@@ -1,0 +1,121 @@
+@import url("./components/Header/Header.scss");
+@import url("./components/Navbar/Navbar.scss");
+@import url("./components/Main/Main.scss");
+@import url("./components/Footer/Footer.scss");
+
+body {
+  height: 100vh;
+  width: 100%; 
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main{
+  flex:1 0 auto;
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+
+a, a:link, a:visited  {
+    text-decoration: none;
+}
+
+a:hover  {
+    text-decoration: none;
+}
+
+
+aside, nav, footer, header, section, main {
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-size: inherit;
+	font-weight: inherit;
+}
+
+ul, ul li {
+	list-style: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
+}
+
+address {
+  font-style: normal;
+}
+
+input, textarea, button, select {
+	font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+button, input[type="submit"] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+input:focus, input:active,
+button:focus, button:active {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+label {
+	cursor: pointer;
+}
+
+legend {
+	display: block;
+}
+
+#root{
+  --first-color: #4094e8;
+  --second-color: #000000;
+  --thirty-color:#ffffff;
+  --fourth-color:#dcdcdc;
+  --primary-font: 'Roboto', sans-serif;
+  --secondary-font: 'Satisfy', cursive;
+  --primary-size:16px;
+  --secondary-size: 20px;
+  --thirty-size: 48px;
+  --fourth-size: 60px;
+  --gradient: -webkit-linear-gradient(45deg, rgb(179, 210, 167), rgb(255, 255, 255) 50%, rgb(137, 167, 140) 100%);
+  --gradienteffect: -webkit-linear-gradient(315deg, rgb(179, 210, 167) 40%, rgb(255, 255, 255) 50%, rgb(137, 167, 140) 60%);
+  font-family:'Roboto', sans-serif ;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color:var(--thirty-color)
+}
