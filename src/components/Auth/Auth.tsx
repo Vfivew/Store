@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../hooks/useAuth';
 import { removeUser } from '../../store/slice/userSlice';
-import { Link } from 'react-router-dom';
 
 const Auth: React.FC = () => {
     const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const Auth: React.FC = () => {
             <button onClick={handleLogout}>Log out from {email}</button>
         </section>
     ) : (
-        <button>
+        <button className='button-auth'>
             Login
         </button>
     );

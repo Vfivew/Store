@@ -1,24 +1,78 @@
-.header{
-    width: 100%;
-    height: auto;
-    min-height: 3em;
-    display: flex;
-    background-color:var(--first-color);
-}
+    .header{
+        width: 100%;
+        height: auto;
+        display: flex;
+        background-color:var(--first-color);
+        border-bottom:1px solid black;
+        border-radius: 0 0 1em 1em ;
+        font-size: var(--primary-size);
+        .header-nav{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
 
-.header-nav{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
+    .header-list-container{
+        max-width: 1280px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .header-list{
+            display: flex;
+            .header-list-item{
+                color:black;
+                margin: 1em 0.5em;
+                font-weight: bold;
+            }
+        }
+    }
 
-.header-list{
-    display: flex;
-    margin: auto 1em;
-}
+    .header-button {
+        display: none;
+    }
 
-.header-list-item{
-    color:black;
-    margin: 1em 1em;
-}
+    .header-menu.active {
+        transform: translateY(0); 
+    }
+
+    @media (max-width: 767px) {
+
+        .header-button {
+        display: block;
+        margin: 1em 1em 1em auto;
+        }
+
+        .header-list-container{
+        width: 100%;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        top: 0; 
+        left: 0;
+        background-color: var(--thirty-color);
+        z-index: 2;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        transform: translateX(-110%); 
+        height: 100vh;
+        width: 50%;
+        overflow: auto;
+        }
+
+        .header-list-container.active {
+        transform: translateX(0); 
+        }
+
+        .header-list{
+        flex-direction: column;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .header{
+            font-size: var(--secondary-size);
+        }
+    }

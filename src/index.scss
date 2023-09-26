@@ -107,15 +107,36 @@ legend {
   --fourth-color:#dcdcdc;
   --primary-font: 'Roboto', sans-serif;
   --secondary-font: 'Satisfy', cursive;
-  --primary-size:16px;
-  --secondary-size: 20px;
-  --thirty-size: 48px;
-  --fourth-size: 60px;
-  --gradient: -webkit-linear-gradient(45deg, rgb(179, 210, 167), rgb(255, 255, 255) 50%, rgb(137, 167, 140) 100%);
-  --gradienteffect: -webkit-linear-gradient(315deg, rgb(179, 210, 167) 40%, rgb(255, 255, 255) 50%, rgb(137, 167, 140) 60%);
+  --primary-size:14px;
+  --secondary-size: 18px;
+  --thirty-size: 22px;
+  --fourth-size: 26px;
   font-family:'Roboto', sans-serif ;
   display: flex;
   flex-direction: column;
   height: 100vh;
   background-color:var(--thirty-color)
+}
+
+@media (max-width: 767px) {
+  #root{
+  --primary-size:10px;
+  --secondary-size: 14px;
+  --thirty-size: 18px;
+  --fourth-size: 22px;
+  }
+}
+
+@media (min-width: 1980px) {
+ #root{
+  --primary-size:20px;
+  --secondary-size: 22px;
+  --thirty-size: 26px;
+  --fourth-size: 30px;
+ }
+}
+
+/// btn
+.button-auth{
+ font-weight: bold;
 }
