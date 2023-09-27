@@ -45,9 +45,13 @@
 @media (max-width: 767px) {
     .footer {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items:center
+    }
+
+    .footer-wrapper{
+        width: auto;
+        flex-direction: column;
     }
     .footer-list{
         width: 100%;
