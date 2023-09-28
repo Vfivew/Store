@@ -1,10 +1,14 @@
 import { useState } from "react";
+import shopCatalogIcon from '../../../img/icon/shopCatalogIcon.svg';
+import close from '../../../img/icon/close.svg';
+import Catalog from "../Catalog";
+import { useAppSelector } from '../../../hooks/redux-hooks'; 
 import { NavLink } from "react-router-dom";
-import shopCatalogIcon from '../../img/icon/shopCatalogIcon.svg';
-import close from '../../img/icon/close.svg';
 
 const Navbar = () => {
     const [burgerActive, setBurgerActive] = useState(false);
+    const Goods = useAppSelector((state) => state.documents);
+    Catalog();
 
     const toggleBurgerMenu = () => {
         setBurgerActive(!burgerActive);
@@ -29,14 +33,13 @@ const Navbar = () => {
                         <img src={close} alt="close" />
                     </button>
                     <ul className="nav-list">
-                        <NavLink to="/">
-                            <li className="nav-menu-item">товари</li>
+                        {Goods?.map((item) => (
+                        <NavLink to={`/goods/${item.id}`} key={item.id}>
+                            <li className="nav-menu-item" key={item.id}>
+                            {item.id}
+                            </li>
                         </NavLink>
-                        <NavLink to="/">
-                            <li className="nav-menu-item">товари</li>
-                        </NavLink>   <NavLink to="/">
-                            <li className="nav-menu-item">товари</li>
-                        </NavLink>  
+                        ))}
                     </ul>
                 </nav>
                 <span className="nav-span">

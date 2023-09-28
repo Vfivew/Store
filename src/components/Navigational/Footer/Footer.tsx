@@ -1,11 +1,16 @@
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from '../../../hooks/redux-hooks'; 
+import { GoodsItem } from "../../../models/fireStoreModels";
 
-import instagram from '../../img/icon/instagram.svg'
-import facebook from '../../img/icon/facebook.svg'
-import telegram from '../../img/icon/telegram.svg'
-import viber from '../../img/icon/viber.svg'
+import instagram from '../../../img/icon/instagram.svg'
+import facebook from '../../../img/icon/facebook.svg'
+import telegram from '../../../img/icon/telegram.svg'
+import viber from '../../../img/icon/viber.svg'
 
 const Footer = () => {
+    
+    const Goods = useAppSelector((state) => state.documents);
+
     return (
         <footer className="footer">
             <section className="footer-wrapper">
@@ -16,12 +21,11 @@ const Footer = () => {
             </ul>
             <ul className='footer-list footer-catalog'>
                 <h3>Catalog</h3>
-                <li>Rods</li>
-                <li>Coils</li>
-                <li>Equipment and installation</li>
-                <li>Artificial baits</li>
-                <li>Boats and motors</li>
-                <li>Equipment</li>
+                    {Goods.map((item: GoodsItem) => (
+                    <NavLink to={`/goods/${item.id}`} key={item.id}>
+                    <li key={item.id}>{item.id}</li>
+                    </NavLink>
+                ))}
             </ul>
             <ul className='footer-list'>
                 <h3>Information to clients</h3>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import Auth from "../../components/Auth/Auth";
-import burgermenu from '../../img/icon/burgermenu.svg';
+import Auth from "../../Auth/Auth";
+import burgermenu from '../../../img/icon/burgermenu.svg';
 
 const Header = () => {
 
