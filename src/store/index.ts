@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import userReducer, { setUser, removeUser } from './slice/userSlice';
 import { firebaseApi } from '../store/slice/fireStoreApi';
 import documentsReducer from '../store/slice/documentsSlice'
+import goodsReducer from '../store/slice/goodsSlice'
 
 const userToken = localStorage.getItem('userToken');
 const userEmail = localStorage.getItem('userEmail');
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     documents: documentsReducer,
+    goods: goodsReducer,
     [firebaseApi.reducerPath]: firebaseApi.reducer, 
   },
   middleware: (getDefaultMiddleware) =>

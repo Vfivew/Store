@@ -2,7 +2,7 @@ import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
-import {GoodsItem} from '../../models/fireStoreModels'
+import {GoodsItem, GoodsKind} from '../../models/fireStoreModels'
 
 
 export const firebaseApi = createApi({
@@ -15,7 +15,6 @@ export const firebaseApi = createApi({
           const goodsCollectionRef = collection(db, "Goods");
           const querySnapshot = await getDocs(goodsCollectionRef);
           const goodsData: GoodsItem[] = [];
-
           querySnapshot.forEach((doc) => {
             goodsData.push({
               id: doc.id,
@@ -37,7 +36,7 @@ export const firebaseApi = createApi({
           const goodsDocSnapshot = await getDoc(goodsDocRef);
 
           if (goodsDocSnapshot.exists()) {
-            const itemData = goodsDocSnapshot.data();
+            const itemData = goodsDocSnapshot.data() as GoodsKind;
             return { data: itemData };
           } else {
             return { data: null };
