@@ -9,3 +9,7 @@ export interface GoodsKind{
 export interface GoodsCardKind{
   [key: string]: any;
 }
+
+export interface CardList {
+  [key: string]: any;
+}

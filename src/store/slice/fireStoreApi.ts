@@ -46,7 +46,26 @@ export const firebaseApi = createApi({
         }
       },
     }),
+    fetchDocumentsByItemIdAndType: builder.query({
+      async queryFn({ itemId, type }: { itemId: string, type: string }) {
+        try {
+          const goodsCollectionRef = collection(db, "Goods", itemId, type);
+          const querySnapshot = await getDocs(goodsCollectionRef);
+          console.log(querySnapshot);
+          const documentsData: Record<string, GoodsItem> = {}; 
+
+          querySnapshot.forEach((doc) => {
+            const itemData: any = doc.data();
+            documentsData[doc.id] = itemData; 
+          });
+
+          return { data: documentsData };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
   }),
 });
 
-export const { useFetchDocumentsQuery, useFetchDocumentByIdQuery } = firebaseApi;
+export const { useFetchDocumentsQuery, useFetchDocumentByIdQuery, useFetchDocumentsByItemIdAndTypeQuery  } = firebaseApi;
