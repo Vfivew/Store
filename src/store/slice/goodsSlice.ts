@@ -1,23 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {GoodsState} from '../../models/goodsSliceModels'
 
-const initialState = {
-  data: null, 
-  filter: null,
+const initialState: GoodsState = {
+  data: null,
+  type: null,
+  filteredData: null,
+  filterKey: null,
 };
 
 const goodsSlice = createSlice({
   name: "goods",
   initialState,
   reducers: {
-    setGoodsFilter: (state, action) => {
-      state.filter = action.payload;
+    setGoodsData: (state, action) => {
+      state.data = action.payload;
+      state.filteredData = state.data;
+      console.log(state.filteredData);
     },
-    setDataFromServer: (state, action) => {
-      state.data = action.payload; 
+    setGoodsType:(state, action) => {
+      state.type = action.payload;
+      console.log(state.type);
+    },
+    setFilteredGoods: (state, action) => {
+      state.filterKey = action.payload;
+      if (state.data) {
+        if (state.filterKey === null) {
+          state.filteredData = null;
+        } else { 
+          state.filteredData = {
+            [state.filterKey]: state.data[state.filterKey] || null
+          };
+          //console.log(JSON.stringify(state.filteredData));
+        }
+      }
     },
   },
 });
 
-export const { setGoodsFilter, setDataFromServer } = goodsSlice.actions;
+export const { setGoodsData, setFilteredGoods,setGoodsType } = goodsSlice.actions;
 
 export default goodsSlice.reducer;

@@ -2,44 +2,43 @@ import React from "react";
 import { useFetchDocumentByIdQuery } from "../../store/slice/fireStoreApi";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import { setGoodsFilter, setDataFromServer } from "../../store/slice/goodsSlice";
+import { setGoodsData,setGoodsType } from "../../store/slice/goodsSlice";
 import { useEffect } from "react";
 
 import StatusDetermine from "../../utils/StatusDetermine/StatusDetermine";
-import NavigationMiniBar from "./NavigationMiniBar";
+import NavigationMiniBar from "./NavigationMiniBar/NavigationMiniBar";
 import Filter from "./Filter/Filter";
-import GoodsCard from "../GoodsCard/GoodsCard";
+import GoodsList from "../GoodsList/GoodsList";
 
 const Goods = () => {
-  const { itemId }  = useParams();
-  const { data:filter, isLoading, isError } = useFetchDocumentByIdQuery(`${itemId}`);
+  const { itemId } = useParams();
+  const { data, isLoading, isError } = useFetchDocumentByIdQuery(`${itemId}`);
   const dispatch = useAppDispatch();
-  const cardList = useAppSelector((state) => state.goods.filter);    
-  console.log(cardList)
+  const goods = useAppSelector((state) => state.goods.filteredData);
+  
 
   useEffect(() => {
     if (!isLoading && !isError) {
-      dispatch(setGoodsFilter(filter));
-    }
-    console.log(filter)
-    if (!cardList) {
-      dispatch(setDataFromServer(cardList))
-    }
-  }, [filter, isLoading, isError, dispatch]);
-
+      dispatch(setGoodsData(data));
+      dispatch(setGoodsType(data))
+    } 
+  }, [data, isLoading, isError, dispatch]);
+  
   return (
-    <main>
-      <StatusDetermine isLoading={isLoading} isError={isError} data={filter} />
-      <div>
-        <NavigationMiniBar routes={["Goods", itemId ? itemId : ""]} />
-      </div>
-      <h2>{itemId}</h2>
-      <section className="goods">
-        <Filter itemId={itemId || ""} />
-        <section className="goods-section">
-          <section>Sort</section>
-          <GoodsCard />
-        </section>
+    <main className="goods">
+      <section className="goods-wrapper">
+        <StatusDetermine isLoading={isLoading} isError={isError} data={data} />
+          <section className="goods-title">
+            <NavigationMiniBar routes={["Goods", itemId ? itemId : ""]} />
+            <h2>{itemId}</h2>
+          </section>
+          <section className="goods-section">
+            <Filter />
+            <section className="goods-list-section">
+              <section>Sort</section>
+              <GoodsList goods={goods} />
+            </section>
+          </section>
       </section>
     </main>
   );

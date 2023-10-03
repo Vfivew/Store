@@ -1,48 +1,35 @@
-import {useState, useEffect} from 'react'
+import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
-import { useFetchDocumentsByItemIdAndTypeQuery } from '../../../store/slice/fireStoreApi'
-import { setDataFromServer } from "../../../store/slice/goodsSlice";
+import { setFilteredGoods } from "../../../store/slice/goodsSlice"; 
 
-const Filter = ({ itemId }: { itemId: string }) => {
-  const [isQueryEnabled, setIsQueryEnabled] = useState<boolean>(false);
-  const [type, setType] = useState<string>('')
-  const filter = useAppSelector((state) => state.goods.filter);
- 
+const Filter = () => {
+  const goods = useAppSelector((state) => state.goods.type);
   const dispatch = useAppDispatch();
+  const [activeButton, setActiveButton] = useState<string | null>(null);
+  
+  const handleFilterClick = (key: any) => {
+    setActiveButton(key); 
+    dispatch(setFilteredGoods(key));
+  };
 
-  const { data , isError, isLoading } = useFetchDocumentsByItemIdAndTypeQuery(
-    { itemId, type },
-    { skip: !isQueryEnabled },
-  );
-
-  useEffect(() => {
-    if (data) {
-      console.log(data)
-      dispatch(setDataFromServer(data));
-    }
-  }, [data, dispatch]); 
-
-  if (filter === null) {
-    return <div>No filter here</div>;
+  if (goods === null) {
+    return <div>No goods here</div>;
   }
 
-  const filterChange = (key: string) => {
-    setType(key);
-    if (itemId && type) {
-      setIsQueryEnabled(true);
-    }
-  };
-  
-  const topLevelKeys = Object.keys(filter);
+  const topLevelKeys = Object.keys(goods);
   return (
     <section className="filter-section">
-    <ul>
-      {topLevelKeys.map((key) => (
-        <button key={key} onClick={() => filterChange(key)}>
-          {key}
-        </button>
-      ))}
-    </ul>
+      <ul className="filter-list">
+        {topLevelKeys.map((key) => (
+          <button
+            key={key}
+            onClick={() => handleFilterClick(key)}
+            className={activeButton === key ? "active" : ""}
+          >
+            {key}
+          </button>
+        ))}
+      </ul>
     </section>
   );
 };

@@ -1,16 +1,31 @@
 .goods{
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 
-.filter-section{
-    width: 20%;
+.goods-wrapper{
+    margin: 1em;
+    background-color:aqua;
+    width: 100%;
+    max-width: 1260px;
+}
+
+.goods-title{
+    h2{
+        font-size: var(--fourth-size);
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
 }
 
 .goods-section{
+    display: flex;
+    width: 100%;
+}
+
+.goods-list-section{
+    background-color:blueviolet;
     width: 80%;
 }
 
-.goods-card-section{
-    width: 80%;
-}

@@ -1,0 +1,23 @@
+.filter-section{
+    background-color:red;
+    width: 18%;
+    border: 1px solid var(--first-color);
+    border-radius:1em;
+    margin-right: 2em;
+    .filter-list{
+        display: flex;
+        flex-direction: column;
+        button{
+            text-align: left;
+            padding: 0.5em;
+        }
+        button:hover,
+        button:focus {
+           color:var(--first-color)
+        }
+        button.active {
+            background-color:var(--first-color);
+            color:white;
+        }
+    }
+}
