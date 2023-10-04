@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
 import { setFilteredGoods } from "../../../store/slice/goodsSlice"; 
 
