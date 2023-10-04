@@ -6,7 +6,7 @@
 
 .goods-wrapper{
     margin: 1em;
-    background-color:aqua;
+    background-color:rgb(255, 255, 255);
     width: 100%;
     max-width: 1260px;
 }
@@ -27,5 +27,11 @@
 .goods-list-section{
     background-color:blueviolet;
     width: 80%;
+}
+
+@media (max-width: 767px) {
+    .goods-list-section{
+        width: 100%;
+    }
 }
 

@@ -9,6 +9,7 @@ import StatusDetermine from "../../utils/StatusDetermine/StatusDetermine";
 import NavigationMiniBar from "./NavigationMiniBar/NavigationMiniBar";
 import Filter from "./Filter/Filter";
 import GoodsList from "../GoodsList/GoodsList";
+import Sort from "./Sort/Sort";
 
 const Goods = () => {
   const { itemId } = useParams();
@@ -35,7 +36,7 @@ const Goods = () => {
           <section className="goods-section">
             <Filter />
             <section className="goods-list-section">
-              <section>Sort</section>
+              <Sort/>
               <GoodsList goods={goods} />
             </section>
           </section>

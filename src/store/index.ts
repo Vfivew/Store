@@ -3,6 +3,7 @@ import userReducer, { setUser, removeUser } from './slice/userSlice';
 import { firebaseApi } from '../store/slice/fireStoreApi';
 import documentsReducer from '../store/slice/documentsSlice'
 import goodsReducer from '../store/slice/goodsSlice'
+import sortReducer from '../store/slice/sortSlice'
 
 const userToken = localStorage.getItem('userToken');
 const userEmail = localStorage.getItem('userEmail');
@@ -13,6 +14,7 @@ export const store = configureStore({
     user: userReducer,
     documents: documentsReducer,
     goods: goodsReducer,
+    sort: sortReducer,
     [firebaseApi.reducerPath]: firebaseApi.reducer, 
   },
   middleware: (getDefaultMiddleware) =>

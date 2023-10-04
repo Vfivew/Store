@@ -4,3 +4,7 @@ export interface GoodsState {
   filteredData: { [key: string]: any } | null;
   filterKey: string | null;
 }
+
+export interface SortState{
+  allGoods: null| { [key: string]: any },
+}

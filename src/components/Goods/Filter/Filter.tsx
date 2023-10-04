@@ -6,10 +6,16 @@ const Filter = () => {
   const goods = useAppSelector((state) => state.goods.type);
   const dispatch = useAppDispatch();
   const [activeButton, setActiveButton] = useState<string | null>(null);
-  
+  const [filterMenuActive, setFilterMenuActive] = useState<boolean>(false);
+
+  const toggleSortMenu = () => {
+    setFilterMenuActive(!filterMenuActive);
+  };
+
   const handleFilterClick = (key: any) => {
     setActiveButton(key); 
     dispatch(setFilteredGoods(key));
+    setFilterMenuActive(!filterMenuActive);
   };
 
   if (goods === null) {
@@ -18,7 +24,11 @@ const Filter = () => {
 
   const topLevelKeys = Object.keys(goods);
   return (
-    <section className="filter-section">
+    <>
+      <button className="filter-button" onClick={toggleSortMenu}>
+        Filter
+      </button>
+    <section className={`filter-section ${filterMenuActive ? 'active' : ''}`}>
       <ul className="filter-list">
         {topLevelKeys.map((key) => (
           <button
@@ -29,8 +39,12 @@ const Filter = () => {
             {key}
           </button>
         ))}
+          <button className="filter-close-button" onClick={toggleSortMenu}>
+            Close
+          </button>
       </ul>
-    </section>
+      </section>
+    </>
   );
 };
 

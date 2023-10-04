@@ -15,11 +15,11 @@ const goodsSlice = createSlice({
     setGoodsData: (state, action) => {
       state.data = action.payload;
       state.filteredData = state.data;
-      console.log(state.filteredData);
+      console.log("setGoodsData:",state.filteredData);
     },
     setGoodsType:(state, action) => {
       state.type = action.payload;
-      console.log(state.type);
+      console.log("setGoodsType:",state.type);
     },
     setFilteredGoods: (state, action) => {
       state.filterKey = action.payload;
@@ -30,7 +30,6 @@ const goodsSlice = createSlice({
           state.filteredData = {
             [state.filterKey]: state.data[state.filterKey] || null
           };
-          //console.log(JSON.stringify(state.filteredData));
         }
       }
     },
