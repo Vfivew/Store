@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import { setGoodsData,setGoodsType } from "../../store/slice/goodsSlice";
 import { useEffect } from "react";
+import { setSortData } from '../../store/slice/sortSlice';
 
 import StatusDetermine from "../../utils/StatusDetermine/StatusDetermine";
 import NavigationMiniBar from "./NavigationMiniBar/NavigationMiniBar";
@@ -16,14 +17,27 @@ const Goods = () => {
   const { data, isLoading, isError } = useFetchDocumentByIdQuery(`${itemId}`);
   const dispatch = useAppDispatch();
   const goods = useAppSelector((state) => state.goods.filteredData);
-  
+
+  let allGoods: any[] = [];
+
+  if (goods) {
+    console.log(goods)
+    Object.keys(goods).forEach((category) => {
+      const categoryGoods = goods[category];
+      Object.keys(categoryGoods).forEach((key) => {
+        allGoods.push(categoryGoods[key]);
+      });
+    });
+  }
 
   useEffect(() => {
     if (!isLoading && !isError) {
+      console.log('GoodsEffect')
       dispatch(setGoodsData(data));
       dispatch(setGoodsType(data))
+      dispatch(setSortData(allGoods));
     } 
-  }, [data, isLoading, isError, dispatch]);
+  }, [data, isLoading, isError, dispatch, allGoods]);
   
   return (
     <main className="goods">
@@ -37,7 +51,7 @@ const Goods = () => {
             <Filter />
             <section className="goods-list-section">
               <Sort/>
-              <GoodsList goods={goods} />
+              <GoodsList/>
             </section>
           </section>
       </section>

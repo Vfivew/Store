@@ -3,6 +3,7 @@ export interface GoodsState {
   type: null | string; 
   filteredData: { [key: string]: any } | null;
   filterKey: string | null;
+  id: string | null;
 }
 
 export interface SortState{
