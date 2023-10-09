@@ -3,6 +3,7 @@ import { SortState } from '../../models/goodsSliceModels';
 
 const initialState: SortState = {
   allGoods: null,
+  activeButton: null,
 };
 
 const sortSlice = createSlice({
@@ -11,11 +12,14 @@ const sortSlice = createSlice({
   reducers: {
     setSortData: (state, action) => {
       state.allGoods = action.payload;
+      //state.activeButton = null; 
+    },
+    setActiveButton: (state, action) => {
+      state.activeButton = action.payload;
     },
     setSortType: (state, action) => {
       const sortType = action.payload;
       if (state.allGoods && sortType === 'PriceUp') {
-         console.log('PriceUp', JSON.stringify(state.allGoods));
         if (Array.isArray(state.allGoods)) {
           state.allGoods.sort((a, b) => {
             const priceA = parseFloat(a.price || a.article?.price || '0');
@@ -44,6 +48,6 @@ const sortSlice = createSlice({
   },
 });
 
-export const { setSortData, setSortType } = sortSlice.actions;
+export const { setSortData, setSortType, setActiveButton} = sortSlice.actions;
 
 export default sortSlice.reducer;

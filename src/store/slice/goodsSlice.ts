@@ -6,22 +6,23 @@ const initialState: GoodsState = {
   type: null,
   filteredData: null,
   filterKey: null,
-  id:''
+  activeButton: null,
 };
 
 const goodsSlice = createSlice({
   name: "goods",
   initialState,
   reducers: {
-    setId: (state, action) => {
-      state.id = action.payload;
+    setActiveButton:(state, action) => {
+      state.activeButton = action.payload
     },
     setGoodsData: (state, action) => {
       state.data = action.payload;
       if (state.filterKey === null) {
         state.filteredData = state.data
+        state.activeButton = null;
       }
-      state.filterKey = null
+      state.filterKey = null;
     },
     setGoodsType:(state, action) => {
       state.type = action.payload;
@@ -42,6 +43,6 @@ const goodsSlice = createSlice({
   },
 });
 
-export const { setGoodsData, setFilteredGoods,setGoodsType,setId } = goodsSlice.actions;
+export const { setGoodsData, setFilteredGoods,setGoodsType,setActiveButton } = goodsSlice.actions;
 
 export default goodsSlice.reducer;

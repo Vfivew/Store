@@ -4,7 +4,6 @@ import { db } from "../../firebase";
 
 import {GoodsItem, GoodsKind} from '../../models/fireStoreModels'
 
-
 export const firebaseApi = createApi({
   baseQuery: fakeBaseQuery(),
   tagTypes: ["Document"],

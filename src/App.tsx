@@ -4,7 +4,9 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
-import Goods from './pages/GoodsPage'
+import Goods from './components/Goods/Goods';
+import GoodsDetails from './components/GoodsList/GoodsDetails/GoodsDetails';
+import Layout from './pages/Layout';
 
 function PrivateRoute({ element }: any) {
   const { isAuth } = useAuth();
@@ -15,11 +17,14 @@ function PrivateRoute({ element }: any) {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/goods/:itemId" element={<Goods />} />
-      <Route path='*' element={<ErrorPage/>} />
+      <Route path="/" element={<Layout/>}>
+        <Route index element={<HomePage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="goods/:itemId" element={<Goods/>} />
+        <Route path="goods/:itemId/:article" element={<GoodsDetails />} />
+        <Route path='*' element={<ErrorPage />} />
+      </Route>
     </Routes>
   );
 }

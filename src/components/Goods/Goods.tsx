@@ -17,11 +17,9 @@ const Goods = () => {
   const { data, isLoading, isError } = useFetchDocumentByIdQuery(`${itemId}`);
   const dispatch = useAppDispatch();
   const goods = useAppSelector((state) => state.goods.filteredData);
-
   let allGoods: any[] = [];
 
   if (goods) {
-    console.log(goods)
     Object.keys(goods).forEach((category) => {
       const categoryGoods = goods[category];
       Object.keys(categoryGoods).forEach((key) => {
@@ -30,21 +28,21 @@ const Goods = () => {
     });
   }
 
+  console.log(allGoods)
   useEffect(() => {
     if (!isLoading && !isError) {
-      console.log('GoodsEffect')
       dispatch(setGoodsData(data));
       dispatch(setGoodsType(data))
       dispatch(setSortData(allGoods));
     } 
-  }, [data, isLoading, isError, dispatch, allGoods]);
+  }, [data, isLoading, isError, allGoods, dispatch]);
   
   return (
     <main className="goods">
       <section className="goods-wrapper">
         <StatusDetermine isLoading={isLoading} isError={isError} data={data} />
           <section className="goods-title">
-            <NavigationMiniBar routes={["Goods", itemId ? itemId : ""]} />
+             <NavigationMiniBar propsArray={['Goods', itemId]} />
             <h2>{itemId}</h2>
           </section>
           <section className="goods-section">

@@ -3,9 +3,14 @@ export interface GoodsState {
   type: null | string; 
   filteredData: { [key: string]: any } | null;
   filterKey: string | null;
-  id: string | null;
+  activeButton: string | null;
 }
 
 export interface SortState{
-  allGoods: null| { [key: string]: any },
+  allGoods: null | { [key: string]: any },
+  activeButton: null | string,
+}
+
+export interface ItemState{
+  selectedItem: { [key: string]: any } | null;
 }
