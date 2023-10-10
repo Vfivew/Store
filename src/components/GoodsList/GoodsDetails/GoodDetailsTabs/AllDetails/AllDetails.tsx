@@ -2,6 +2,8 @@ import {useState} from 'react';
 import { useAppSelector } from '../../../../../hooks/redux-hooks';
 import Reviews from '../Reviews/Reviews';
 import DelivieryPayment from '../DelivieryPayment/DelivieryPayment'
+import ItemRaiting from '../ItemRaiting/ItemRaiting';
+import Characteristics from '../Characteristics/Characteristics';
 
 const AllDetails = () => {
     const item = useAppSelector((state) => state.item.selectedItem);
@@ -10,22 +12,6 @@ const AllDetails = () => {
     if (!item) {
         return <div>Loading...</div>;
     }
-
-    const excludedFields = ['img', 'name', 'price', 'rating'];
-
-    const renderFields = () => {
-        return Object.keys(item).map((key) => {
-            if (!excludedFields.includes(key)) {
-            return (
-                <li key={key}>
-                <strong>{key}: </strong>
-                {item[key]}
-                </li>
-            );
-            }
-            return null;
-        });
-    };
 
     const handleIncrease = () => {
         if (quantity < 100001) {
@@ -63,15 +49,13 @@ const AllDetails = () => {
         <section>
           <img src={item.img} alt="Item photo" />
         </section>
-        <section>
-          <h3>Characteristics</h3>
-          <ul>{renderFields()}</ul>
-        </section>
+          <Characteristics/>
       </section>
       <section className="all-details-right-block">
         <section>
             <h3>{item.name}</h3>
-            <p>{item.price}</p>
+            <ItemRaiting rating={item.rating} />
+            <p>{item.price}$</p>
             <div className="all-details-quantily-block">
                 <button className="all-details-combined-button" onClick={handleDecrease}>
                 -
@@ -85,11 +69,11 @@ const AllDetails = () => {
                 <button className="all-details-combined-button" onClick={handleIncrease}>
                 +
                 </button>
-                <button
-                className="all-details-head-button"
-                onClick={handleAddToCart}
-                >
-                Buy
+                <button className='button'
+                  onClick={handleAddToCart}
+                  >
+                  <div className="wave"></div>
+                  <span className='span'>Buy</span>
                 </button>
             </div>
         </section>

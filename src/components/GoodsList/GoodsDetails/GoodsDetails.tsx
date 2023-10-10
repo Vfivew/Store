@@ -6,7 +6,7 @@ import Characteristics from './GoodDetailsTabs/Characteristics/Characteristics';
 import Reviews from './GoodDetailsTabs/Reviews/Reviews';
 import { useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
-import { setItemByArticle } from '../../../store/slice/itemSlice';
+import { setItemByArticle, setFullData } from '../../../store/slice/itemSlice';
 
 const GoodsDetails = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +17,7 @@ const GoodsDetails = () => {
 
   useEffect(() => {
     if (!isLoading && !isError && goodsListById) {
+      dispatch(setFullData(goodsListById))
       for (const key in goodsListById) {
         if (Object.hasOwnProperty.call(goodsListById, key)) {
           const item = goodsListById[key];

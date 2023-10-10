@@ -27,7 +27,7 @@ const Goods = () => {
       });
     });
   }
-
+  console.log(goods)
   console.log(allGoods)
   useEffect(() => {
     if (!isLoading && !isError) {
