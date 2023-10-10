@@ -1,29 +1,30 @@
 import React from 'react';
-import { useAppSelector } from "../../../hooks/redux-hooks";
-import { Link } from "react-router-dom";
+import { useAppSelector } from '../../../hooks/redux-hooks';
+import { Link } from 'react-router-dom';
 
-interface RouterProps {
-  routes?: string[];
+interface NavigationProps {
+  propsArray: (string | undefined)[];
 }
 
-const NavigationMiniBar: React.FC<RouterProps> = ({ routes }) => {
+const NavigationMiniBar: React.FC<NavigationProps> = ({ propsArray }) => {
   const key = useAppSelector((state) => state.goods.filterKey);
 
-  const updatedRoutes = key !== null && routes ? [...routes, key] : routes;
+  const updatedPropsArray = key !== null ? [...propsArray, key] : propsArray;
 
   return (
-    <div className='navigation-mini-bar'>
-      {updatedRoutes &&
-        updatedRoutes.map((route, index) => (
-          <span key={route}>
-            {index > 0 && ' > '}
-            {index === 0 ? (
-              <Link to="/">Main</Link> 
-            ) : (
-              route
-            )}
-          </span>
-        ))}
+    <div className="navigation-mini-bar">
+      {updatedPropsArray.map((prop, index) => (
+        <span key={index}>
+          {index > 0 && ' > '}
+          {index === 0 ? (
+            <Link to="/">Main</Link>
+          ) : index === 1 ? (
+            <Link to={`/Goods/${prop}`}>{prop}</Link>
+          ) : (
+            prop
+          )}
+        </span>
+      ))}
     </div>
   );
 };

@@ -1,18 +1,17 @@
 import Footer from "../components/Navigational/Footer/Footer";
 import Header from "../components/Navigational/Header/Header";
 import Navbar from "../components/Navigational/Navbar/Navbar";
+import { Outlet } from 'react-router-dom';
 
-import Goods from "../components/Goods/Goods";
-
-const GoodsPage = () => {
+const Layout = () => {
     return (
         <>
             <Header />
             <Navbar />
-            <Goods/>
+            <Outlet/>
             <Footer/>
         </>
     );
 };
 
-export default GoodsPage;
+export default Layout;

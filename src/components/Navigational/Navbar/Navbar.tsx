@@ -1,21 +1,19 @@
-import { useState } from "react";
 import shopCatalogIcon from '../../../img/icon/shopCatalogIcon.svg';
 import close from '../../../img/icon/close.svg';
 import Catalog from "../Catalog";
-import { useAppSelector } from '../../../hooks/redux-hooks'; 
+import { useAppSelector, useAppDispatch } from '../../../hooks/redux-hooks'; 
 import { NavLink } from "react-router-dom";
+import { setNavBurgerActive } from "../../../store/slice/mediaSlice";
 
 const Navbar = () => {
-    const [burgerActive, setBurgerActive] = useState(false);
+    const dispatch = useAppDispatch()
     const Goods = useAppSelector((state) => state.documents);
+    const burgerActive = useAppSelector((state) => state.media.navBurgerActive);
+    
     Catalog();
 
     const toggleBurgerMenu = () => {
-        setBurgerActive(!burgerActive);
-    };
-
-    const closeBurgerMenu = () => {
-        setBurgerActive(false);
+        dispatch(setNavBurgerActive(!burgerActive))
     };
 
     return (
@@ -27,9 +25,9 @@ const Navbar = () => {
                 </button>
                 <nav
                     className={`nav-menu ${burgerActive ? 'active' : ''}`}
-                    onClick={closeBurgerMenu}
+                    onClick={toggleBurgerMenu}
                 >
-                    <button className="nav-button-close" onClick={closeBurgerMenu}>
+                    <button className="nav-button-close" onClick={toggleBurgerMenu}>
                         <img src={close} alt="close" />
                     </button>
                     <ul className="nav-list">

@@ -1,35 +1,31 @@
-import React, { useState } from 'react';
-import { useAppDispatch } from '../../../hooks/redux-hooks';
-import { setSortType } from '../../../store/slice/sortSlice'
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
+import { setSortType, setActiveButton } from '../../../store/slice/sortSlice'
+import { setSortMenuActive } from '../../../store/slice/mediaSlice';
 
 const Sort = () => {
   const dispatch = useAppDispatch();
-  
-  const [activeButton, setActiveButton] = useState<string | null>(null);
-  const [sortMenuActive, setSortMenuActive] = useState<boolean>(false);
+  const sortMenuActive = useAppSelector((state) => state.media.sortMenuActive);
+  const activeButton = useAppSelector((state) => state.sort.activeButton);
   const [buttonText, setButtonText] = useState<string | null>(null);
   
   const toggleSortMenu = () => {
-      setSortMenuActive(!sortMenuActive);
+    dispatch(setSortMenuActive(!sortMenuActive))
   };
     
   const handleFilterClick = (buttonText: string) => {
-    setActiveButton(buttonText);
-    dispatch(setSortType(buttonText));
     setButtonText(buttonText);
-    setSortMenuActive(!sortMenuActive);
+    dispatch(setActiveButton(buttonText))
+    dispatch(setSortType(buttonText));
+    dispatch(setSortMenuActive(!sortMenuActive))
   };
 
   return (
     <section className='sort-section'>
     <h3>Sort</h3>
-    <button className="sort-button" onClick={toggleSortMenu}>
-        {buttonText ? (
-            <button>{buttonText}</button>
-        ) : (
-            'Choose sorting'
-        )}
-    </button>
+      <button className="sort-button" onClick={toggleSortMenu}>
+          {buttonText ? buttonText : 'Choose sorting'}
+      </button>
       <ul className={`sort-menu ${sortMenuActive ? 'active' : ''}`}>
         <button
           className={activeButton === 'PriceUp' ? 'active' : ''}

@@ -4,7 +4,6 @@ import { db } from "../../firebase";
 
 import {GoodsItem, GoodsKind} from '../../models/fireStoreModels'
 
-
 export const firebaseApi = createApi({
   baseQuery: fakeBaseQuery(),
   tagTypes: ["Document"],
@@ -32,6 +31,7 @@ export const firebaseApi = createApi({
     fetchDocumentById: builder.query({
       async queryFn(itemId) {
         try {
+          console.log('fetchDocumentById')
           const goodsDocRef = doc(db, "Goods", itemId);
           const goodsDocSnapshot = await getDoc(goodsDocRef);
 

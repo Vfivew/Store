@@ -1,44 +1,41 @@
-import {useEffect} from "react";
+import { useEffect } from 'react'
+import { useParams } from "react-router-dom";
 import GoodsCard from "./GoodCards/GoodsCard";
-import { GoodsKind } from "../../models/fireStoreModels";
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import {setSortData} from '../../store/slice/sortSlice'
+import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
+import { setSortType } from "../../store/slice/sortSlice";
+import {Link} from "react-router-dom"
 
-type GoodsListProps = {
-  goods: GoodsKind | null | undefined;
-};
-
-const GoodsList: React.FC<GoodsListProps> = ({ goods }) => {
+const GoodsList = () => {
+  const { itemId } = useParams();
   const dispatch = useAppDispatch();
-  console.log(goods);
-  const allGoods: { [key: string]: any } = {};
-
-  if (goods) {
-    Object.keys(goods).forEach((category) => {
-      const categoryGoods = goods[category];
-      Object.keys(categoryGoods).forEach((key) => {
-        allGoods[key] = categoryGoods[key];
-      });
-    });
-  } 
+  const allGoods = useAppSelector((state) => state.sort.allGoods);
+  const activeButton = useAppSelector((state) => state.sort.activeButton);
 
   useEffect(() => {
-    if (allGoods) {
-      dispatch(setSortData(allGoods));
-    } 
+    if (activeButton !==null) {
+      dispatch(setSortType(activeButton));
+    }
   }, [allGoods, dispatch]);
 
   return (
     <section className="goods-card-section-list">
-      {Object.keys(allGoods).map((key) => (
-        <div className="goods-card-section" key={key}>
+      {allGoods ? (
+        allGoods.map((good:any) => (
+        <Link
+          className="goods-card-section"
+          key={good.article}
+          to={`/goods/${itemId}/${good.article}`} 
+        >
           <GoodsCard
-            name={allGoods[key].name} 
-            img={allGoods[key].img}
-            price={allGoods[key].price}
+            name={good.name}
+            img={good.img}
+            price={good.price}
           />
-        </div>
-      ))}
+        </Link>
+        ))
+      ) : (
+        <p>No goods available</p>
+      )}
     </section>
   );
 };

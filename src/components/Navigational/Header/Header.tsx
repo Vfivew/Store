@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useAppSelector, useAppDispatch } from '../../../hooks/redux-hooks'; 
 import { NavLink } from "react-router-dom";
+import { setHeaderBurgerActive } from "../../../store/slice/mediaSlice";
 
 import Auth from "../../Auth/Auth";
 import burgermenu from '../../../img/icon/burgermenu.svg';
 
 const Header = () => {
-
-    const [burgerActive, setBurgerActive] = useState(false);
+    const dispatch = useAppDispatch()
+    const burgerActive = useAppSelector((state) => state.media.headerBurgerActive);
 
     const toggleBurgerMenu = () => {
-        setBurgerActive(!burgerActive);
+        dispatch(setHeaderBurgerActive(!burgerActive))
     };
 
     return (
