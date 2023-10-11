@@ -1,10 +1,10 @@
 .main-product-detail {
   display: flex;
   justify-content: center;
-
+  margin:0 0.5em;
   .main-product-detail-wrapper {
     max-width: 1280px;
-    div {
+    .navigation-mini-bar {
       margin-top: 1em;
     }
   }
@@ -37,6 +37,15 @@
         height: 2px;
         background-color: var(--first-color);
       }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .main-product-detail-list{
+    flex-wrap: wrap;
+    li {
+      margin-bottom: 1em;
     }
   }
 }

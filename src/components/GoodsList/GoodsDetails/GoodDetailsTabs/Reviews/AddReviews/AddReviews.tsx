@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useEffect,useState, ChangeEvent } from 'react';
 import { useAppSelector,useAppDispatch } from '../../../../../../hooks/redux-hooks';
-import { setNewReview } from '../../../../../../store/slice/itemSlice'; 
+import { setNewReview, resetNewFullData } from '../../../../../../store/slice/itemSlice'; 
 import { useParams } from 'react-router-dom';
-import {updateReview} from '../../../../../../Service/updateReview'
+import { updateReview } from '../../../../../../Service/updateReview'
 
 const AddReviews = () => {
   const { itemId, article } = useParams();
@@ -43,20 +43,23 @@ const AddReviews = () => {
     setAdvantages('');
     setDisadvantages('');
     if (fullData !== null && selectItemData !== null) {
-        const reviewData = {
-            advantages:advantages,
-            disadvantages:disadvantages,
-            email: userEmail,
-            text: reviewText
-        };
-        dispatch(setNewReview(reviewData));
-        
-    }
-    setIsButtonDisabled(true);
-      if (newFullData !== null) {
-        updateReview(itemId, newFullData)
+      const reviewData = {
+        advantages:advantages,
+        disadvantages:disadvantages,
+        email: userEmail,
+        text: reviewText,
+        rating: rating,
+      };
+      dispatch(setNewReview({ reviewData, rating }));
     }
   };
+
+  useEffect(() => {
+    if (newFullData !== null) {
+      updateReview(itemId, newFullData);
+      dispatch(resetNewFullData())
+    }
+  }, [newFullData]);
 
   return (
     <section className="add-reviews-container">

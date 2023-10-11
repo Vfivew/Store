@@ -6,11 +6,10 @@ import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 const RatingStars = ({ rating }: { rating: number[] | null }) => {
   const maxStars = 5;
 
-  const averageRating =
-    rating && rating.length > 0
-      ? rating.reduce((sum, value) => sum + value, 0) / rating.length
-      : 0;
-
+const averageRating =
+  rating && rating.length > 0
+    ? rating.map(Number).reduce((sum, value) => sum + value, 0) / rating.length
+    : 0;
   const stars = [];
 
   for (let i = 0; i < maxStars; i++) {
@@ -24,7 +23,6 @@ const RatingStars = ({ rating }: { rating: number[] | null }) => {
       );
     }
   }
-
   return (
     <div>
       {stars}

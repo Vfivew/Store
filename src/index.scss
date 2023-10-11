@@ -12,9 +12,11 @@
 @import url("./components/Goods/Sort/Sort.scss");
 @import url("./components/GoodsList//GoodsDetails/GoodsDetails.scss");
 @import url("./components/GoodsList/GoodsDetails/GoodDetailsTabs/AllDetails/AllDetails.scss");
-@import url('./components/GoodsList//GoodsDetails/GoodDetailsTabs/Characteristics/Characteristics.scss');
-@import url('./components/GoodsList//GoodsDetails/GoodDetailsTabs/Reviews/Reviews.scss');
-@import url('./components/GoodsList//GoodsDetails/GoodDetailsTabs/Reviews/AddReviews/AddReviews.scss');
+@import url('./components/GoodsList/GoodsDetails/GoodDetailsTabs/Characteristics/Characteristics.scss');
+@import url('./components/GoodsList/GoodsDetails/GoodDetailsTabs/Reviews/Reviews.scss');
+@import url('./components/GoodsList/GoodsDetails/GoodDetailsTabs/Reviews/AddReviews/AddReviews.scss');
+@import url('./components/Basket/Basket.scss');
+@import url('./components/Basket/BasketItem/BasketItem.scss');
 
 
 body {
