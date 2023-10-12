@@ -17,8 +17,6 @@ const Login: FC = () => {
       .then(({ user }) => {
         user.getIdToken().then((token) => {
           localStorage.setItem('userToken', token);
-        //   localStorage.setItem('userEmail', user.email || ''); КОД НИЖЧЕ МОЖНА ВИДАЛИТИ
-        //   localStorage.setItem('userId', user.uid);
           dispatch(
             setUser({
               email: user.email || '',

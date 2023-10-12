@@ -2,17 +2,23 @@ import { useState } from "react";
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux-hooks'; 
 import { NavLink } from "react-router-dom";
 import { setHeaderBurgerActive } from "../../../store/slice/mediaSlice";
+import { setToogleModal } from "../../../store/slice/basketSlise";
 
+import Basket from "../../Basket/Basket";
 import Auth from "../../Auth/Auth";
 import burgermenu from '../../../img/icon/burgermenu.svg';
 
 const Header = () => {
     const dispatch = useAppDispatch()
     const burgerActive = useAppSelector((state) => state.media.headerBurgerActive);
-
+     const isBasketOpen = useAppSelector((state) => state.basket.isBasketOpen)
     const toggleBurgerMenu = () => {
         dispatch(setHeaderBurgerActive(!burgerActive))
     };
+
+    const openBasket =() => {
+        dispatch(setToogleModal());
+    }
 
     return (
         <header className="header">
@@ -41,7 +47,7 @@ const Header = () => {
                         <NavLink to="/">
                             <li className="header-list-item">Desire</li>
                         </NavLink>
-                        <NavLink to="/">
+                        <NavLink to="#" onClick={openBasket}>
                             <li className="header-list-item">Basket</li>
                         </NavLink>
                         <NavLink to="/register"><li className="header-list-item">
@@ -50,6 +56,7 @@ const Header = () => {
                     </ul>
                 </div>
             </section>
+            {isBasketOpen && <Basket/>}
         </header>
     );
 };

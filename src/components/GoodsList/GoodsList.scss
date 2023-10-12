@@ -12,11 +12,11 @@
     margin: 1%;
     min-height: auto;
     max-height: 500px;
-    background-color:yellow;
+    background-color:var(--first-color);
     display: flex;
     flex-direction: column;
     align-items:center;
-    border:1px solid var(--first-color);
+    border:1px solid var(--second-color);
     border-radius:1em;
     font-size: var(--primary-size);
     img{

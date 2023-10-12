@@ -18,13 +18,13 @@ const Reviews = () => {
   }
   if (!item.reviews) {
     return (
-      <div>
+      <div className='review-warning'>
         No reviews...
-        {userEmail ? (
+        {/* {userEmail ? (
           <AddReviews />
         ) : (
-          <div>Please log in to leave a review.</div>
-        )}
+          <div className='review-warning'>Please log in to leave a review.</div>
+        )} */}
       </div>
     );
   }
@@ -57,7 +57,7 @@ const Reviews = () => {
       {userEmail ? (
           <AddReviews />
         ) : (
-          <div>Please log in to leave a review.</div>
+          <div className='review-warning'>Please log in to leave a review.</div>
        )}
     </section>
   );

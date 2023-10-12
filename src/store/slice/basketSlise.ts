@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { BasketState } from '../../models/goodsSliceModels';
 
+const initialBasketState = JSON.parse(localStorage.getItem('basket') || '[]');
+
 const initialState: BasketState = {
-  basket: [],
+  basket: initialBasketState,
   isBasketOpen: false,
 };
 
@@ -10,20 +12,35 @@ const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
-      setToogleModal: (state) => {
+    setToogleModal: (state) => {
       state.isBasketOpen = !state.isBasketOpen;
       console.log(JSON.stringify(state.isBasketOpen, null, 2));
     },
-      addBasketItem: (state, action) => {
-      const { quantity , item , itemId } = action.payload; 
-      console.log(quantity)
-      console.log(item)
-      state.basket = [...state.basket, [quantity , item, itemId]]; 
-      console.log(JSON.stringify(state.basket, null, 2));
+    addBasketItem: (state, action) => {
+      const { quantity, item, itemId } = action.payload;
+      const existingItem = state.basket.find(([, basketItem]) => basketItem.article === item.article);
+      if (existingItem) {
+        existingItem[0] += quantity;
+      } else {
+        state.basket = [...state.basket, [quantity, item, itemId]];
+      }
+      localStorage.setItem('basket', JSON.stringify(state.basket));
+    },
+    updateQuantity: (state, action) => {
+      const { itemForUpdate, newQuantity } = action.payload;
+      const basketIndex = state.basket.findIndex(([, item]) => item.article === itemForUpdate);
+      if (basketIndex !== -1) {
+        state.basket[basketIndex][0] = newQuantity;
+        localStorage.setItem('basket', JSON.stringify(state.basket));
+      }
+    },
+    removeBasketItem: (state, action) => {
+      const itemIdToRemove = action.payload;
+      state.basket = state.basket.filter(([, item]) => item.article !== itemIdToRemove);
+      localStorage.setItem('basket', JSON.stringify(state.basket));
     },
   },
 });
 
-
-export const { setToogleModal,addBasketItem } = basketSlice.actions;
+export const { setToogleModal, addBasketItem, updateQuantity, removeBasketItem } = basketSlice.actions;
 export default basketSlice.reducer;

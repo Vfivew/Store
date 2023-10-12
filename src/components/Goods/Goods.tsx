@@ -43,10 +43,12 @@ const Goods = () => {
         <StatusDetermine isLoading={isLoading} isError={isError} data={data} />
           <section className="goods-title">
              <NavigationMiniBar propsArray={['Goods', itemId]} />
-            <h2>{itemId}</h2>
           </section>
-          <section className="goods-section">
+        <section className="goods-section">
+          <section className="goods-filter-wrapper">
+            <h2>{itemId}</h2>
             <Filter />
+          </section>
             <section className="goods-list-section">
               <Sort/>
               <GoodsList/>

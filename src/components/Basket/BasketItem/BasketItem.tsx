@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
+import { updateQuantity, removeBasketItem } from '../../../store/slice/basketSlise';
+import { BasketItemProps } from '../../../models/goodsSliceModels';
 
-const BasketItem = ({ item, quantity,itemId, handleModalClick }: { item:any, quantity: number,itemId:any,handleModalClick: () => void  }) => {
+const BasketItem: React.FC<BasketItemProps> = ({ item, quantity, itemId, handleModalClick }) => {
+  const dispatch = useAppDispatch();
+
+  const [localQuantity, setLocalQuantity] = useState(quantity);
 
   const handleRemoveItem = () => {
+    dispatch(removeBasketItem(item.article)); 
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuantity = Number(event.target.value);
+    if (newQuantity >= 0) {
+      setLocalQuantity(newQuantity); 
+      dispatch(updateQuantity({ itemForUpdate: item.article, newQuantity: newQuantity }));
+    }
   };
 
   return (
     <div className='basket-item-pay-info'>
-        <Link
+      <Link
         className='basket-item-pay-link'
         to={`/goods/${itemId}/${item.article}`}
-            onClick={() => {
-            handleModalClick()
+        onClick={() => {
+          if (handleModalClick) {
+            handleModalClick();
+          }
         }}
-        >
-        <img className='basket-item-pay-info-image' src={item.image} alt={item.name} />
-        </Link>
+      >
+        <img className='basket-item-pay-info-image' src={item.img} alt={item.name} />
+      </Link>
       <div className='basket-item-pay-info-name'>{item.name}</div>
       <div className='basket-item-pay-info-quantity'>
-        Кількість
+        <p>Quantity</p> 
         <input
           className='basket-item-pay-info-quantity-input'
           type='number'
-          value={quantity}
+          value={localQuantity} 
           onChange={handleQuantityChange}
           min='0'
         />
       </div>
-      <div className='basket-item-pay-info-price'>Ціна: {item.price} $</div>
-      <button onClick={handleRemoveItem}>Видалити</button>
+      <div className='basket-item-pay-info-price'>Price: {item.price} $</div>
+      <button onClick={handleRemoveItem}>Delete</button>
     </div>
   );
 };

@@ -1,11 +1,9 @@
 .filter-section{
     background-color:rgb(253, 253, 253);
-    width: 18%;
     border: 1px solid var(--first-color);
     border-radius:1em;
     margin-right: 2em;
     padding: 0.3em;
-    height: 10%;
     .filter-list{
         display: flex;
         flex-direction: column;

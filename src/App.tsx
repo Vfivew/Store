@@ -7,6 +7,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Goods from './components/Goods/Goods';
 import GoodsDetails from './components/GoodsList/GoodsDetails/GoodsDetails';
 import Layout from './pages/Layout';
+import SalesForm from './components/SalesForm/SalesForm'
 
 function PrivateRoute({ element }: any) {
   const { isAuth } = useAuth();
@@ -23,6 +24,7 @@ function App() {
         <Route path="register" element={<RegisterPage />} />
         <Route path="goods/:itemId" element={<Goods/>} />
         <Route path="goods/:itemId/:article" element={<GoodsDetails />} />
+        <Route path="form" element={<SalesForm/>} />
         <Route path='*' element={<ErrorPage />} />
       </Route>
     </Routes>

@@ -16,7 +16,7 @@ const Basket = () => {
   const formattedTotalAmount = `${totalAmount.toLocaleString('en-US')} $`;
 
   const handleOrderClick = () => {
-    // navigate('/form');
+    navigate('/form');
   };
 
   const handleModalClick = () => {

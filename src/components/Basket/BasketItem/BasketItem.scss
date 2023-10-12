@@ -1,8 +1,25 @@
 .basket-item-pay-info{
-    font-size: var(--primary-size);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  margin: 1em 0;
+  background: linear-gradient(to bottom, var(--first-color), white, var(--first-color));
+  padding: 0.5em;
+  border:1px solid black;
+  border-radius:1em;
+  font-size: var(--primary-size);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+      button{
+      background-color:var(--first-color);
+      padding: 5px;
+      border:1px solid black;
+      border-radius:1em;
+      font-weight: bold;
+      }
+      button:hover{
+      background-color:white;
+      color:var(--first-color);
+      border:1px solid var(--first-color);
+      }
 }
 
 .basket-item-pay-link{
@@ -17,10 +34,23 @@
 
 .basket-item-pay-info-name{
     width: 30%;
+    font-weight: bold;
 }
 
 .basket-item-pay-info-quantity{
     width: 20%;
+    p{
+      font-weight: bold;
+      margin: 0 2px 2px 0;
+    }
+    input{
+      background-color:white;
+      padding: 2px;
+      width: auto;
+      max-width: 50%;
+      border:1px solid var(--first-color);
+      border-radius:6px
+    }
 }
 
 .basket-item-pay-info-quantity-input{
@@ -61,6 +91,9 @@
 
   .basket-item-pay-info-quantity {
     width: 20%; 
+    input{
+      max-width: 50%;
+    }
   }
 
   .basket-item-pay-info-quantity-input {
@@ -99,13 +132,13 @@
 
   .basket-item-pay-info-quantity {
     width: 20%;
-
   }
 
   .basket-item-pay-info-quantity-input {
     max-width: 70%; 
     height: 2em;
     font-size: var(--secondary-size); 
+    
   }
 
   .basket-item-pay-info-price {

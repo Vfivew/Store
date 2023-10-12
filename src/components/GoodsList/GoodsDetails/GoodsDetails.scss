@@ -1,12 +1,14 @@
 .main-product-detail {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items:center;
   margin:0 0.5em;
-  .main-product-detail-wrapper {
-    max-width: 1280px;
     .navigation-mini-bar {
+      width: 100%;
       margin-top: 1em;
     }
+  .main-product-detail-wrapper {
+    max-width: 1280px;
   }
 
   .main-product-detail-list {
