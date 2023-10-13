@@ -15,12 +15,17 @@ const LoginPage: React.FC = () => {
   }, [isAuth, navigate]);
 
   return (
-    <div>
-      <div>
+    <main className='auth-page'>
+      <div className='auth-page-block'>
         <Login />
-        <Link to="/register">Register</Link>
+        <div className='auth-page-reference'>
+        <Link
+          className='gradient-button'
+          to="/register">Register
+        </Link>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

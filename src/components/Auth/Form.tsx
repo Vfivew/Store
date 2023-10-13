@@ -55,18 +55,18 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
   };
 
   return (
-    <div className='flex items-center justify-center'>
+    <div className='form-wrapper'>
       {resetPassword ? (
         <ResetPasswordForm onResetPassword={handleResetPasswordCancel} />
       ) : (
-        <form onSubmit={handleSubmit} className="bg-thirty py-10 px-8 pb-10 rounded-xl shadow-md border border-white">
+        <form onSubmit={handleSubmit} className="auth-form">
           <p>Login</p>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="w-full text-black p-2 mb-4 rounded border-2 border-fifth focus:outline-none focus:ring focus:border-blue-200"
+            className=""
             autoComplete="current-email"
           />
           <p>Password</p>
@@ -75,7 +75,7 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
             value={pass}
             onChange={handlePasswordChange}
             placeholder="Password"
-            className="w-full text-black p-2 mb-4 rounded border-2 border-fifth focus:outline-none focus:ring focus:border-blue-200"
+            className=""
             autoComplete="current-password"
           />
           {isRegistrationPage && (
@@ -85,29 +85,31 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
                 value={confirmPass}
                 onChange={handleConfirmPasswordChange}
                 placeholder="Confirm Password"
-                className="w-full text-black p-2 mb-4 rounded border-2 border-fifth focus:outline-none focus:ring focus:border-blue-200"
+                className=""
                 autoComplete="current-password"
               />
-              {error && <p className="text-red-600 mb-4">{error}</p>}
+              {error && <p className="">{error}</p>}
             </>
           )}
-          <div className='flex items-center justify-center space-x-4'>
+          <div className='form-button-block'>
             <button
               type="submit"
               disabled={isRegistrationPage && pass !== confirmPass}
-              className="base-btn"
+              className='gradient-button'
             >
               {title}
             </button>
             <button
               onClick={handleResetPasswordClick}
-              className="base-btn"
+              className='gradient-button'
             >
               Forgot password?
               </button>
-              <button>
-                <Link to="/">Back to Main</Link>
+              <Link to="/">
+              <button className='gradient-button'>
+                Back to Main
               </button>
+              </Link>
           </div>
         </form>
       )}

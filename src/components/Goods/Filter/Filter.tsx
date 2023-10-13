@@ -39,8 +39,11 @@ const Filter = () => {
               {key}
             </button>
           ))}
-            <button className="filter-close-button" onClick={toggleSortMenu}>
-              Close
+            <button className='button'
+              onClick={toggleSortMenu}
+              >
+              <div className="wave"></div>
+              <span className='span'>Close</span>
             </button>
         </ul>
         </section>

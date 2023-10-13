@@ -4,6 +4,9 @@
     border-radius:1em;
     margin-right: 2em;
     padding: 0.3em;
+    .button {
+        display: none;
+    }
     .filter-list{
         display: flex;
         flex-direction: column;
@@ -25,6 +28,7 @@
 .filter-button{
     display: none;
 }
+
 
 @media (max-width: 767px) {
     .filter-button{
@@ -55,9 +59,34 @@
         left:0;
         transition: transform 0.3s ease-in-out, opacity  0.1s ease-in-out;
         transform: translateX(-120%); 
+        .filter-list{
+            .button {
+            margin: 1em 0.5em;
+            display: block;
+            font-size: 14px;
+            width: 60px;
+                &:hover {
+                    .wave {
+                    top:-25px;  
+                    }
+                }
+                .wave {
+                    top: -20px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            .button:hover{
+                color:white;
+            }
+        }
     }
     .filter-section.active{
         transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         transform: translateX(0%); 
+    }
+    .filter-close-button{
+        margin-top: 1em;
+        display: block;
     }
 }
