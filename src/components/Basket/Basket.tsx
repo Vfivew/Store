@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
 import { setToogleModal } from '../../store/slice/basketSlise'; 
@@ -8,7 +7,7 @@ const Basket = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const basket = useAppSelector(state => state.basket.basket);
-
+  console.log(basket)
   const totalAmount = basket.reduce((total, [quantity, item]) => {
     return total + (parseFloat(item.price) * quantity);
   }, 0);

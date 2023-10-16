@@ -14,7 +14,6 @@ const Header = () => {
     const burgerActive = useAppSelector((state) => state.media.headerBurgerActive);
     const isBasketOpen = useAppSelector((state) => state.basket.isBasketOpen)
     const basketItems = useAppSelector(state => state.basket.basket);
-    console.log(basketItems)
     const countItem = basketItems.length;
 
     const toggleBurgerMenu = () => {

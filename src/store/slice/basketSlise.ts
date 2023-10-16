@@ -12,9 +12,12 @@ const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
+    setBasketItem: (state, action) => {
+      state.basket = action.payload;
+      console.log(JSON.stringify(state.basket, null, 2));
+    },
     setToogleModal: (state) => {
       state.isBasketOpen = !state.isBasketOpen;
-      console.log(JSON.stringify(state.isBasketOpen, null, 2));
     },
     addBasketItem: (state, action) => {
       const { quantity, item, itemId } = action.payload;
@@ -25,6 +28,7 @@ const basketSlice = createSlice({
         state.basket = [...state.basket, [quantity, item, itemId]];
       }
       localStorage.setItem('basket', JSON.stringify(state.basket));
+      // console.log(JSON.stringify(state.basket, null, 2));
     },
     updateQuantity: (state, action) => {
       const { itemForUpdate, newQuantity } = action.payload;
@@ -42,5 +46,5 @@ const basketSlice = createSlice({
   },
 });
 
-export const { setToogleModal, addBasketItem, updateQuantity, removeBasketItem } = basketSlice.actions;
+export const { setToogleModal, addBasketItem, updateQuantity, removeBasketItem, setBasketItem } = basketSlice.actions;
 export default basketSlice.reducer;

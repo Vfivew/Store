@@ -27,7 +27,28 @@ export const firebaseApi = createApi({
       },
       providesTags: ["Document"],
     }),
+  fetchBasket: builder.query({
+    async queryFn(email) {
+      console.log(email);
+      try {
+        const docRef = doc(db, 'UserBasket', email);
+        const docSnap = await getDoc(docRef);
 
+        if (docSnap.exists()) {
+          const basketData: any = docSnap.data();
+          console.log(basketData);
+          return { data: basketData };
+        } else {
+          console.log('No such document!');
+          return { data: null };
+        }
+      } catch (error) {
+        console.error('Error getting document:', error);
+        return { error };
+      }
+    },
+    providesTags: ["Document"],
+  }),
     fetchDocumentById: builder.query({
       async queryFn(itemId) {
         try {
@@ -49,4 +70,4 @@ export const firebaseApi = createApi({
   }),
 });
 
-export const { useFetchDocumentsQuery, useFetchDocumentByIdQuery } = firebaseApi;
+export const { useFetchDocumentsQuery,useFetchBasketQuery, useFetchDocumentByIdQuery } = firebaseApi;

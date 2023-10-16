@@ -7,11 +7,13 @@ import Characteristics from '../Characteristics/Characteristics';
 import { setToogleModal, addBasketItem } from '../../../../../store/slice/basketSlise';
 import Basket from '../../../../Basket/Basket';
 import { useParams } from 'react-router-dom';
+import { updateBasket } from '../../../../../Service/updateBasket';
 
 const AllDetails = () => {
   const { itemId, article } = useParams();
   const dispatch = useAppDispatch();
   const item = useAppSelector((state) => state.item.selectedItem);
+  const email = useAppSelector((state)=> state.user.email)
   const [quantity, setQuantity] = useState(0);
   const isBasketOpen = useAppSelector((state) => state.basket.isBasketOpen);
   
@@ -48,6 +50,9 @@ const AllDetails = () => {
       console.log(item);
       dispatch(addBasketItem({ quantity , item, itemId}));
       dispatch(setToogleModal());
+      if (email) {
+        updateBasket({ quantity: quantity, item: item, itemId: itemId, email: email })
+      }
     }
   };
     
