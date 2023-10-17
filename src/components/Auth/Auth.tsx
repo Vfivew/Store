@@ -14,7 +14,7 @@ const Auth: React.FC = () => {
 
     return isAuth ? (
         <section>
-            <button onClick={handleLogout}>Log out from {email}</button>
+            <button className='button-auth' onClick={handleLogout}>Log out</button>
         </section>
     ) : (
         <button className='button-auth'>

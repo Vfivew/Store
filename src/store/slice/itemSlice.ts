@@ -17,7 +17,11 @@ const itemSlice = createSlice({
     setFullData: (state, action) => {
       state.fullData = action.payload
     },
+    resetNewFullData:(state)=> {
+      state.newFullData = null;
+    },
     setNewReview: (state, action) => {
+      const { reviewData, rating } = action.payload;
       const updatedFullData = { ...state.fullData };
 
       if (state.selectedItem && state.fullData) {
@@ -31,7 +35,11 @@ const itemSlice = createSlice({
                 if (!itemInside.reviews) {
                   itemInside.reviews = [];
                 }
-                itemInside.reviews.push(action.payload);
+                if (!itemInside.rating){
+                  itemInside.rating = []
+                }
+                itemInside.reviews.push(reviewData);
+                itemInside.rating.push(rating)
               }
             }
           }
@@ -44,6 +52,6 @@ const itemSlice = createSlice({
     }
 });
 
-export const { setItemByArticle , setFullData,setNewReview} = itemSlice.actions;
+export const { setItemByArticle , setFullData,setNewReview,resetNewFullData} = itemSlice.actions;
 
 export default itemSlice.reducer;

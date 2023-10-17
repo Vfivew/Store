@@ -6,7 +6,6 @@ import Button from "../components/Button/Button";
 const HomePage = () => {
     return (
         <>
-            <Button />
             <Main />
             <BannerInfo/>
             <BannerDiscount/>

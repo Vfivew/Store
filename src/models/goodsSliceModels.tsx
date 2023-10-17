@@ -16,3 +16,20 @@ export interface ItemState{
   selectedItem: { [key: string]: any } | null;
   newFullData: { [key: string]: any } | null;
 }
+
+export interface BasketState {
+  basket: any[];
+  isBasketOpen: boolean;
+};
+
+export interface FormState {
+  deliveryMethod: string;
+  isOrderPlaced: boolean;
+};
+
+export interface BasketItemProps {
+  item: any;
+  quantity: number;
+  itemId: any;
+  handleModalClick?: () => void;
+}

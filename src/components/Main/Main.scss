@@ -65,14 +65,18 @@
         font-size: var(--secondary-size);
         text-align: left;
         padding: 0 1em 1em 3em;
+        cursor: pointer;
     }
     p::after {
     content: "";
     display: block;
-    width: 5.5em;
+    width: 6.2em;
     height: 1px;
     background-color: rgb(255, 255, 255); 
     margin-bottom: 1px; 
+    }
+    p:hover::after {
+    background-color: rgb(157, 157, 157);
     }
 }
 

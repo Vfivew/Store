@@ -31,19 +31,19 @@ const Sort = () => {
           className={activeButton === 'PriceUp' ? 'active' : ''}
           onClick={() => handleFilterClick('PriceUp')}
         >
-          Возрастание цены
+          Price Up
         </button>
         <button
           className={activeButton === 'Pricedown' ? 'active' : ''}
           onClick={() => handleFilterClick('Pricedown')}
         >
-          Убывание цены
+          Price down
         </button>
         <button
           className={activeButton === 'Rating' ? 'active' : ''}
           onClick={() => handleFilterClick('Rating')}
         >
-          По рейтингу
+          By rating
         </button>
       </ul>
     </section>

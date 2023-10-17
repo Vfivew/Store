@@ -55,8 +55,8 @@ const GoodsDetails = () => {
 
   return (
     <main className='main-product-detail'>
+      <NavigationMiniBar propsArray={['Goods', itemId, itemName]} />
       <div className='main-product-detail-wrapper'>
-        <NavigationMiniBar propsArray={['Goods', itemId, itemName]} />
         <ul className='main-product-detail-list'>
           <li
             className={selectedTab === 'All Details' ? 'active' : ''}
