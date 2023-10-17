@@ -13,8 +13,8 @@ const Main = () => {
         <section className="block1">
           <Slider />
           <div className='block-sticker'>
-            <h3>Великий вибір вудилищ на котушок</h3>
-            <p onClick={handleCatalogClick}>До каталогу</p>
+            <h3>Great selection of fishing rods and reels</h3>
+            <p onClick={handleCatalogClick}>To the catalog</p>
           </div>
         </section>
         <section className="block2"></section>
