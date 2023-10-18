@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux-hooks'; 
 import { NavLink } from "react-router-dom";
 import { setHeaderBurgerActive } from "../../../store/slice/mediaSlice";
 import { setToogleModal } from "../../../store/slice/basketSlise";
+import { setBasketItem } from "../../../store/slice/basketSlise";
+import { useFetchBasketQuery } from "../../../store/slice/fireStoreApi";
 import basket from '../../../img/icon/basket.svg'
 
 import Basket from "../../Basket/Basket";
@@ -14,7 +16,12 @@ const Header = () => {
     const burgerActive = useAppSelector((state) => state.media.headerBurgerActive);
     const isBasketOpen = useAppSelector((state) => state.basket.isBasketOpen)
     const basketItems = useAppSelector(state => state.basket.basket);
+    const email = useAppSelector(state=> state.user.email)
+    const { data:basketData, isLoading:basketLoading, isError:basketError } = useFetchBasketQuery(email);
     const countItem = basketItems.length;
+
+    const transformedBasketData = basketData ? Object.values(basketData) : [];
+    const arrayBasketData = Object.keys(transformedBasketData).map((key: any) => transformedBasketData[key]);
 
     const toggleBurgerMenu = () => {
         dispatch(setHeaderBurgerActive(!burgerActive))
@@ -23,6 +30,12 @@ const Header = () => {
     const openBasket =() => {
         dispatch(setToogleModal());
     }
+
+    useEffect(() => {
+    if (!basketLoading && !basketError) {
+        dispatch(setBasketItem(arrayBasketData))
+    } 
+    }, [basketData, basketLoading, basketError, dispatch]);
 
     return (
         <header className="header">

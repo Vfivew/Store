@@ -1,6 +1,7 @@
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
 import { setFilteredGoods,setActiveButton } from "../../../store/slice/goodsSlice"; 
 import { setFilterMenuActive } from "../../../store/slice/mediaSlice";
+import AdditionalFilter from "./AdditionalFilter";
 
 const Filter = () => {
   const goods = useAppSelector((state) => state.goods.type);
@@ -23,6 +24,7 @@ const Filter = () => {
   }
 
   const topLevelKeys = Object.keys(goods);
+
   return (
     <>
       <button className="filter-button" onClick={toggleSortMenu}>
@@ -39,6 +41,7 @@ const Filter = () => {
               {key}
             </button>
           ))}
+            <AdditionalFilter/>
             <button className='button'
               onClick={toggleSortMenu}
               >

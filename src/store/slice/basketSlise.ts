@@ -14,7 +14,6 @@ const basketSlice = createSlice({
   reducers: {
     setBasketItem: (state, action) => {
       state.basket = action.payload;
-      console.log(JSON.stringify(state.basket, null, 2));
     },
     setToogleModal: (state) => {
       state.isBasketOpen = !state.isBasketOpen;
@@ -23,8 +22,10 @@ const basketSlice = createSlice({
       const { quantity, item, itemId } = action.payload;
       const existingItem = state.basket.find(([, basketItem]) => basketItem.article === item.article);
       if (existingItem) {
+        console.log(existingItem)
         existingItem[0] += quantity;
       } else {
+        console.log("else")
         state.basket = [...state.basket, [quantity, item, itemId]];
       }
       localStorage.setItem('basket', JSON.stringify(state.basket));
