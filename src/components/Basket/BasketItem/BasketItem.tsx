@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
 import { updateQuantity, removeBasketItem } from '../../../store/slice/basketSlise';
 import { BasketItemProps } from '../../../models/goodsSliceModels';
+import { deleteBasketItem } from '../../../Service/updateBasket';
 
 const BasketItem: React.FC<BasketItemProps> = ({ item, quantity, itemId, handleModalClick }) => {
   const dispatch = useAppDispatch();
-
+  const email = useAppSelector((state)=>state.user.email)
   const [localQuantity, setLocalQuantity] = useState(quantity);
 
   const handleRemoveItem = () => {
     dispatch(removeBasketItem(item.article)); 
+    if (email) {
+      deleteBasketItem({article:item.article, email})
+    }
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {

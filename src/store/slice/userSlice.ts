@@ -31,6 +31,7 @@ const userSlice = createSlice({
       localStorage.removeItem('userEmail');
       localStorage.removeItem('userToken');
       localStorage.removeItem('userId');
+      localStorage.removeItem('basket');
     },
   },
 });
