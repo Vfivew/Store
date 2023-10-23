@@ -1,23 +1,25 @@
-import { useAppSelector } from "../../../hooks/redux-hooks";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
 import { useState } from 'react';
+import { extractGoodsFromData } from '../../../utils/extractGoodsFromData'
+import { setAdditionalFilter, setPrice } from '../../../store/slice/goodsSlice'
 
 type Good = {
     [key: string]: any;
 };
 
 const AdditionalFilter: React.FC = () => {
-    const allGoods = useAppSelector((state) => state.sort.allGoods) as Good[];
-    const [selectedValues, setSelectedValues] = useState<{ [key: string]: string }>({});
+    const dispatch = useAppDispatch();
+    const data = useAppSelector((state) => state.goods.data);
+    const [selectedValues, setSelectedValues] = useState<{ [key: string]: string[] }>({});
+    const [selectPrice, setSelectPrice] = useState<{ min: string; max: string }>({ min: '0', max: '0' });
+    const [activeAdditionalFilter, setActiveAdditionalFilter] = useState<{ key: string, value: string }[]>([]);
+    let allGoods = extractGoodsFromData(data);
     let minPrice = Number.MAX_SAFE_INTEGER;
     let maxPrice = 0;
     let additionalFilter: string[] = [];
-    console.log(allGoods);
     if (allGoods && Array.isArray(allGoods) && allGoods.length > 0) {
         const allPossibleKeys: string[] = ["price", "weight", "producer", "length", "transport_length", "material", "number_of_sections"];
-        console.log(allPossibleKeys);
         additionalFilter = allPossibleKeys.map(key => key);
-        console.log(additionalFilter);
-
         allGoods.forEach(good => {
             const price = parseInt(good["price"]);
             if (!isNaN(price)) {
@@ -29,11 +31,30 @@ const AdditionalFilter: React.FC = () => {
                 }
             }
         });
-    }
+    }   
 
     const handleCheckboxChange = (key: string, value: string) => {
-        setSelectedValues(prevState => ({ ...prevState, [key]: value }));
+        const existingFilterIndex = activeAdditionalFilter.findIndex(
+            (filter) => filter.key === key && filter.value === value
+        );
+
+        let updatedFilter: { key: string; value: string }[];
+
+        if (existingFilterIndex !== -1) {
+            updatedFilter = activeAdditionalFilter.filter(
+                (filter, index) => index !== existingFilterIndex
+            );
+        } else {
+            updatedFilter = [...activeAdditionalFilter, { key, value }];
+        }
+        console.log(updatedFilter);
+        setActiveAdditionalFilter(updatedFilter);
+        dispatch(setAdditionalFilter(updatedFilter));
     };
+
+    const handleSetPrice = (min: string, max: string) => {
+       dispatch(setPrice({ min, max }));
+    }
 
     return (
         <>
@@ -41,17 +62,25 @@ const AdditionalFilter: React.FC = () => {
                 const displayKey = key.replace(/_/g, ' ');
                 if (key === 'price') {
                     return (
-                        <div key={index}>
-                            <p>{displayKey}</p>
-                            <input
-                                type="range"
-                                min={minPrice}
-                                max={maxPrice}
-                                value={selectedValues[key] || minPrice}
-                                onChange={(e) => handleCheckboxChange(key, e.target.value)}
-                            />
-                            <span>{selectedValues[key] || minPrice}</span>
-                        </div>
+  <div>
+                <p>Price Range</p>
+                    <input
+                        type="number"
+                        min={minPrice}
+                        max={maxPrice}
+                        value={selectPrice.min}
+                        onChange={(e) => setSelectPrice({ ...selectPrice, min: e.target.value })}
+                    />
+                    <span> to </span>
+                    <input
+                        type="number"
+                        min={minPrice}
+                        max={maxPrice}
+                        value={selectPrice.max}
+                        onChange={(e) => setSelectPrice({ ...selectPrice, max: e.target.value })}
+                    />
+                <button onClick={() => handleSetPrice(selectPrice.min, selectPrice.max)}>Apply</button>
+            </div>
                     );
                 }
                 return (
@@ -63,7 +92,6 @@ const AdditionalFilter: React.FC = () => {
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedValues[key] === good[key]}
                                             onChange={() => handleCheckboxChange(key, good[key])}
                                         />
                                         {good[key]}

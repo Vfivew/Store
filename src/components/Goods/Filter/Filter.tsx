@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
-import { setFilteredGoods,setActiveButton } from "../../../store/slice/goodsSlice"; 
+import { setFilteredGoods,setActiveButton,setAdditionalFilter,setPrice } from "../../../store/slice/goodsSlice"; 
 import { setFilterMenuActive } from "../../../store/slice/mediaSlice";
 import AdditionalFilter from "./AdditionalFilter";
 
@@ -16,6 +16,8 @@ const Filter = () => {
   const handleFilterClick = (key: string) => {
     dispatch(setActiveButton(key));
     dispatch(setFilteredGoods(key));
+    dispatch(setAdditionalFilter(null));
+    dispatch(setPrice({ min: null, max: null }));
     dispatch(setFilterMenuActive(!filterMenuActive))
   };
 
