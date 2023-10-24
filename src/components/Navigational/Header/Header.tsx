@@ -59,6 +59,9 @@ const Header = () => {
                         </NavLink>
                     </ul>
                     <ul className="header-list">
+                        {email? <NavLink to="/admin">
+                            <li className="header-list-item">Admin Panel</li>
+                        </NavLink>:null}
                         <button className="header-list-item">EN</button>
                         <button className="header-list-item">UK</button>
                         <NavLink to="/">
