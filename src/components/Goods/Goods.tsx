@@ -1,7 +1,7 @@
 import { useFetchDocumentByIdQuery } from "../../store/slice/fireStoreApi";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import { setGoodsData,setGoodsType, setPrevItemId } from "../../store/slice/goodsSlice";
+import { setGoodsData,setGoodsType, setPrevItemId,resetFilter } from "../../store/slice/goodsSlice";
 import { useEffect } from "react";
 import { setSortData } from '../../store/slice/sortSlice';
 import { extractGoodsFromData } from "../../utils/extractGoodsFromData";
@@ -21,6 +21,7 @@ const Goods = () => {
   let allGoods = extractGoodsFromData(goods);
 
   useEffect(() => {
+    dispatch(resetFilter())
     if (itemId !== prevItemId && !isLoading && !isError)
       {
         dispatch(setGoodsData(data));
