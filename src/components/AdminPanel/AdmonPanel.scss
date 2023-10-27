@@ -1,0 +1,48 @@
+
+.add-goods-category-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.add-goods-category-container section {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  flex: 1;
+}
+
+.add-goods-category-container h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.add-goods-category-container p {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.add-goods-category-container button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.add-goods-category-container button:hover {
+  background-color: #e9e9e9;
+}
+
+.add-goods-category-container input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+

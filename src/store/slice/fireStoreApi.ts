@@ -60,6 +60,7 @@ export const firebaseApi = createApi({
 
           if (goodsDocSnapshot.exists()) {
             const itemData = goodsDocSnapshot.data() as GoodsKind;
+            console.log(itemData)
             return { data: itemData };
           } else {
             return { data: null };

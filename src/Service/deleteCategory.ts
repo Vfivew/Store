@@ -1,14 +1,16 @@
 import { db } from '../firebase';
-import { doc, getDoc, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc, deleteDoc, setDoc } from 'firebase/firestore';
 
-export const deleteGoods = async (inputValue: string) => {
+export const deleteCategory = async (newData: any, itemId: string) => {
+    console.log(itemId, 'deleteCategory');
+    console.log(newData, 'newData');
     try {
-        const goodsDocRef = doc(db, 'Goods', inputValue);
+        const goodsDocRef = doc(db, 'Goods', itemId);
         const docSnap = await getDoc(goodsDocRef);
         if (!docSnap.exists()) {
             throw new Error('Item does not exist');
         } else {
-            await deleteDoc(goodsDocRef);
+            await setDoc(goodsDocRef, newData);
             return { data: 'Item deleted successfully' };
         }
     } catch (error) {

@@ -1,9 +1,11 @@
 import React, { useState, ChangeEvent } from 'react';
 import { addGoods } from '../../Service/addGoods';
-import  { deleteGoods } from '../../Service/deleteGoods'
+import { deleteGoods } from '../../Service/deleteGoods'
+import { useFetchDocumentsQuery } from '../../store/slice/fireStoreApi';
 
 const AddGoods = () => {
     const [inputValue, setInputValue] = useState<string>('');
+    const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -17,19 +19,17 @@ const AddGoods = () => {
         addGoods(inputValue);
         console.log('add');
     };
-
     
-    const handleDelete = () => {
-        deleteGoods(inputValue);
+    const handleDelete = (id: string) => {
+        deleteGoods(id);
         console.log('delete');
     };
-
 
     return (
         <div>
             <section>
                 <h2>AddGoods</h2>
-                    <input
+                <input
                     type="text"
                     value={inputValue}
                     onChange={handleChange}
@@ -39,13 +39,9 @@ const AddGoods = () => {
             </section>
             <section>
                 <h2>DeleteGoods</h2>
-                    <input
-                    type="text"
-                    value={inputValue}
-                    onChange={handleChange}
-                    placeholder="Введите слово на английском"
-                />
-                <button onClick={handleDelete}>click to delete</button>
+                {data && data.map((item: any, index: number) => (
+                    <button key={index} onClick={() => handleDelete(item.id)}>{item.id}</button>
+                ))}
             </section>
         </div>
     );
