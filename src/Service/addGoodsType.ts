@@ -1,7 +1,7 @@
 import { db } from '../firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
-export const addGoods = async (inputValue: string) => {
+export const addGoodsType = async (inputValue: string) => {
     try {
         const goodsDocRef = doc(db, 'Goods', inputValue);
         const docSnap = await getDoc(goodsDocRef);
@@ -9,6 +9,7 @@ export const addGoods = async (inputValue: string) => {
             throw new Error('Item already exists');
         } else {
             await setDoc(goodsDocRef, {});
+            window.location.reload(); 
             return { data: 'Item added successfully' };
         }
     } catch (error) {

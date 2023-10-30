@@ -1,8 +1,43 @@
+.main-admin-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  text-align:center;
+}
 
 .add-goods-category-container {
+  max-width: 1280px;
   display: flex;
   justify-content: space-between;
   padding: 20px;
+}
+.add-category-exist-category{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  p{
+    background-color:var(--first-color);
+    margin: 2%;
+    width: 45%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0.5em;
+  }
+  .delete-button{
+    background-color:var(--first-color);
+    margin: 2%;
+    width: 45%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid grey;
+    padding: 0.5em;
+  }
 }
 
 .add-goods-category-container section {
@@ -21,6 +56,7 @@
   font-size: 1em;
   margin-bottom: 10px;
 }
+
 
 .add-goods-category-container button {
   display: block;

@@ -67,8 +67,8 @@ const AddGoodsCategory = () => {
      return (
         <div className="add-goods-category-container">
             <section className="add-category-section">
-                <h2>AddCategory</h2>
-                <p>CHOISE TYPE OF PRODUCT to whom you want add Category</p>
+                <h2>Add Category</h2>
+                <p>Choose the goods of product to which you want to add a product category</p>
                 {data && data.map((item: any, index: number) => (
                     <button
                         onClick={() => handleChoiseType(item.id)}
@@ -76,22 +76,22 @@ const AddGoodsCategory = () => {
                         {item.id}
                     </button>
                 ))}
-                {
-                fetchedData &&
-                Object.keys(fetchedData).map((key, index) => (
-                    <div key={index}>{key}</div>
-                ))}
-                <input
+                {fetchedData && (
+                <div>
+                    <input
+                    placeholder='Enter the name of goods'
                     type="text"
                     value={inputValue}
                     onChange={handleChange}
                     className="input-field"
-                />
-                <button onClick={handleAdd} className="add-button">Add</button>
+                    />
+                    <button onClick={handleAdd} className="add-button">Add</button>
+                </div>
+                )}
             </section>
             <section className="delete-category-section">
-                <h2>DeleteCategory</h2>
-                <p>CHOISE TYPE OF PRODUCT</p>
+                <h2>Delete Category</h2>
+                <p>Select the goods of product from which you want to remove the category, and then click on the category you wish to delete."</p>
                 {data && data.map((item: any, index: number) => (
                     <button
                         onClick={() => handleChoiseType(item.id)}
@@ -99,6 +99,8 @@ const AddGoodsCategory = () => {
                         {item.id}
                     </button>
                 ))}
+                
+                 <div className='add-category-exist-category'>
                 {
                 fetchedData &&
                 Object.keys(fetchedData).map((key, index) => (
@@ -106,6 +108,7 @@ const AddGoodsCategory = () => {
                         onClick={()=>handleDelete(key)}
                         key={index} className="delete-button">{key}</button>
                 ))}
+                </div>
             </section>
         </div>
     );

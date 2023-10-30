@@ -11,6 +11,7 @@ export const deleteCategory = async (newData: any, itemId: string) => {
             throw new Error('Item does not exist');
         } else {
             await setDoc(goodsDocRef, newData);
+            window.location.reload(); 
             return { data: 'Item deleted successfully' };
         }
     } catch (error) {

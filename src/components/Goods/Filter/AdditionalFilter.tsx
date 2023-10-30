@@ -16,8 +16,19 @@ const AdditionalFilter: React.FC = () => {
     let minPrice = Number.MAX_SAFE_INTEGER;
     let maxPrice = 0;
     let additionalFilter: string[] = [];
+    console.log(allGoods)
     if (allGoods && Array.isArray(allGoods) && allGoods.length > 0) {
-        const allPossibleKeys: string[] = ["price", "weight", "producer", "length", "transport_length", "material", "number_of_sections"];
+        let allPossibleKeys: string[] = [];
+        const excludedKeys = ['reviews', 'rating', 'img', 'desc', 'article','description', 'name'];
+        if (allGoods && Array.isArray(allGoods) && allGoods.length > 0) {
+            allGoods.forEach(good => {
+                for (const key in good) {
+                    if (!excludedKeys.includes(key) && !allPossibleKeys.includes(key)) {
+                        allPossibleKeys.push(key);
+                    }
+                }
+            });
+        }
         additionalFilter = allPossibleKeys.map(key => key);
         allGoods.forEach(good => {
             const price = parseInt(good["price"]);
@@ -32,24 +43,24 @@ const AdditionalFilter: React.FC = () => {
         });
     }   
 
- const handleCheckboxChange = (key: any, value: any, min?: any, max?: any) => {
-     if (key !== null && value !== null) {
-        const existingFilterIndex = activeAdditionalFilter.findIndex(
-            (filter) => filter.key === key && filter.value === value
-        );
-
-        let updatedFilter: { key: string; value: string }[];
-
-        if (existingFilterIndex !== -1) {
-            updatedFilter = activeAdditionalFilter.filter(
-                (filter, index) => index !== existingFilterIndex
+    const handleCheckboxChange = (key: any, value: any, min?: any, max?: any) => {
+        if (key !== null && value !== null) {
+            const existingFilterIndex = activeAdditionalFilter.findIndex(
+                (filter) => filter.key === key && filter.value === value
             );
-        } else {
-            updatedFilter = [...activeAdditionalFilter, { key, value }];
-        }
-        console.log(updatedFilter);
-        setActiveAdditionalFilter(updatedFilter);
-        dispatch(setFilter({ min, max, updatedFilter, }))
+
+            let updatedFilter: { key: string; value: string }[];
+
+            if (existingFilterIndex !== -1) {
+                updatedFilter = activeAdditionalFilter.filter(
+                    (filter, index) => index !== existingFilterIndex
+                );
+            } else {
+                updatedFilter = [...activeAdditionalFilter, { key, value }];
+            }
+            console.log(updatedFilter);
+            setActiveAdditionalFilter(updatedFilter);
+            dispatch(setFilter({ min, max, updatedFilter, }))
         } else {
             dispatch(setFilter({ min, max, updatedFilter:activeAdditionalFilter, }))
         }
@@ -61,25 +72,25 @@ const AdditionalFilter: React.FC = () => {
                 const displayKey = key.replace(/_/g, ' ');
                 if (key === 'price') {
                     return (
-            <div className="additional-filter">
-                <p>Price Range</p>
-                    <input
-                        type="number"
-                        min={minPrice}
-                        max={maxPrice}
-                        value={selectPrice.min !== null ? selectPrice.min : ""}
-                        onChange={(e) => setSelectPrice({ ...selectPrice, min: e.target.value })}
-                    />
-                    <span> to </span>
-                    <input
-                        type="number"
-                        min={minPrice}
-                        max={maxPrice}
-                        value={selectPrice.max !== null ? selectPrice.max : ""}
-                        onChange={(e) => setSelectPrice({ ...selectPrice, max: e.target.value })}
-                    />
-                <button onClick={() => handleCheckboxChange(null, null, selectPrice.min, selectPrice.max)}>Apply</button>
-            </div>
+                        <div className="additional-filter" key={index}>
+                            <p>Price Range</p>
+                            <input
+                                type="number"
+                                min={minPrice}
+                                max={maxPrice}
+                                value={selectPrice.min !== null ? selectPrice.min : ""}
+                                onChange={(e) => setSelectPrice({ ...selectPrice, min: e.target.value })}
+                            />
+                            <span> to </span>
+                            <input
+                                type="number"
+                                min={minPrice}
+                                max={maxPrice}
+                                value={selectPrice.max !== null ? selectPrice.max : ""}
+                                onChange={(e) => setSelectPrice({ ...selectPrice, max: e.target.value })}
+                            />
+                            <button onClick={() => handleCheckboxChange(null, null, selectPrice.min, selectPrice.max)}>Apply</button>
+                        </div>
                     );
                 }
                 return (

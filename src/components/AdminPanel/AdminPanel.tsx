@@ -9,10 +9,10 @@ const AdminPanel = () => {
     console.log(data)
     
     return (
-        <main>
-            <AddGoods />
+        <main className='main-admin-panel'>
             <AddGoodsType />
-            <AddGoodsCategory/>
+            <AddGoodsCategory />
+            <AddGoods />
         </main>
     );
 };

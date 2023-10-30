@@ -1,50 +1,139 @@
-import React, { useState, ChangeEvent } from 'react';
-import { addGoods } from '../../Service/addGoods';
-import { deleteGoods } from '../../Service/deleteGoods'
-import { useFetchDocumentsQuery } from '../../store/slice/fireStoreApi';
+import { useState, useEffect } from 'react';
+import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../store/slice/fireStoreApi';
 
-const AddGoods = () => {
-    const [inputValue, setInputValue] = useState<string>('');
+const AddGoodsCategory = () => {
+    const [skip, setSkip] = useState(true);
     const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
+    const [itemId, setItemId] = useState<string>('');
+    const { data: fetchedData } = useFetchDocumentByIdQuery(itemId, { skip });
+    const [activeKey, setActiveKey] = useState<string | null>(null);
+    const [inputValues, setInputValues] = useState<Record<string, string>>({});
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const regex = /^[a-zA-Z]+$/;
-        if (value === '' || regex.test(value)) {
-            setInputValue(value);
+    const handleChoiseType = (itemId: string) => {
+        setItemId(itemId);
+        setSkip(false);
+        console.log(itemId);
+    };
+
+    useEffect(() => {
+        if (!skip && fetchedData) {
+            console.log(fetchedData);
+        }
+    }, [fetchedData, skip]);
+
+    const handleDelete = async (key: any) => {
+
+    };
+
+    const handleCreateInput = (key: string) => {
+        if (fetchedData && fetchedData[key] && fetchedData[key].article) {
+            setActiveKey(key);
+            const foundObject = fetchedData[key].article;
+            if (typeof foundObject === 'object' && foundObject !== null) {
+                const keysArray = Object.keys(foundObject).filter(key => key !== "rating" && key !== "reviews");
+                console.log(keysArray);
+            } else {
+                console.log("The found object is not an object or is null");
+            }
+        } else {
+            console.log("fetchedData, fetchedData[key], or fetchedData[key].article is undefined or null");
         }
     };
 
-    const handleAdd = () => {
-        addGoods(inputValue);
-        console.log('add');
-    };
-    
-    const handleDelete = (id: string) => {
-        deleteGoods(id);
-        console.log('delete');
+    const renderInputs = (keysArray: string[]) => {
+        return keysArray.map((key, index) => {
+            return (
+                <div key={index}>
+                    <label>{key}</label>
+                    <input
+                        type="text"
+                        name={key}
+                        onChange={(e) => {
+                            setInputValues((prev) => ({ ...prev, [key]: e.target.value }));
+                        }}
+                    />
+                </div>
+            );
+        });
     };
 
+const handleAddToConsole = () => {
+    const valuesAreFilled = Object.values(inputValues).every(value => value && value.trim() !== '' && value !== undefined);
+    console.log(inputValues)
+    if (valuesAreFilled) {
+        if (inputValues['article']) {
+            const filteredValues = Object.keys(inputValues).reduce((obj: Record<string, string>, key) => {
+                if (key === 'article') {
+                    obj[key] = inputValues[key];
+                } else {
+                    obj[key] = inputValues[key];
+                }
+                return obj;
+            }, {});
+            const newObject = { [inputValues['article']]: filteredValues };
+            console.log(newObject);
+        } else {
+            console.log('article is undefined or empty');
+        }
+    } else {
+        console.log('Please fill in all fields');
+    }
+};
+
+
+
+
+
+
+
     return (
-        <div>
-            <section>
-                <h2>AddGoods</h2>
-                <input
-                    type="text"
-                    value={inputValue}
-                    onChange={handleChange}
-                    placeholder="Введите слово на английском"
-                />
-                <button onClick={handleAdd}>click to add</button>
+        <div className="add-goods-category-container">
+            <section className="add-category-section">
+                <h2>Add goods</h2>
+                <p>Choose the type an category which you want to add</p>
+                {data &&
+                    data.map((item: any, index: number) => (
+                        <button onClick={() => handleChoiseType(item.id)} key={index}>
+                            {item.id}
+                        </button>
+                    ))}
+                <div className="add-category-exist-category">
+                    {fetchedData &&
+                        Object.keys(fetchedData).map((key, index) => (
+                            <div key={index}>
+                                <button onClick={() => handleCreateInput(key)} className="delete-button">
+                                    {key}
+                                </button>
+                            </div>
+                        ))}
+                </div>
+                {activeKey && fetchedData && fetchedData[activeKey] && fetchedData[activeKey].article ? (
+                    <div className="add-category-exist-category">
+                        {renderInputs(Object.keys(fetchedData[activeKey].article).filter(key => key !== "rating" && key !== "reviews"))}
+                        <button onClick={handleAddToConsole}>Add to Console</button>
+                    </div>
+                ) : null}
             </section>
-            <section>
-                <h2>DeleteGoods</h2>
-                {data && data.map((item: any, index: number) => (
-                    <button key={index} onClick={() => handleDelete(item.id)}>{item.id}</button>
-                ))}
+            <section className="delete-category-section">
+                <h2>Delete goods</h2>
+                <p>Choose the type an category which you want to delete</p>
+                {data &&
+                    data.map((item: any, index: number) => (
+                        <button onClick={() => handleChoiseType(item.id)} key={index}>
+                            {item.id}
+                        </button>
+                    ))}
+                <div className="add-category-exist-category">
+                    {fetchedData &&
+                        Object.keys(fetchedData).map((key, index) => (
+                            <button onClick={() => handleDelete(key)} key={index} className="delete-button">
+                                {key}
+                            </button>
+                        ))}
+                </div>
             </section>
         </div>
     );
 };
 
-export default AddGoods;
+export default AddGoodsCategory;
