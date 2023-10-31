@@ -2,8 +2,6 @@ import { db } from '../firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 export const addCategory = async (newData: any, itemId: string) => {
-    console.log(itemId, 'addCategory');
-    console.log(newData, 'newData');
     try {
         const goodsDocRef = doc(db, 'Goods', itemId);
         const docSnap = await getDoc(goodsDocRef);
