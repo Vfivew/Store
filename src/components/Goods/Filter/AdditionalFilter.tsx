@@ -30,41 +30,53 @@ const AdditionalFilter: React.FC = () => {
             });
         }
         additionalFilter = allPossibleKeys.map(key => key);
-        allGoods.forEach(good => {
-            const price = parseInt(good["price"]);
-            if (!isNaN(price)) {
-                if (price < minPrice) {
-                    minPrice = price;
-                }
-                if (price > maxPrice) {
-                    maxPrice = price;
-                }
-            }
-        });
+       // allGoods.forEach(good => {
+        //    const price = parseInt(good["price"]);
+        //    if (!isNaN(price)) {
+        //        if (price < minPrice) {
+        //            minPrice = price;
+        //        }
+        //        if (price > maxPrice) {//
+        //            maxPrice = price;
+        //        }
+        //    }
+        //});
     }   
 
     const handleCheckboxChange = (key: any, value: any, min?: any, max?: any) => {
-        if (key !== null && value !== null) {
-            const existingFilterIndex = activeAdditionalFilter.findIndex(
-                (filter) => filter.key === key && filter.value === value
-            );
+    let updatedMin = min;
+    let updatedMax = max;
 
-            let updatedFilter: { key: string; value: string }[];
+    if (min === null && max !== null) {
+        updatedMin = '1';
+    }
 
-            if (existingFilterIndex !== -1) {
-                updatedFilter = activeAdditionalFilter.filter(
-                    (filter, index) => index !== existingFilterIndex
-                );
-            } else {
-                updatedFilter = [...activeAdditionalFilter, { key, value }];
-            }
-            console.log(updatedFilter);
-            setActiveAdditionalFilter(updatedFilter);
-            dispatch(setFilter({ min, max, updatedFilter, }))
+    if (max === null && min !== null) {
+        updatedMax = '9999';
+    }
+
+    if (key !== null && value !== null) {
+        const existingFilterIndex = activeAdditionalFilter.findIndex(
+        (filter) => filter.key === key && filter.value === value
+        );
+
+        let updatedFilter: { key: string; value: string }[];
+
+        if (existingFilterIndex !== -1) {
+        updatedFilter = activeAdditionalFilter.filter(
+            (filter, index) => index !== existingFilterIndex
+        );
         } else {
-            dispatch(setFilter({ min, max, updatedFilter:activeAdditionalFilter, }))
+        updatedFilter = [...activeAdditionalFilter, { key, value }];
         }
+        console.log(updatedFilter);
+        setActiveAdditionalFilter(updatedFilter);
+        dispatch(setFilter({ min: updatedMin, max: updatedMax, updatedFilter }));
+    } else {
+        dispatch(setFilter({ min: updatedMin, max: updatedMax, updatedFilter: activeAdditionalFilter }));
+    }
     };
+
 
     return (
         <>
@@ -76,16 +88,16 @@ const AdditionalFilter: React.FC = () => {
                             <p>Price Range</p>
                             <input
                                 type="number"
-                                min={minPrice}
-                                max={maxPrice}
+                                //min={minPrice}
+                                //max={maxPrice}
                                 value={selectPrice.min !== null ? selectPrice.min : ""}
                                 onChange={(e) => setSelectPrice({ ...selectPrice, min: e.target.value })}
                             />
                             <span> to </span>
                             <input
                                 type="number"
-                                min={minPrice}
-                                max={maxPrice}
+                                //min={minPrice}
+                                //max={maxPrice}
                                 value={selectPrice.max !== null ? selectPrice.max : ""}
                                 onChange={(e) => setSelectPrice({ ...selectPrice, max: e.target.value })}
                             />

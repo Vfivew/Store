@@ -26,7 +26,7 @@ const AddType = () => {
                 onChange={handleChange}
                 placeholder="Enter the name"
             />
-            <button onClick={handleAdd}>Click to add</button>
+            <button onClick={handleAdd} className='final-add-button'>Add</button>
         </section>
     );
 };

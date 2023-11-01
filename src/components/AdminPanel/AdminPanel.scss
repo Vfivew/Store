@@ -1,4 +1,5 @@
 .main-admin-panel {
+  font-family: var(--primary-font);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +12,17 @@
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  .final-add-button{
+    background-color:var(--first-color);
+    font-weight: bold;
+  }
+  .final-add-button:hover,
+  .final-add-button:focus{
+    background-color:rgb(0, 187, 255);
+    border:1px solid black;
+  }
 }
+
 .add-category-exist-category{
   display: flex;
   justify-content: center;
@@ -38,8 +49,27 @@
     border: 1px solid grey;
     padding: 0.5em;
   }
+  .category-wrapper{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    div{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      button{
+        background-color:var(--first-color);
+        margin: 2%;
+        width: 100%;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 0.5em;
+      }
+    }
+  }
 }
-
 .add-goods-category-container section {
   border: 1px solid #ddd;
   padding: 20px;

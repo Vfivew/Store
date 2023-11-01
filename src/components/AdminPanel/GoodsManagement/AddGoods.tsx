@@ -115,7 +115,8 @@ const AddGoods = () => {
                     </button>
                 ))}
             <div className="add-category-exist-category">
-                {fetchedData &&
+                <div className='category-wrapper'>
+                    {fetchedData &&
                     Object.keys(fetchedData).map((key, index) => (
                         <div key={index}>
                             <button onClick={() => handleCreateInput(key)} className="delete-button">
@@ -123,11 +124,13 @@ const AddGoods = () => {
                             </button>
                         </div>
                     ))}
+                </div>
             </div>
             {activeKey && fetchedData && fetchedData[activeKey] ? (
                 <div className="add-category-exist-category">
                     {renderInputs(characteristicArray)}
-                    <button onClick={handleAddGood}>Add to Console</button>
+                    <button className='final-add-button'
+                        onClick={handleAddGood}>Add</button>
                 </div>
             ) : null}
         </section>

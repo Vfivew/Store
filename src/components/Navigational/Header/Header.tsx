@@ -48,13 +48,13 @@ const Header = () => {
                         <NavLink to="/">
                             <li className="header-list-item">About Us</li>
                         </NavLink>
-                        <NavLink to="/">
+                        <NavLink to="/info/0">
                             <li className="header-list-item">Payment and delivery</li>
                         </NavLink>
-                        <NavLink to="/">
+                        <NavLink to="/info/1">
                             <li className="header-list-item">Exchange and return</li>
                         </NavLink>
-                        <NavLink to="/">
+                        <NavLink to="/info/2">
                             <li className="header-list-item">Contact Information</li>
                         </NavLink>
                     </ul>

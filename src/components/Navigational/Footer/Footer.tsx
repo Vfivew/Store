@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useAppSelector } from '../../../hooks/redux-hooks'; 
 import { GoodsItem } from "../../../models/fireStoreModels";
 
+import logo from '../../../img/logo.png'
 import instagram from '../../../img/icon/instagram.svg'
 import facebook from '../../../img/icon/facebook.svg'
 import telegram from '../../../img/icon/telegram.svg'
@@ -15,9 +16,9 @@ const Footer = () => {
         <footer className="footer">
             <section className="footer-wrapper">
             <ul className='footer-list footer-logo'>
-                <li>Logo<img src="" alt="" /></li>
-                <li>@2023</li>
-                <li>Payment</li>
+                <li><img className="footer-img" src={logo} alt="Logo"/></li>
+                <li className="footer-logo-li">@2023</li>
+                <li className="footer-logo-li">Payment</li>
             </ul>
             <ul className='footer-list footer-catalog'>
                 <h3>Catalog</h3>
@@ -32,25 +33,25 @@ const Footer = () => {
                     <NavLink to="/">
                         <li className="header-list-item">About Us</li>
                     </NavLink>
-                    <NavLink to="/">
+                    <NavLink to="/info/0">
                         <li className="header-list-item">Payment and delivery</li>
                     </NavLink>
-                    <NavLink to="/">
+                    <NavLink to="/info/1">
                         <li className="header-list-item">Exchange and return</li>
                     </NavLink>
-                    <NavLink to="/">
+                    <NavLink to="/info/2">
                     <li className="header-list-item">Contact Information</li>
                     </NavLink>
             </ul>
             <ul className='footer-list'>
                 <h3>Contact Information</h3>
                 <li><a className='nav-number' href="tel:380999999999">
-                        +099-999-99-99
+                        099-999-99-99
                     </a>
                 </li>
                 <li>
                     <a className='nav-number' href="tel:0444444444">
-                        +044-444-44-44
+                        044-444-44-44
                     </a>
                 </li>
                 <li>Call us back</li>

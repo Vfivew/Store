@@ -156,7 +156,7 @@ const AddCategory = () => {
                         </div>
                     ))}
                     <button onClick={handleAddCharacteristic} className="add-button">Add more characteristics</button>
-                    <button onClick={handleAdd} className="add-button">Add</button>
+                    <button onClick={handleAdd} className='final-add-button'>Add</button>
                 </div>
             )}
         </section>
