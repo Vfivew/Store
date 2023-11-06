@@ -11,7 +11,7 @@ const DeleteType = () => {
 
     return (
         <section>
-            <h2>Delete Type</h2>
+            <h2>Видалити тип</h2>
             {data && data.map((item: any, index: number) => (
                 <button key={index} onClick={() => handleDelete(item.id)}>{item.id}</button>
             ))}

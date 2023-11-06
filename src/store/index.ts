@@ -8,6 +8,7 @@ import mediaReducer from '../store/slice/mediaSlice'
 import itemReducer from '../store/slice/itemSlice'
 import basketReducer from '../store/slice/basketSlise';
 import formReducer from './slice/formReducer';
+import desireReducer from './slice/desireSlice'
 
 const userToken = localStorage.getItem('userToken');
 const userEmail = localStorage.getItem('userEmail');
@@ -23,6 +24,7 @@ export const store = configureStore({
     item: itemReducer,
     basket: basketReducer,
     form: formReducer,
+    desire: desireReducer,
     [firebaseApi.reducerPath]: firebaseApi.reducer, 
   },
   middleware: (getDefaultMiddleware) =>

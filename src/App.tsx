@@ -10,6 +10,7 @@ import Layout from './pages/Layout';
 import SalesForm from './components/SalesForm/SalesForm'
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import Info from './components/Info/Info';
+import Desire from './components/Desire/Desire'
 
 function PrivateRoute({ element }: any) {
   const { isAuth } = useAuth();
@@ -30,6 +31,7 @@ function App() {
         <Route path='*' element={<ErrorPage />} />
         <Route path="/info" element={<Info tabIndex={0} />} />
         <Route path="/info/:tabIndex" element={<Info tabIndex={0} />} />
+        <Route path='/desire' element={<Desire />} />
         <Route path='admin' element={<PrivateRoute element={<AdminPanel/>} />} />
       </Route>
     </Routes>

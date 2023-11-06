@@ -79,6 +79,8 @@ const AddCategory = () => {
                         name: name,
                         article: article,
                         img: image,
+                        reviews: [],//new
+                        rating:[],//new
                         ...characteristicsObject
                     }
                 }

@@ -63,7 +63,7 @@ const AddGoods = () => {
                     }
                     return obj;
                 }, {});
-                const newObject = { [inputValues['article']]: filteredValues };
+                const newObject = { [inputValues['article']]: { ...filteredValues, rating: [], reviews: [] } };//new
                 console.log(newObject);
 
                 if (activeKey) {

@@ -1,0 +1,27 @@
+.desire-block{
+    display: flex;
+    .goods-card-section{
+        .desite-buttons-block{
+            display: flex;
+            align-items:center;
+
+            .desire-button{
+                width: 6em;
+                height: 3em;
+                padding: 1em;
+                margin: 0 0.5em;
+                background-color:var(--thirty-color);
+                color:black;
+                font-weight: bold;
+                padding: 4px 14px;
+                border:1px solid grey;
+                border-radius:1em
+            }
+            .desire-button:hover {
+                background-image: var(--main-gradient);
+                color: white;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+}
