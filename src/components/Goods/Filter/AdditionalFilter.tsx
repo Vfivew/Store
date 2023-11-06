@@ -2,10 +2,7 @@ import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
 import { useState } from 'react';
 import { extractGoodsFromData } from '../../../utils/extractGoodsFromData'
 import { setFilter } from '../../../store/slice/goodsSlice'
-
-type Good = {
-    [key: string]: any;
-};
+import UniqueElements from './AdditionalFilterUniqueElement/UniqueElements'; 
 
 const AdditionalFilter: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -13,91 +10,101 @@ const AdditionalFilter: React.FC = () => {
     const [selectPrice, setSelectPrice] = useState<{ min: string|null; max: string | null}>({ min: null, max: null });
     const [activeAdditionalFilter, setActiveAdditionalFilter] = useState<{ key: string, value: string }[]>([]);
     let allGoods = extractGoodsFromData(data);
-    let minPrice = Number.MAX_SAFE_INTEGER;
-    let maxPrice = 0;
     let additionalFilter: string[] = [];
+
     if (allGoods && Array.isArray(allGoods) && allGoods.length > 0) {
-        const allPossibleKeys: string[] = ["price", "weight", "producer", "length", "transport_length", "material", "number_of_sections"];
+        let allPossibleKeys: string[] = [];
+        const excludedKeys = ['price', 'reviews', 'rating', 'img', 'desc', 'article','description', 'name'];
+        if (allGoods && Array.isArray(allGoods) && allGoods.length > 0) {
+            allGoods.forEach(good => {
+                for (const key in good) {
+                    if (!excludedKeys.includes(key) && !allPossibleKeys.includes(key)) {
+                        allPossibleKeys.push(key);
+                    }
+                }
+            });
+        }
         additionalFilter = allPossibleKeys.map(key => key);
-        allGoods.forEach(good => {
-            const price = parseInt(good["price"]);
-            if (!isNaN(price)) {
-                if (price < minPrice) {
-                    minPrice = price;
-                }
-                if (price > maxPrice) {
-                    maxPrice = price;
-                }
-            }
-        });
     }   
 
- const handleCheckboxChange = (key: any, value: any, min?: any, max?: any) => {
-     if (key !== null && value !== null) {
-        const existingFilterIndex = activeAdditionalFilter.findIndex(
+    const handleCheckboxChange = (key: any, value: any, min?: any, max?: any) => {
+        let updatedMin = min;
+        let updatedMax = max;
+
+        if (min === null && max !== null) {
+            updatedMin = '1';
+        }
+
+        if (max === null && min !== null) {
+            updatedMax = '9999';
+        }
+
+        if (key !== null && value !== null) {
+            const existingFilterIndex = activeAdditionalFilter.findIndex(
             (filter) => filter.key === key && filter.value === value
-        );
+            );
 
-        let updatedFilter: { key: string; value: string }[];
+            let updatedFilter: { key: string; value: string }[];
 
-        if (existingFilterIndex !== -1) {
-            updatedFilter = activeAdditionalFilter.filter(
+            if (existingFilterIndex !== -1) {
+                updatedFilter = activeAdditionalFilter.filter(
                 (filter, index) => index !== existingFilterIndex
             );
+            } else {
+                updatedFilter = [...activeAdditionalFilter, { key, value }];
+            }
+            console.log(updatedFilter);
+            setActiveAdditionalFilter(updatedFilter);
+            dispatch(setFilter({ min: updatedMin, max: updatedMax, updatedFilter }));
         } else {
-            updatedFilter = [...activeAdditionalFilter, { key, value }];
+            dispatch(setFilter({ min: updatedMin, max: updatedMax, updatedFilter: activeAdditionalFilter }));
         }
-        console.log(updatedFilter);
-        setActiveAdditionalFilter(updatedFilter);
-        dispatch(setFilter({ min, max, updatedFilter, }))
+    };
+
+    const [activeItems, setActiveItems] = useState<number[]>([]);
+
+    const toggleActive = (index: number) => {
+        if (activeItems.includes(index)) {
+            setActiveItems(activeItems.filter((item) => item !== index));
         } else {
-            dispatch(setFilter({ min, max, updatedFilter:activeAdditionalFilter, }))
+            setActiveItems([...activeItems, index]);
         }
     };
 
     return (
         <>
+        <div className="additional-filter price-filter">
+            <p>Price Range</p>
+            <input
+                type="number"
+                value={selectPrice.min !== null ? selectPrice.min : ""}
+                onChange={(e) => setSelectPrice({ ...selectPrice, min: e.target.value })}
+            />
+            <span> to </span>
+            <input
+                type="number"
+                value={selectPrice.max !== null ? selectPrice.max : ""}
+                onChange={(e) => setSelectPrice({ ...selectPrice, max: e.target.value })}
+            />
+            <button onClick={() => handleCheckboxChange(null, null, selectPrice.min, selectPrice.max)}>Apply</button>
+        </div>
+        
             {additionalFilter.map((key, index) => {
                 const displayKey = key.replace(/_/g, ' ');
-                if (key === 'price') {
-                    return (
-            <div className="additional-filter">
-                <p>Price Range</p>
-                    <input
-                        type="number"
-                        min={minPrice}
-                        max={maxPrice}
-                        value={selectPrice.min !== null ? selectPrice.min : ""}
-                        onChange={(e) => setSelectPrice({ ...selectPrice, min: e.target.value })}
-                    />
-                    <span> to </span>
-                    <input
-                        type="number"
-                        min={minPrice}
-                        max={maxPrice}
-                        value={selectPrice.max !== null ? selectPrice.max : ""}
-                        onChange={(e) => setSelectPrice({ ...selectPrice, max: e.target.value })}
-                    />
-                <button onClick={() => handleCheckboxChange(null, null, selectPrice.min, selectPrice.max)}>Apply</button>
-            </div>
-                    );
-                }
+                const isActive = activeItems.includes(index);
+
                 return (
                     <div className="additional-filter" key={index}>
-                        <p>{displayKey}</p>
-                        {allGoods.map((good: Good, idx: number) => (
-                            <div key={idx}>
-                                {good[key] && (
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            onChange={() => handleCheckboxChange(key, good[key], selectPrice.min, selectPrice.max)}
-                                        />
-                                        {good[key]}
-                                    </label>
-                                )}
-                            </div>
-                        ))}
+                        <button className={isActive ? 'button-active' : 'button-default'} onClick={() => toggleActive(index)}>{displayKey}</button>
+                        <div className={isActive ? 'filter-active' : 'filter-hide'}>
+                            <UniqueElements
+                                allGoods={allGoods}
+                                filterKey={key}
+                                handleCheckboxChange={handleCheckboxChange}
+                                selectPriceMin={selectPrice.min}
+                                selectPriceMax={selectPrice.max}
+                            />
+                        </div>
                     </div>
                 );
             })}

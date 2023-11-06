@@ -5,6 +5,7 @@
     background-color:var(--first-color);
     border-top: 1px solid black;
     border-radius: 1em 1em 0 0;
+    font-family: var(--primary-font);
 }
 
 .footer-wrapper{
@@ -12,6 +13,19 @@
     display: flex;
     justify-content: space-between;
     max-width: 1280px;
+    .footer-logo{
+        .footer-logo-li{
+            margin-left: 2em;
+        }
+            li{
+                .footer-img{
+                    margin-top: -13%;
+                    margin-left: 0;
+                    width: 60%;
+                }
+            }
+    
+    }
 }
 
 .footer-list{

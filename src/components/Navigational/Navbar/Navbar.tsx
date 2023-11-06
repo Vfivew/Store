@@ -1,5 +1,7 @@
 import shopCatalogIcon from '../../../img/icon/shopCatalogIcon.svg';
+import logo from '../../../img/logo.png'
 import close from '../../../img/icon/close.svg';
+import phone from '../../../img/icon/phone.svg';
 import Catalog from "../Catalog";
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux-hooks'; 
 import { NavLink } from "react-router-dom";
@@ -19,7 +21,7 @@ const Navbar = () => {
     return (
         <section className="nav">
             <section className="nav-wrapper">
-                    <span className="nav-span">Logo</span>
+                <img className="nav-img" src={logo} alt="Logo"/>
                 <button className="nav-button" onClick={toggleBurgerMenu}>
                     <img src={shopCatalogIcon} alt="Shop Catalog Icon" />
                 </button>
@@ -41,8 +43,9 @@ const Navbar = () => {
                     </ul>
                 </nav>
                 <span className="nav-span">
+                    <img className="nav-phone-icon" src={phone} alt="Phone" />
                     <a className='nav-number' href="tel:380999999999">
-                        +099 999-99-99
+                        099 999-99-99
                     </a>
                 </span>         
             </section>

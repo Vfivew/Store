@@ -27,6 +27,10 @@ export interface BasketState {
   isBasketOpen: boolean;
 };
 
+export interface DesireState {
+  desire: any[];
+};
+
 export interface FormState {
   deliveryMethod: string;
   isOrderPlaced: boolean;

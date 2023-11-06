@@ -15,12 +15,21 @@
         align-items: center;
         font-size: var(--secondary-size);
         max-width: 1280px;
+            .nav-span{
+                .nav-phone-icon{
+                    margin: 0 6px -1px 0;
+                }
+            }
         }
-        .nav-span {
-        width: 15%;
+        .nav-img {
+        margin-left: 1em;
+        margin-right: 1em;
+        width: 4%;
         text-align: center;
         }
         .nav-number {
+        color:black;
+        margin-right: 1em;
         font-weight: bold;
         }
         .nav-list{
@@ -94,6 +103,14 @@
 
     .nav-button {
     display: block;
+    }    
+
+    .nav{
+        .nav-wrapper{
+            .nav-img{
+                width: 60px;
+            }
+        }
     }
 }
 

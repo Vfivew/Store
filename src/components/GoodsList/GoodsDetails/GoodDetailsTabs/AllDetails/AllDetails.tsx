@@ -8,6 +8,8 @@ import { setToogleModal, addBasketItem } from '../../../../../store/slice/basket
 import Basket from '../../../../Basket/Basket';
 import { useParams } from 'react-router-dom';
 import { updateBasket } from '../../../../../Service/updateBasket';
+import { addDesireItem } from '../../../../../store/slice/desireSlice';
+import { updateDesire } from '../../../../../Service/updateDesire';
 
 const AllDetails = () => {
   const { itemId, article } = useParams();
@@ -55,6 +57,13 @@ const AllDetails = () => {
       }
     }
   };
+
+  const handleAddToDesireList = () => {
+      dispatch(addDesireItem({item, itemId}));
+      if (email) {
+        updateDesire({item: item, itemId: itemId, email: email })
+      }
+  };
     
   return (
     <section className="all-details">
@@ -87,6 +96,12 @@ const AllDetails = () => {
                   >
                   <div className="wave"></div>
                   <span className='span'>Buy</span>
+                </button>
+                <button className='button'
+                  onClick={handleAddToDesireList}
+                  >
+                  <div className="wave"></div>
+                  <span className='span'>Desire</span>
                 </button>
             </div>
         </section>

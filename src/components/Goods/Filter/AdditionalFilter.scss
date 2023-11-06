@@ -1,13 +1,69 @@
 .additional-filter{
     text-align: left;
-    padding: 0.5em;
+    margin: 0.5em 0;
+    
     p{
         font-weight: bold;
+        margin-left: 0.5em;
     }
     input{
-        margin-top: 0.5em;
+        margin: 1em 0 0 0.5em;
         margin-right: 5px;
         border: 1px solid var(--first-color);
         border-radius: 6px;
     }
+
+    .button-active{
+        width: 100%;
+        font-weight: bold;
+        background-color:var(--first-color);
+        color:white;
+    }
+
+    .button-default{
+        width: 100%;
+        font-weight: bold;
+        background-color:var(--first-color);
+    }
+
+    .button-active:hover,
+    .button-active:focus{
+        color:white !important;
+    }
+    .button-default:hover,
+    .button-default:focus{
+        color:white !important;
+    }
 }
+
+.price-filter{
+    input{
+        width: 3em;
+    }
+    button{
+        margin-top: 1em;
+        padding: 1em;
+        color:black;
+        background-color:rgb(255, 255, 255);
+        border:1px solid var(--first-color);
+    }
+    button:hover,
+    button:focus{
+        color:rgb(255, 255, 255) !important; 
+        background-color:var(--first-color);
+    }
+}
+
+.filter-hide{
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s, height 0.38s; 
+}
+
+.filter-active{
+    opacity: 1;
+    height: auto;
+    transition: opacity 0.3s, height 0.3s;
+}
+

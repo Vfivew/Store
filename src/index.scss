@@ -20,6 +20,9 @@
 @import url('./components/Basket/BasketItem/BasketItem.scss');
 @import url('./components/SalesForm/SalesForm.scss');
 @import url('./components/Auth/Form.scss');
+@import url('./components/AdminPanel/AdminPanel.scss');
+@import url('./components/Info/Info.scss');
+@import url('./components/Desire/Desire.scss');
 
 body {
   height: 100vh;
@@ -125,6 +128,7 @@ legend {
   --fourth-color:#dcdcdc;
   --primary-font: 'Roboto', sans-serif;
   --secondary-font: 'Satisfy', cursive;
+  --thirty-font: 'PT Serif', serif;
   --primary-size:14px;
   --secondary-size: 18px;
   --thirty-size: 22px;
