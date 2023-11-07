@@ -40,14 +40,11 @@ const goodsSlice = createSlice({
         state.filteredData = state.data
         state.activeButton = null;
       }
-      // console.log(JSON.stringify(state.data, null, 2))
     },
     setGoodsType:(state, action) => {
       state.type = action.payload;
     },
     setFilter: (state, action) => {
-      console.log('setFilter')
-      console.log(action.payload)
       const { min, max, updatedFilter } = action.payload
       state.activeAdditionalFilter = updatedFilter;
       state.minPrice = min;

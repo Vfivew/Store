@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Info = ({ tabIndex }: { tabIndex: number }) => {
     const tabs = ["Payment and delivery", "Exchange and return", "Contact Information"];
-    const [activeTab, setActiveTab] = useState(tabIndex);
+    const [activeTab, setActiveTab] = useState<number>(tabIndex);
     const location = useLocation();
 
     useEffect(() => {

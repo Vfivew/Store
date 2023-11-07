@@ -6,15 +6,18 @@ const DeleteType = () => {
 
     const handleDelete = (id: string) => {
         deleteGoodsType(id);
-        console.log('delete');
     };
 
     return (
         <section>
-            <h2>Видалити тип</h2>
-            {data && data.map((item: any, index: number) => (
-                <button key={index} onClick={() => handleDelete(item.id)}>{item.id}</button>
-            ))}
+            <h2>Delete type</h2>
+            {isError ? (
+                <p>There was a problem with the server. Please try again later or contact technical support.</p>
+            ) : (
+                data && data.map((item: any, index: number) => (
+                    <button key={index} onClick={() => handleDelete(item.id)}>{item.id}</button>
+                ))
+            )}
         </section>
     );
 };

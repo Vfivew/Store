@@ -13,11 +13,12 @@ import GoodsList from "../GoodsList/GoodsList";
 import Sort from "./Sort/Sort";
 
 const Goods = () => {
-  const prevItemId = useAppSelector((state) => state.goods.prevItemId)
+  const dispatch = useAppDispatch();
   const { itemId } = useParams();
   const { data, isLoading, isError } = useFetchDocumentByIdQuery(`${itemId}`);
-  const dispatch = useAppDispatch();
   const goods = useAppSelector((state) => state.goods.filteredData);
+  const prevItemId = useAppSelector((state) => state.goods.prevItemId)
+  
   let allGoods = extractGoodsFromData(goods);
 
   useEffect(() => {

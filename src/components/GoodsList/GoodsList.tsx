@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
-import GoodsCard from "./GoodCards/GoodsCard";
 import { useAppSelector, useAppDispatch } from '../../hooks/redux-hooks';
 import { setSortType } from "../../store/slice/sortSlice";
 import { addBasketItem } from '../../store/slice/basketSlise';
 import { setToogleModal } from '../../store/slice/basketSlise';
 import {updateBasket} from '../../Service/updateBasket'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+
+import GoodsCard from "./GoodCards/GoodsCard";
 
 const GoodsList = () => {
-  const { itemId } = useParams();
   const dispatch = useAppDispatch();
+  const { itemId } = useParams();
   const allGoods = useAppSelector((state) => state.sort.allGoods);
   const activeButton = useAppSelector((state) => state.sort.activeButton);
-  const email = useAppSelector((state) => state.user.email)
+  const email = useAppSelector((state) => state.user.email);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,8 +24,6 @@ const GoodsList = () => {
   }, [allGoods, dispatch]);
 
   const handleAddToCart = (good: any) => {
-    console.log(good)
-    console.log(good.article)
     dispatch(setToogleModal());
     dispatch(addBasketItem({ quantity: 1, item: good, itemId: itemId }));
     if (email) {

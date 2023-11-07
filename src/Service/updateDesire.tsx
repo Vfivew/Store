@@ -1,5 +1,6 @@
 import { db } from '../firebase';
-import { doc, setDoc, updateDoc,getDoc, deleteField } from 'firebase/firestore';
+import { doc, setDoc, updateDoc,getDoc } from 'firebase/firestore';
+import {sendError} from "./sendError"
 
 interface Item {
   [key: string]: any;
@@ -36,8 +37,15 @@ export const updateDesire = async ({item, itemId, email }: UpdateDesireParams) =
 
     console.log(`Document with ID ${email} successfully updated.`);
   } catch (error) {
-    console.error(`Error updating document: ${error}`);
-  }
+      if (error instanceof Error) {
+        const errorMessage = 'Some problem: ' + error.message;
+        console.log(error);
+        await sendError(error);
+        return { error: errorMessage };
+      } else {
+        return { error: 'An unknown error occurred.' };
+      }
+    }
 };
 
 export const deleteDesireItem = async ({ article, email }: DeleteDesireItemParams) => {
@@ -54,6 +62,13 @@ export const deleteDesireItem = async ({ article, email }: DeleteDesireItemParam
       console.log('No such document!');
     }
   } catch (error) {
-    console.error(`Error deleting data: ${error}`);
-  }
+      if (error instanceof Error) {
+        const errorMessage = 'Some problem: ' + error.message;
+        console.log(error);
+        await sendError(error);
+        return { error: errorMessage };
+      } else {
+        return { error: 'An unknown error occurred.' };
+      }
+    }
 };

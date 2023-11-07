@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery, useFetchDocumentDiscountGoodsQuery } from '../../../store/slice/fireStoreApi';
 import { deleteDiscount } from '../../../Service/deleteDiscount';
 
@@ -8,40 +8,29 @@ const DeleteGoods = () => {
     const [activeKey, setActiveKey] = useState<string | null>(null);
 
     const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
-    const { data: fetchedData } = useFetchDocumentByIdQuery(itemId, { skip });
-    const { data: discountData } = useFetchDocumentDiscountGoodsQuery(itemId, { skip });
-
-    useEffect(() => {
-        if (!skip && fetchedData) {
-            console.log(fetchedData);
-        }
-    }, [fetchedData, skip]);
+    const { data: fetchedData, isLoading:fetchLoading, isError:fetchError } = useFetchDocumentByIdQuery(itemId, { skip });
+    const { data: discountData, isLoading:discountLoading, isError:discountError } = useFetchDocumentDiscountGoodsQuery(itemId, { skip });
 
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId);
         setSkip(false);
-        console.log(itemId);
     };
 
     const handleChoiseCategory = async (key: string) => {
-        console.log(key);
         setActiveKey(key); 
     };
 
-const handleNestedButtonClick = (article: string) => {
-    console.log(article);
-    console.log(discountData);
-    if (fetchedData && activeKey && fetchedData[activeKey] && discountData) {
-        const updatedData = {
-            ...discountData,
-            [activeKey]: Object.fromEntries(
-                Object.entries(discountData[activeKey]).filter(([key]) => key !== article)
-            ),
-        };
-        console.log(updatedData);
-        deleteDiscount(updatedData, itemId);
-    }
-};
+    const handleNestedButtonClick = (article: string) => {
+        if (fetchedData && activeKey && fetchedData[activeKey] && discountData) {
+            const updatedData = {
+                ...discountData,
+                [activeKey]: Object.fromEntries(
+                    Object.entries(discountData[activeKey]).filter(([key]) => key !== article)
+                ),
+            };
+            deleteDiscount(updatedData, itemId);
+        }
+    };
 
     const renderNestedButtons = () => {
         if (discountData && activeKey && discountData[activeKey]) {
@@ -55,6 +44,13 @@ const handleNestedButtonClick = (article: string) => {
         return null;
     };
 
+    if (isError || fetchError|| discountError) {
+        return (
+            <section className="delete-category-section">
+                <p>There was a problem with the server. Please try again later or contact technical support.</p>
+            </section>
+        );
+    }
 
     return (
         <section className="delete-category-section">

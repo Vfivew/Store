@@ -8,25 +8,22 @@ const AddGoods = () => {
     const [activeKey, setActiveKey] = useState<string | null>(null);
     const [inputValues, setInputValues] = useState<Record<string, string>>({});
     const [characteristicArray, setCharacteristicArray] = useState<string[]>([]);
+    const [isFieldsFilled, setIsFieldsFilled] = useState(true);
 
     const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
-    const { data: fetchedData } = useFetchDocumentByIdQuery(itemId, { skip });
+    const { data: fetchedData, isLoading:fetchLoading, isError:fetchError } = useFetchDocumentByIdQuery(itemId, { skip });
 
     useEffect(() => {
         if (!skip && fetchedData) {
-            console.log(fetchedData);
         }
     }, [fetchedData, skip]);
 
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId);
         setSkip(false);
-        console.log(itemId);
     };
 
     const handleCreateInput = (key: string) => {
-        console.log(fetchedData)
-      
         if (fetchedData && fetchedData[key]) {
             setActiveKey(key);
             const foundObject = Object.values(fetchedData[key]).find(item => typeof item === 'object' && item !== null);
@@ -42,17 +39,13 @@ const AddGoods = () => {
                 });
                 setInputValues(newInputValues);
                 console.log(newInputValues)
-            } else {
-                console.log("The found object is not an object or is null");
-            }
-        } else {
-            console.log("fetchedData, fetchedData[key], or fetchedData[key].article is undefined or null");
-        }
+            } 
+        } 
     };
 
-        const handleAddGood = () => {
+    const handleAddGood = () => {
         const valuesAreFilled = Object.values(inputValues).every(value => value && value.trim() !== '' && value !== undefined);
-        console.log(inputValues)
+        
         if (valuesAreFilled) {
             if (inputValues['article']) {
                 const filteredValues = Object.keys(inputValues).reduce((obj: Record<string, string>, key) => {
@@ -73,16 +66,12 @@ const AddGoods = () => {
                     } else {
                         newFetchedData[activeKey] = { ...newObject };
                     }
-                    console.log(newFetchedData);
                     addCategory(newFetchedData, itemId)
-                } else {
-                    console.log('activeKey is null');
                 }
-            } else {
-                console.log('article is undefined or empty');
             }
+            setIsFieldsFilled(true)
         } else {
-            console.log('Please fill in all fields');
+            setIsFieldsFilled(false);
         }
     };
 
@@ -103,6 +92,14 @@ const AddGoods = () => {
             );
         });
     };
+
+    if (isError || fetchError) {
+        return (
+            <section className="delete-category-section">
+                <p>There was a problem with the server. Please try again later or contact technical support.</p>
+            </section>
+        );
+    }
 
     return (
         <section className="add-category-section">
@@ -126,13 +123,13 @@ const AddGoods = () => {
                     ))}
                 </div>
             </div>
-            {activeKey && fetchedData && fetchedData[activeKey] ? (
+           {activeKey && fetchedData && fetchedData[activeKey] ? (
                 <div className="add-category-exist-category">
                     {renderInputs(characteristicArray)}
-                    <button className='final-add-button'
-                        onClick={handleAddGood}>Add</button>
+                    <button className='final-add-button' onClick={handleAddGood}>Add</button>
                 </div>
             ) : null}
+            {!isFieldsFilled && <p style={{ color: 'red' }}>Please fill in all fields</p>}
         </section>
     );
 };

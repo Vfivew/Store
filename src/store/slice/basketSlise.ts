@@ -15,6 +15,10 @@ const basketSlice = createSlice({
     setBasketItem: (state, action) => {
       state.basket = action.payload;
     },
+    resetStoreBasket:(state) => {
+      state.basket = [];
+      localStorage.removeItem('basket');
+    },
     setToogleModal: (state) => {
       state.isBasketOpen = !state.isBasketOpen;
     },
@@ -22,14 +26,11 @@ const basketSlice = createSlice({
       const { quantity, item, itemId } = action.payload;
       const existingItem = state.basket.find(([, basketItem]) => basketItem.article === item.article);
       if (existingItem) {
-        console.log(existingItem)
         existingItem[0] += quantity;
       } else {
-        console.log("else")
         state.basket = [...state.basket, [quantity, item, itemId]];
       }
       localStorage.setItem('basket', JSON.stringify(state.basket));
-      // console.log(JSON.stringify(state.basket, null, 2));
     },
     updateQuantity: (state, action) => {
       const { itemForUpdate, newQuantity } = action.payload;
@@ -47,5 +48,5 @@ const basketSlice = createSlice({
   },
 });
 
-export const { setToogleModal, addBasketItem, updateQuantity, removeBasketItem, setBasketItem } = basketSlice.actions;
+export const { resetStoreBasket, setToogleModal, addBasketItem, updateQuantity, removeBasketItem, setBasketItem } = basketSlice.actions;
 export default basketSlice.reducer;

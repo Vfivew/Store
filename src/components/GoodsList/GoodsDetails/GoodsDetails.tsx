@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
+import { useAppDispatch } from '../../../hooks/redux-hooks';
+import { setItemByArticle, setFullData } from '../../../store/slice/itemSlice';
+
 import NavigationMiniBar from '../../Goods/NavigationMiniBar/NavigationMiniBar';
 import AllDetails from './GoodDetailsTabs/AllDetails/AllDetails';
 import Characteristics from './GoodDetailsTabs/Characteristics/Characteristics';
 import Reviews from './GoodDetailsTabs/Reviews/Reviews';
-import { useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
-import { useAppDispatch } from '../../../hooks/redux-hooks';
-import { setItemByArticle, setFullData } from '../../../store/slice/itemSlice';
 
 const GoodsDetails = () => {
   const dispatch = useAppDispatch();
@@ -52,6 +53,14 @@ const GoodsDetails = () => {
         return null;
     }
   };
+
+  if (isError) {
+    return (
+      <section>
+        <p>There was a problem with the server. Please try again later or contact technical support.</p>
+      </section>
+   );
+  }
 
   return (
     <main className='main-product-detail'>

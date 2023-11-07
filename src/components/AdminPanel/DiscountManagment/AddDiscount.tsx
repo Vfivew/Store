@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery, useFetchDocumentDiscountGoodsQuery } from '../../../store/slice/fireStoreApi';
 import { addDiscount } from '../../../Service/addDiscount';
 
@@ -6,24 +6,17 @@ const DeleteGoods = () => {
     const [skip, setSkip] = useState<boolean>(true);
     const [itemId, setItemId] = useState<string>('');
     const [activeKey, setActiveKey] = useState<string | null>(null);
-    const { data: discountData } = useFetchDocumentDiscountGoodsQuery(itemId, { skip });
+    const { data: discountData, isLoading:discountLoading, isError:discountError } = useFetchDocumentDiscountGoodsQuery(itemId, { skip });
     const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
-    const { data: fetchedData } = useFetchDocumentByIdQuery(itemId, { skip });
-    console.log(discountData)
-    useEffect(() => {
-        if (!skip && fetchedData) {
-            console.log(fetchedData);
-        }
-    }, [fetchedData, skip]);
+    const { data: fetchedData, isLoading:fetchLoading, isError:fetchError } = useFetchDocumentByIdQuery(itemId, { skip });
+    
 
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId);
         setSkip(false);
-        console.log(itemId);
     };
 
     const handleChoiseCategory = async (key: string) => {
-        console.log(key);
         setActiveKey(key); 
     };
 
@@ -57,6 +50,13 @@ const DeleteGoods = () => {
         return null;
     };
 
+    if (isError || fetchError|| discountError) {
+        return (
+            <section className="delete-category-section">
+                <p>There was a problem with the server. Please try again later or contact technical support.</p>
+            </section>
+        );
+    }
 
     return (
         <section className="delete-category-section">

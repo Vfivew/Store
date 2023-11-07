@@ -8,10 +8,11 @@ const Main = () => {
   const navigate = useNavigate();
   const itemId = randomItemId();
   const { data, isLoading, isError } = useFetchDocumentDiscountGoodsQuery(`${itemId}`);
-
   let discountGoods: any[] = [];
   let discountItemName = null;
   let discountItemImg = null;
+  let discountItemName2 = null;
+  let discountItemImg2 = null;
 
   if (data) {
     Object.keys(data).forEach((category) => {
@@ -23,7 +24,27 @@ const Main = () => {
 
     if (discountGoods[0] && discountGoods[0].name) {
       discountItemName = discountGoods[0].name;
+      discountItemName = discountItemName.split(' ').slice(0, 3).join(' ');
       discountItemImg = discountGoods[0].img;
+    }
+
+    if (discountGoods[1] && discountGoods[1].name) {
+      discountItemName2 = discountGoods[1].name;
+      discountItemName2 = discountItemName2.split(' ').slice(0, 3).join(' ');
+      discountItemImg2 = discountGoods[1].img;
+    }
+
+    if (discountGoods.length > 2) {
+      const randomIndex1 = Math.floor(Math.random() * discountGoods.length);
+      let randomIndex2;
+      do {
+        randomIndex2 = Math.floor(Math.random() * discountGoods.length);
+      } while (randomIndex2 === randomIndex1);
+
+      discountItemName = discountItemName.split(' ').slice(0, 3).join(' ');
+      discountItemImg = discountGoods[randomIndex1].img;
+      discountItemName2 = discountItemName2.split(' ').slice(0, 3).join(' ');
+      discountItemImg2 = discountGoods[randomIndex2].img;
     }
   }
 
@@ -34,6 +55,14 @@ const Main = () => {
   const handleCatalogClick = () => {
     navigate('/goods/Coils');
   };
+
+  if (isError) {
+    return (
+      <section>
+        <p>There was a problem with the server. Please try again later or contact technical support.</p>
+      </section>
+    );
+  }
 
   return (
     <main className="main">
@@ -54,14 +83,14 @@ const Main = () => {
           </div>
         </section>
         <section className="block3" onClick={goToDiscountItem}>
-          <img src={discountItemImg} alt="discountItem" />
+          <img src={discountItemImg2} alt="discountItem" />
           <div className='line'>Discount 15%
           <span>
-            {discountItemName}
+            {discountItemName2}
           </span>
           </div>
         </section>
-        </section>
+      </section>
     </main>
   );
 };

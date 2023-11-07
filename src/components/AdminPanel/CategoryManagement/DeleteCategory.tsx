@@ -1,19 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
 import { deleteCategory } from '../../../Service/deleteCategory';
 
 const DeleteCategory = () => {
-    const [skip, setSkip] = useState(true);
+    const [skip, setSkip] = useState<boolean>(true);
+     const [itemId, setItemId] = useState<string>('')
     const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
-    const [itemId, setItemId] = useState<string>('')
-    const { data: fetchedData } = useFetchDocumentByIdQuery(itemId, { skip });
+    const { data: fetchedData, isLoading:fetchLoading, isError:fetchError } = useFetchDocumentByIdQuery(itemId, { skip });
    
-    useEffect(() => {
-        if (!skip && fetchedData) {
-            console.log(fetchedData);
-        }
-    }, [fetchedData, skip]);
-
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId)
         setSkip(false);
@@ -22,15 +16,21 @@ const DeleteCategory = () => {
 
     const handleDelete = async (key: any) => {
         if (!fetchedData) {
-            console.log("Fetched data is null or undefined");
             return;
         }
 
         const newData = { ...fetchedData };
         delete newData[key];
         await deleteCategory(newData, itemId);
-        console.log("delete:", key);
     };
+
+    if (isError || fetchError) {
+        return (
+            <section className="delete-category-section">
+                <p>There was a problem with the server. Please try again later or contact technical support.</p>
+            </section>
+        );
+    }
 
     return (
         <section className="delete-category-section">
@@ -43,15 +43,13 @@ const DeleteCategory = () => {
                     {item.id}
                 </button>
             ))}
-            
-                <div className='add-category-exist-category'>
-            {
-            fetchedData &&
-            Object.keys(fetchedData).map((key, index) => (
-                <button
-                    onClick={()=>handleDelete(key)}
-                    key={index} className="delete-button">{key}</button>
-            ))}
+            <div className='add-category-exist-category'>
+                {fetchedData &&
+                Object.keys(fetchedData).map((key, index) => (
+                    <button
+                        onClick={()=>handleDelete(key)}
+                        key={index} className="delete-button">{key}</button>
+                ))}
             </div>
         </section>
     );

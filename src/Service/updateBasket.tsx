@@ -1,5 +1,6 @@
 import { db } from '../firebase';
-import { doc, setDoc, updateDoc,getDoc, deleteField } from 'firebase/firestore';
+import { doc, setDoc, updateDoc,getDoc } from 'firebase/firestore';
+import {sendError} from './sendError'
 
 interface Item {
   [key: string]: any;
@@ -37,8 +38,15 @@ export const updateBasket = async ({ quantity, item, itemId, email }: UpdateBask
 
     console.log(`Document with ID ${email} successfully updated.`);
   } catch (error) {
-    console.error(`Error updating document: ${error}`);
-  }
+      if (error instanceof Error) {
+        const errorMessage = 'Some problem: ' + error.message;
+        console.log(error);
+        await sendError(error);
+        return { error: errorMessage };
+      } else {
+        return { error: 'An unknown error occurred.' };
+      }
+   }
 };
 
 export const deleteBasketItem = async ({ article, email }: DeleteBasketItemParams) => {
@@ -55,6 +63,36 @@ export const deleteBasketItem = async ({ article, email }: DeleteBasketItemParam
       console.log('No such document!');
     }
   } catch (error) {
-    console.error(`Error deleting data: ${error}`);
+      if (error instanceof Error) {
+        const errorMessage = 'Some problem: ' + error.message;
+        console.log(error);
+        await sendError(error);
+        return { error: errorMessage };
+      } else {
+        return { error: 'An unknown error occurred.' };
+      }
+    }
+};
+
+export const resetBasket = async (email: string) => {
+  const docRef = doc(db, 'UserBasket', email);
+  console.log(email)
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await setDoc(docRef, {});
+      console.log(`successfully deleted ${email}.`);
+    } else {
+      console.log('Doc not exist');
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      const errorMessage = 'Some problem: ' + error.message;
+      console.log(error);
+      await sendError(error);
+      return { error: errorMessage };
+    } else {
+      return { error: 'An unknown error occurred.' };
+    }
   }
 };

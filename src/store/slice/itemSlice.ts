@@ -47,7 +47,6 @@ const itemSlice = createSlice({
       }
       }
       state.newFullData = updatedFullData
-      console.log(JSON.stringify(state.newFullData, null, 2));
       }
     }
 });

@@ -2,6 +2,7 @@ import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
 import { useState } from 'react';
 import { extractGoodsFromData } from '../../../utils/extractGoodsFromData'
 import { setFilter } from '../../../store/slice/goodsSlice'
+
 import UniqueElements from './AdditionalFilterUniqueElement/UniqueElements'; 
 
 const AdditionalFilter: React.FC = () => {
