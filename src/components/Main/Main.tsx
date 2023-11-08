@@ -14,6 +14,7 @@ const Main = () => {
   let discountItemName2 = null;
   let discountItemImg2 = null;
 
+
   if (data) {
     Object.keys(data).forEach((category) => {
       const categoryGoods = data[category];
@@ -22,16 +23,25 @@ const Main = () => {
       });
     });
 
+    console.log(data)
+    console.log(discountGoods)
+    console.log(discountGoods.length)
+
     if (discountGoods[0] && discountGoods[0].name) {
       discountItemName = discountGoods[0].name;
       discountItemName = discountItemName.split(' ').slice(0, 3).join(' ');
       discountItemImg = discountGoods[0].img;
+      console.log(discountGoods[0])
     }
 
     if (discountGoods[1] && discountGoods[1].name) {
       discountItemName2 = discountGoods[1].name;
       discountItemName2 = discountItemName2.split(' ').slice(0, 3).join(' ');
       discountItemImg2 = discountGoods[1].img;
+      console.log(discountGoods[1])
+    } else {
+      discountItemName2 = discountItemName.split(' ').slice(0, 3).join(' ');
+      discountItemImg2 = discountGoods[0].img;
     }
 
     if (discountGoods.length > 2) {
