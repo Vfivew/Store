@@ -1,13 +1,14 @@
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
 import { setFilteredGoods,setActiveButton } from "../../../store/slice/goodsSlice"; 
 import { setFilterMenuActive } from "../../../store/slice/mediaSlice";
+
 import AdditionalFilter from "./AdditionalFilter";
 
 const Filter = () => {
+  const dispatch = useAppDispatch();
   const goods = useAppSelector((state) => state.goods.type);
   const filterMenuActive = useAppSelector((state) => state.media.filterMenuActive);
   const activeButton = useAppSelector((state) => state.goods.activeButton)
-  const dispatch = useAppDispatch();
   
   const toggleSortMenu = () => {
     dispatch(setFilterMenuActive(!filterMenuActive))

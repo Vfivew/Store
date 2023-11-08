@@ -12,7 +12,6 @@ const sortSlice = createSlice({
   reducers: {
     setSortData: (state, action) => {
       state.allGoods = action.payload;
-      //state.activeButton = null; 
     },
     setActiveButton: (state, action) => {
       state.activeButton = action.payload;

@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { setDeliveryMethod, setIsOrderPlaced } from '../../store/slice/formReducer'
+import { resetBasket } from '../../Service/updateBasket';
+import { resetStoreBasket } from '../../store/slice/basketSlise';
 import BasketItem from '../Basket/BasketItem/BasketItem';
 
 const SalesForm = () => {
@@ -10,11 +12,15 @@ const SalesForm = () => {
   const navigate = useNavigate();
   const { handleSubmit, control, formState: { errors, isValid } } = useForm({ mode: 'onBlur' });
   const { deliveryMethod, isOrderPlaced } = useAppSelector(state => state.form); 
+  const email = useAppSelector(state=>state.user.email)
   const basket = useAppSelector(state => state.basket.basket);
   
   const onSubmit = (data: any) => {
-    console.log(data);
     dispatch(setIsOrderPlaced(true));
+    if (email) {
+      resetBasket(email);
+      dispatch(resetStoreBasket())
+    }
   };
 
   const closeModal = () => {

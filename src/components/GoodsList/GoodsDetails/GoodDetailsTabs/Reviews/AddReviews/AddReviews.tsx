@@ -1,12 +1,12 @@
-import React, { useEffect,useState, ChangeEvent } from 'react';
+import { useEffect,useState, ChangeEvent } from 'react';
 import { useAppSelector,useAppDispatch } from '../../../../../../hooks/redux-hooks';
 import { setNewReview, resetNewFullData } from '../../../../../../store/slice/itemSlice'; 
 import { useParams } from 'react-router-dom';
 import { updateReview } from '../../../../../../Service/updateReview'
 
 const AddReviews = () => {
-  const { itemId, article } = useParams();
   const dispatch = useAppDispatch();
+  const { itemId, article } = useParams();
   const userEmail = useAppSelector((state) => state.user.email);
   const fullData = useAppSelector((state) => state.item.fullData);
   const selectItemData = useAppSelector((state) => state.item.selectedItem);
@@ -43,12 +43,14 @@ const AddReviews = () => {
     setAdvantages('');
     setDisadvantages('');
     if (fullData !== null && selectItemData !== null) {
+      const currentDate = new Date().toLocaleDateString('en-GB'); 
       const reviewData = {
         advantages:advantages,
         disadvantages:disadvantages,
         email: userEmail,
         text: reviewText,
         rating: rating,
+        date: currentDate
       };
       dispatch(setNewReview({ reviewData, rating }));
     }

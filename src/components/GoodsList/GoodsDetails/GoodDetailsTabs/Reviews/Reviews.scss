@@ -14,13 +14,13 @@
         border-radius:1em;
         padding: 1em;
     }
+    .review-warning{
+        text-align: center;
+        font-weight: bold;
+        border:1px solid var(--first-color);
+        margin-top: 0.5em;
+        padding: 1em;
+        border-radius:1em
+    }
 }
 
-.review-warning{
-    text-align: center;
-    font-weight: bold;
-    border:1px solid var(--first-color);
-    margin-top: 0.5em;
-    padding: 1em;
-    border-radius:1em
-}

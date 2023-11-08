@@ -1,5 +1,6 @@
 import { db } from '../firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { sendError } from './sendError'; 
 
 export const addCategory = async (newData: any, itemId: string) => {
     try {
@@ -15,6 +16,13 @@ export const addCategory = async (newData: any, itemId: string) => {
             return { data: 'Item added successfully' };
         }
     } catch (error) {
-        return { error };
+        if (error instanceof Error) {
+            const errorMessage = 'Some problem: ' + error.message;
+            console.log(error);
+            await sendError(error);
+            return { error: errorMessage };
+        } else {
+            return { error: 'An unknown error occurred.' };
+        }
     }
 };

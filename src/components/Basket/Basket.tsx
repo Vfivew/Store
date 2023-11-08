@@ -7,7 +7,7 @@ const Basket = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const basket = useAppSelector(state => state.basket.basket);
-  console.log(basket)
+
   const totalAmount = basket.reduce((total, [quantity, item]) => {
     return total + (parseFloat(item.price) * quantity);
   }, 0);

@@ -22,7 +22,7 @@
     border-radius:1em;
     font-size: var(--primary-size);
     box-shadow: 0 7px 6px rgba(0, 0, 0, 0.75);
-
+    transition: transform 0.3s ease;
     img{
     width: 100%;
     padding: 10%;

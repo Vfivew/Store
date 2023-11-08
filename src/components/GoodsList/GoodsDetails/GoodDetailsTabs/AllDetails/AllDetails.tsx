@@ -1,23 +1,24 @@
 import {useState} from 'react';
 import { useAppSelector, useAppDispatch } from '../../../../../hooks/redux-hooks';
-import Reviews from '../Reviews/Reviews';
-import DelivieryPayment from '../DelivieryPayment/DelivieryPayment'
-import ItemRaiting from '../ItemRaiting/ItemRaiting';
-import Characteristics from '../Characteristics/Characteristics';
-import { setToogleModal, addBasketItem } from '../../../../../store/slice/basketSlise';
-import Basket from '../../../../Basket/Basket';
 import { useParams } from 'react-router-dom';
 import { updateBasket } from '../../../../../Service/updateBasket';
 import { addDesireItem } from '../../../../../store/slice/desireSlice';
 import { updateDesire } from '../../../../../Service/updateDesire';
+import { setToogleModal, addBasketItem } from '../../../../../store/slice/basketSlise';
+
+import Reviews from '../Reviews/Reviews';
+import ItemRaiting from '../ItemRaiting/ItemRaiting';
+import Characteristics from '../Characteristics/Characteristics';
+import Basket from '../../../../Basket/Basket';
 
 const AllDetails = () => {
   const { itemId, article } = useParams();
   const dispatch = useAppDispatch();
   const item = useAppSelector((state) => state.item.selectedItem);
   const email = useAppSelector((state)=> state.user.email)
-  const [quantity, setQuantity] = useState(0);
   const isBasketOpen = useAppSelector((state) => state.basket.isBasketOpen);
+
+  const [quantity, setQuantity] = useState(0);
   
   if (!item) {
     return <div>Loading...</div>;
@@ -105,7 +106,6 @@ const AllDetails = () => {
                 </button>
             </div>
         </section>
-        <DelivieryPayment/>
         <Reviews/>
       </section>
       {isBasketOpen && <Basket/>}

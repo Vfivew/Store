@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
 import { deleteCategory } from '../../../Service/deleteCategory';
 
@@ -8,22 +8,14 @@ const DeleteGoods = () => {
     const [activeKey, setActiveKey] = useState<string | null>(null);
 
     const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
-    const { data: fetchedData } = useFetchDocumentByIdQuery(itemId, { skip });
-
-    useEffect(() => {
-        if (!skip && fetchedData) {
-            console.log(fetchedData);
-        }
-    }, [fetchedData, skip]);
+    const { data: fetchedData, isLoading:fetchLoading, isError:fetchError } = useFetchDocumentByIdQuery(itemId, { skip });
 
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId);
         setSkip(false);
-        console.log(itemId);
     };
 
     const handleChoiseCategory = async (key: string) => {
-        console.log(key);
         setActiveKey(key); 
     };
 
@@ -36,7 +28,6 @@ const DeleteGoods = () => {
                 }
             };
             delete updatedData[activeKey][article];
-            console.log(updatedData);
             deleteCategory(updatedData, itemId)
         }
     };
@@ -53,6 +44,13 @@ const DeleteGoods = () => {
         return null;
     };
 
+    if (isError || fetchError) {
+        return (
+            <section className="delete-category-section">
+                <p>There was a problem with the server. Please try again later or contact technical support.</p>
+            </section>
+        );
+    }
 
     return (
         <section className="delete-category-section">

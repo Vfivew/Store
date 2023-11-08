@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppSelector } from '../../../../../hooks/redux-hooks';
 import AddReviews from './AddReviews/AddReviews';
 
@@ -7,6 +6,7 @@ interface Review {
   text: string;
   advantages?: string;
   disadvantages?: string;
+  date: string;
 }
 
 const Reviews = () => {
@@ -20,11 +20,6 @@ const Reviews = () => {
     return (
       <div className='review-warning'>
         No reviews...
-        {/* {userEmail ? (
-          <AddReviews />
-        ) : (
-          <div className='review-warning'>Please log in to leave a review.</div>
-        )} */}
       </div>
     );
   }
@@ -39,6 +34,7 @@ const Reviews = () => {
           <li
             className='review' 
             key={index}>
+            <p> <strong>Date: </strong>{review.date}</p>
             <p> {review.email}<br /></p>
             <p>{review.text}<br /></p>
             {review.advantages && (

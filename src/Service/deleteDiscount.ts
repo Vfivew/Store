@@ -1,5 +1,6 @@
 import { db } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { sendError } from './sendError';
 
 export const deleteDiscount = async (newData: any, itemId: string) => {
     try {
@@ -13,6 +14,13 @@ export const deleteDiscount = async (newData: any, itemId: string) => {
             return { data: 'Item deleted successfully' };
         }
     } catch (error) {
-        return { error };
+        if (error instanceof Error) {
+            const errorMessage = 'Some problem: ' + error.message;
+            console.log(error);
+            await sendError(error);
+            return { error: errorMessage };
+        } else {
+            return { error: 'An unknown error occurred.' };
+        }
     }
 };

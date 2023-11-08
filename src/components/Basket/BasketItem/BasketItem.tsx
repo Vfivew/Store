@@ -30,10 +30,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ item, quantity, itemId, handleM
       <Link
         className='basket-item-pay-link'
         to={`/goods/${itemId}/${item.article}`}
-        onClick={() => {
-          if (handleModalClick) {
-            handleModalClick();
-          }
+        onClick={() => { if (handleModalClick) {handleModalClick();}
         }}
       >
         <img className='basket-item-pay-info-image' src={item.img} alt={item.name} />

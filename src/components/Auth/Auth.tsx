@@ -5,7 +5,7 @@ import { removeUser } from '../../store/slice/userSlice';
 
 const Auth: React.FC = () => {
     const dispatch = useDispatch();
-    const { isAuth, email } = useAuth();
+    const { isAuth } = useAuth();
 
     const handleLogout = () => {
         dispatch(removeUser());

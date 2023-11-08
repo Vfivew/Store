@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
 import { addCategory } from '../../../Service/addCategory';
 
@@ -8,17 +8,12 @@ const AddCategory = () => {
     const [price, setPrice] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [image, setImage] = useState<string>('')
-    const [characteristics, setCharacteristics] = useState<{ key: string; value: string }[]>([]);
-    const [skip, setSkip] = useState(true);
-    const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
     const [itemId, setItemId] = useState<string>('');
-    const { data: fetchedData } = useFetchDocumentByIdQuery(itemId, { skip });
-
-    useEffect(() => {
-        if (!skip && fetchedData) {
-            console.log(fetchedData);
-        }
-    }, [fetchedData, skip]);
+    const [skip, setSkip] = useState<boolean>(true);
+    const [isExist, setExist] = useState<boolean>(false);
+    const [characteristics, setCharacteristics] = useState<{ key: string; value: string }[]>([]);
+    const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
+    const { data: fetchedData, isLoading:fetchLoading, isError:fetchError } = useFetchDocumentByIdQuery(itemId, { skip });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -57,18 +52,16 @@ const AddCategory = () => {
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId);
         setSkip(false);
-        console.log(itemId);
     };
 
     const handleAdd = () => {
         if (!fetchedData) {
-            console.log("Fetched data is null or undefined");
             return;
         }
 
         const found = Object.keys(fetchedData).find(key => key === inputValue);
         if (found) {
-            console.log(`Data with name ${inputValue} already exists`);
+            setExist(true)
         } else {
             const characteristicsObject = Object.fromEntries(characteristics.map(item => [item.key, item.value]));
             const newData = {
@@ -79,16 +72,23 @@ const AddCategory = () => {
                         name: name,
                         article: article,
                         img: image,
-                        reviews: [],//new
-                        rating:[],//new
+                        reviews: [],
+                        rating:[],
                         ...characteristicsObject
                     }
                 }
             };
             addCategory(newData, itemId);
-            console.log("Add:", newData);
         }
     };
+
+    if (isError || fetchError) {
+        return (
+            <section className="delete-category-section">
+                <p>There was a problem with the server. Please try again later or contact technical support.</p>
+            </section>
+        );
+    }
 
     return (
         <section className="add-category-section">
@@ -159,6 +159,7 @@ const AddCategory = () => {
                     ))}
                     <button onClick={handleAddCharacteristic} className="add-button">Add more characteristics</button>
                     <button onClick={handleAdd} className='final-add-button'>Add</button>
+                    {isExist && <p style={{ color: 'red' }}>Category {inputValue} already exists</p>} 
                 </div>
             )}
         </section>
