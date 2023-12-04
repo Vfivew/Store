@@ -9,6 +9,8 @@ import { useFetchBasketQuery, useFetchDesireQuery } from "../../../store/slice/f
 
 import heart from '../../../img/icon/heart.svg'
 import basket from '../../../img/icon/basket.svg'
+import england from '../../../img/icon/england.svg'
+import ukraine from '../../../img/icon/ukraine.svg'
 
 import Basket from "../../Basket/Basket";
 import Auth from "../../Auth/Auth";
@@ -79,10 +81,10 @@ const Header = () => {
                             <li className="header-list-item">Admin Panel</li>
                         </NavLink>:null}
                         <button className="header-list-item" onClick={() => handleLanguageClick('en')}>
-                            EN
+                            <img src={england} alt="english language" className="england" />
                         </button>
                         <button className="header-list-item" onClick={() => handleLanguageClick('uk')}>
-                            UK
+                           <img src={ukraine} alt="ukraine language" className="england" />
                         </button>
                         <NavLink className='desire-link' to="/desire">
                              <img src={heart} alt="desire" className="desire-image" />

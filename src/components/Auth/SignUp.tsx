@@ -16,7 +16,6 @@ const SignUp: FC = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         user.getIdToken().then((token) => {
-          console.log('User is registered with token:', token);
           dispatch(
             setUser({
               email: user.email,

@@ -2,7 +2,7 @@
         width: 100%;
         height: auto;
         display: flex;
-        background-color:var(--first-color);
+        background-color:var(--additional-color);
         font-size: var(--primary-size);
         font-family: var(--primary-font);
         .header-nav{
@@ -26,7 +26,7 @@
             .header-login-button{
                 .button-auth{
                 padding: 1em 0.5em;
-                color: black;
+                color: var(--thirty-color);
                 }
             }
             a:hover,
@@ -38,7 +38,7 @@
             .basket-item-count{
                 position: absolute;
                 background-color:rgb(255, 255, 255);
-                color: blue;
+                color: var(--first-color);
                 width: 1em;
                 font-weight: bold;
                 border-radius:1em;
@@ -80,7 +80,7 @@
 
             .header-list-item{
                 height: 100%;
-                color:black;
+                color: var(--thirty-color);
                 margin: 1em 0.5em;
                 font-weight: bold;
             }
@@ -110,7 +110,7 @@
         flex-wrap: nowrap;
         top: 0; 
         left: 0;
-        background-color: var(--thirty-color);
+        background-color:var(--additional-color);
         z-index: 3;
         transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         transform: translateX(-110%); 
@@ -124,6 +124,7 @@
         }
 
         .header-list-container.active {
+        background-color:var(--additional-color);
         transform: translateX(0); 
             .header-list{
                 .basket-link:hover {
@@ -134,7 +135,6 @@
                     background-color:rgba(84, 133, 207, 0.5);
                 }
             }
-
         }
 
     }

@@ -18,7 +18,6 @@ export const addCategory = async (newData: any, itemId: string) => {
     } catch (error) {
         if (error instanceof Error) {
             const errorMessage = 'Some problem: ' + error.message;
-            console.log(error);
             await sendError(error);
             return { error: errorMessage };
         } else {

@@ -28,7 +28,6 @@ const Reviews = () => {
 
   return (
     <section className='review-section'>
-      <h3>Reviews</h3>
       <ul>
         {firstFourReviews.map((review: Review, index: number) => (
           <li

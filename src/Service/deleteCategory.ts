@@ -3,8 +3,6 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { sendError } from './sendError';
 
 export const deleteCategory = async (newData: any, itemId: string) => {
-    console.log(itemId, 'deleteCategory');
-    console.log(newData, 'newData');
     try {
         const goodsDocRef = doc(db, 'Goods', itemId);
         const docSnap = await getDoc(goodsDocRef);

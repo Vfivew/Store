@@ -54,7 +54,6 @@ const AdditionalFilter: React.FC = () => {
             } else {
                 updatedFilter = [...activeAdditionalFilter, { key, value }];
             }
-            console.log(updatedFilter);
             setActiveAdditionalFilter(updatedFilter);
             dispatch(setFilter({ min: updatedMin, max: updatedMax, updatedFilter }));
         } else {

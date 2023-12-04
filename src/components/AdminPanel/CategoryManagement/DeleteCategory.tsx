@@ -11,7 +11,7 @@ const DeleteCategory = () => {
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId)
         setSkip(false);
-        console.log(itemId); 
+    
     };
 
     const handleDelete = async (key: any) => {

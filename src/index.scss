@@ -22,6 +22,7 @@
 @import url('./components/AdminPanel/AdminPanel.scss');
 @import url('./components/Info/Info.scss');
 @import url('./components/Desire/Desire.scss');
+@import url('./components/AboutUs/AboutUs.scss');
 
 body {
   height: 100vh;
@@ -37,6 +38,7 @@ body {
 
 main{
   flex:1 0 auto;
+  background-color:#f0f0f0;
 }
 
 * {
@@ -121,10 +123,12 @@ legend {
 }
 
 #root{
-  --first-color: #4094e8;
+  --first-color: #4a94df;
   --second-color: #000000;
   --thirty-color:#ffffff;
   --fourth-color:#dcdcdc;
+  --additional-color:#39424f;
+  --background-color:#f0f0f0;
   --primary-font: 'Roboto', sans-serif;
   --secondary-font: 'Satisfy', cursive;
   --thirty-font: 'PT Serif', serif;
@@ -136,7 +140,7 @@ legend {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color:var(--thirty-color);
+  background-color:var(--background-color);
   --main-gradient: linear-gradient(
   180deg,
   hsl(194, 100%, 50%) 0%,

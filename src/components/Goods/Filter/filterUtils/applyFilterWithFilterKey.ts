@@ -7,7 +7,6 @@ export const applyFilterWithFilterKey = ({ min, max, updatedFilter, chekedData, 
 }) => {
     const priceFilterData: { [key: string]: any } = {};
     let additionalFilterData: { [category: string]: { [article: string]: any } } = {};
-    console.log(updatedFilter)
     if (min !== null || max !== null) {
         if (chekedData) {
             Object.keys(chekedData).forEach((selectedCategory) => {
@@ -29,9 +28,7 @@ export const applyFilterWithFilterKey = ({ min, max, updatedFilter, chekedData, 
         chekedData = priceFilterData
     }
 
-    console.log('price', chekedData)
     if (updatedFilter.length > 0) {
-        console.log(updatedFilter, 'updateFilter')
         updatedFilter.forEach((filter: any) => {
             const { key, value } = filter;
             let selectedCategory: any;
@@ -42,7 +39,6 @@ export const applyFilterWithFilterKey = ({ min, max, updatedFilter, chekedData, 
             if (chekedData) {
                 categoryGoods = chekedData[selectedCategory];
             }
-            console.log(selectedCategory, 'selectedCategory', categoryGoods)
             if (categoryGoods) {
                 Object.keys(categoryGoods).forEach((article) => {
                     const articleData = categoryGoods[article];
@@ -56,8 +52,6 @@ export const applyFilterWithFilterKey = ({ min, max, updatedFilter, chekedData, 
             }
         });
         chekedData = additionalFilterData;
-        console.log('filter', chekedData)
     }
-    console.log('finish', chekedData)
     return chekedData
 }
