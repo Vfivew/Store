@@ -29,7 +29,6 @@ const AddGoods = () => {
             const foundObject = Object.values(fetchedData[key]).find(item => typeof item === 'object' && item !== null);
             if (typeof foundObject === 'object' && foundObject !== null) {
                 const keysArray = Object.keys(foundObject).filter(key => key !== "rating" && key !== "reviews");
-                console.log(keysArray);
                 setCharacteristicArray(keysArray)
                 const newInputValues = { ...inputValues };
                 keysArray.forEach(dynamicKey => {
@@ -38,7 +37,6 @@ const AddGoods = () => {
                     }
                 });
                 setInputValues(newInputValues);
-                console.log(newInputValues)
             } 
         } 
     };
@@ -57,7 +55,6 @@ const AddGoods = () => {
                     return obj;
                 }, {});
                 const newObject = { [inputValues['article']]: { ...filteredValues, rating: [], reviews: [] } };//new
-                console.log(newObject);
 
                 if (activeKey) {
                     const newFetchedData = { ...fetchedData };
@@ -76,7 +73,6 @@ const AddGoods = () => {
     };
 
     const renderInputs = (keysArray: string[]) => {
-        console.log(keysArray)
         return keysArray.map((key, index) => {
             return (
                 <div key={index}>

@@ -50,7 +50,6 @@ const AllDetails = () => {
 
   const handleAddToCart = () => {
     if (quantity > 0) {
-      console.log(item);
       dispatch(addBasketItem({ quantity , item, itemId}));
       dispatch(setToogleModal());
       if (email) {

@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     font-family: var(--primary-font);
-    background-color: var(--thirty-color);
+    background-color: var(--background-color);
     max-height: 700px;
     li {
       background-color:var(--first-color);
@@ -38,6 +38,9 @@
     margin: 1em 1em 1em 1em;
     padding: 1em; 
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    h2{
+      font-weight:bold;
+    }
     label {
       display: block;
       margin-bottom: 0.5em; 

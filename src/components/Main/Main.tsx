@@ -14,6 +14,7 @@ const Main = () => {
   let discountItemName2 = null;
   let discountItemImg2 = null;
 
+
   if (data) {
     Object.keys(data).forEach((category) => {
       const categoryGoods = data[category];
@@ -32,6 +33,9 @@ const Main = () => {
       discountItemName2 = discountGoods[1].name;
       discountItemName2 = discountItemName2.split(' ').slice(0, 3).join(' ');
       discountItemImg2 = discountGoods[1].img;
+    } else {
+      discountItemName2 = discountItemName.split(' ').slice(0, 3).join(' ');
+      discountItemImg2 = discountGoods[0].img;
     }
 
     if (discountGoods.length > 2) {
@@ -65,7 +69,7 @@ const Main = () => {
   }
 
   return (
-    <main className="main">
+    <section className="main">
       <section className="grid-container">
         <section className="block1">
           <Slider />
@@ -91,7 +95,7 @@ const Main = () => {
           </div>
         </section>
       </section>
-    </main>
+    </section>
   );
 };
 

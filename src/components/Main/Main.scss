@@ -16,6 +16,19 @@
             grid-row: span 2;
             margin: 1em 0 1em 1em;
             position: relative;
+            background-color:white;
+            border-radius:1em;
+            overflow: hidden;
+            div{
+                div{
+                    background-color:white;
+                    img{
+                        height:auto;
+                        border-radius:1em
+                    }
+                }
+                
+            }
         }
 
         .block2 {
@@ -32,9 +45,10 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            transition: box-shadow 0.3s ease;
             img{
-            max-width: 90%;
-            max-height: 90%;
+                max-width: 90%;
+                max-height: 90%;
             }
             .line{
                 display: flex;
@@ -53,6 +67,8 @@
                 transform: rotate(-45deg);
                 span{
                     margin-left: 8px;
+                    color:var(--additional-color);
+                    text-decoration: underline;
                 }
             }
         }
@@ -71,9 +87,10 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            transition: box-shadow 0.3s ease;
             img{
-            max-width: 90%;
-            max-height: 90%;
+                max-width: 90%;
+                max-height: 90%;
             }
             .line{
                 display: flex;
@@ -91,14 +108,16 @@
                 transform-origin: top left;
                 transform: rotate(-45deg);
                 span{
+                    color:var(--additional-color);
+                    text-decoration: underline;
                     margin-left: 8px;
                 }
             }
         }
 
         .block2:hover, .block2:focus, .block3:hover, .block3:focus {
-            box-shadow: 0 6px 10px rgba(108, 182, 214, 0.7);
-            scale: 1.02;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.7);
+            transform: scale(1.02)
         }
 
         .block-sticker{
@@ -106,47 +125,46 @@
             align-items:center;
             flex-direction: column;
             justify-content: center;
-            width: 40%;
+            width: 46%;
             height: 40%;
             position: absolute;
             top: 30%;
             left: 0;
-            background-color: rgb(0, 119, 255, 0.8);
+            background: linear-gradient(to right, rgb(26, 131, 251), rgba(23, 131, 254, 0.8));
             color: var(--thirty-color);
             z-index: 2;
             border-top-right-radius:1em;
             border-bottom-right-radius: 1em;
             h3{
                 width: 100%;
-                font-size: var(--secondary-size);
+                font-size: 22px;
                 font-weight: bold;
                 text-align: left;
-                padding: 1em 1em 1em 3em;
+                padding: 18px 36px;
+                letter-spacing: 2px;
             }
             p{
                 width: 100%;
                 font-size: var(--secondary-size);
                 text-align: left;
-                padding: 0 1em 1em 3em;
+                padding: 0 36px 18px 36px;
                 cursor: pointer;
             }
             p::after {
             content: "";
-            display: block;
-            width: 6.2em;
-            height: 1px;
-            background-color: rgb(255, 255, 255); 
-            margin-bottom: 1px; 
+                display: block;
+                width: 6.2em;
+                height: 2px;
+                background-color: rgb(255, 255, 255);
+                margin-bottom: 1px; 
+                transition: background-color 0.3s ease;
             }
             p:hover::after {
-            background-color: rgb(157, 157, 157);
+                background-color:rgb(10, 28, 63);
             }
         }
     }
 }
-
-
-
 
 @media (max-width: 767px) {
     .main{
@@ -191,6 +209,17 @@
                     top:20em;
                 }
             }
+            .block-sticker{
+                h3{
+                    font-size: var(--secondary-size);
+                }
+                h3{
+                    padding: 0.5em 0.5em 0.5em 2em;
+                }
+                p{
+                    padding: 0 0.5em 0.5em 2em;
+                }
+                }
         }
     }
 
@@ -198,14 +227,15 @@
 
 
 @media (max-width:460px) {
-    .block-sticker{
-    width: 50%;
-    height: 50%;
-    h3{
-        padding: 0.5em 0.5em 0.5em 2em;
-    }
-    p{
-        padding: 0 0.5em 0.5em 2em;
+.main{
+    .grid-container{
+        .block-sticker{
+            width: 50%;
+            height: 50%;
+            p::after {
+                width: 3.2em;
+            }
+        }
     }
 }
 }

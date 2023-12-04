@@ -1,10 +1,9 @@
 .nav {
     width: 100%;
-    min-height: 3em;
     height: auto;
     display: flex;
     justify-content: center;
-    background-color:var(--fourth-color);
+    background-color: var(--first-color);
     border-bottom:1px solid black;
     border-radius: 0 0 1em 1em ;
         .nav-wrapper{
@@ -28,9 +27,8 @@
         text-align: center;
         }
         .nav-number {
-        color:black;
+        color:var(--thirty-color);
         margin-right: 1em;
-        font-weight: bold;
         }
         .nav-list{
         height: auto;
@@ -39,7 +37,7 @@
         justify-content: center;
             .nav-menu-item{
             margin: 0.7em 1em;
-            color:black;
+            color:var(--thirty-color)
             }
             a:hover,
             a:focus {
@@ -68,7 +66,7 @@
     bottom: 0; 
     left: 0;
     right: 0;
-    background-color: var(--thirty-color);
+    background-color: var(--additional-color);
     border-top:2px solid var(--first-color); 
     border-top-right-radius: 1em;
     border-top-left-radius: 1em;
