@@ -19,8 +19,8 @@ const desireSlice = createSlice({
             const existingItem = state.desire[i][0];
             const existingItemId = state.desire[i][1];
             if (existingItemId === itemId && existingItem.article === item.article) {
-            itemExists = true;
-            break;
+                itemExists = true;
+                break;
             }
         }
         if (!itemExists) {

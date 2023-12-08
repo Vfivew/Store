@@ -35,10 +35,12 @@ const sortSlice = createSlice({
           });
         }
       } else if (state.allGoods && sortType === 'Rating') {
+        console.log(JSON.stringify(state.allGoods, null, 2));
         if (Array.isArray(state.allGoods)) {
           state.allGoods.sort((a, b) => {
-            const ratingA = a.rating ? a.rating.length : 0;
-            const ratingB = b.rating ? b.rating.length : 0;
+            const ratingA = a.rating ? a.rating.reduce((acc:number, curr:string) => acc + parseInt(curr), 0) / (a.rating.length || 1) : 0;
+            const ratingB = b.rating ? b.rating.reduce((acc:number, curr:string) => acc + parseInt(curr), 0) / (b.rating.length || 1) : 0;
+
             return ratingB - ratingA;
           });
         }

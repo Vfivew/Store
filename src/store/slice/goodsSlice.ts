@@ -41,7 +41,7 @@ const goodsSlice = createSlice({
         state.activeButton = null;
       }
     },
-    setGoodsType:(state, action) => {
+    setGoodsType: (state, action) => {
       state.type = action.payload;
     },
     setFilter: (state, action) => {
@@ -57,6 +57,7 @@ const goodsSlice = createSlice({
         const chekedData = state.noAdditionalFilterData
         state.filteredData = applyFilterWithFilterKey({ min, max, updatedFilter, chekedData,  category: state.filterKey})
       }
+      console.log('Filtered Data:', JSON.stringify(state.filteredData));
     },
 
     setFilteredGoods: (state, action) => {

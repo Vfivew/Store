@@ -7,7 +7,7 @@ import sortReducer from '../store/slice/sortSlice'
 import mediaReducer from '../store/slice/mediaSlice'
 import itemReducer from '../store/slice/itemSlice'
 import basketReducer from '../store/slice/basketSlise';
-import formReducer from './slice/formReducer';
+import formReducer from './slice/formSlice';
 import desireReducer from './slice/desireSlice'
 
 const userToken = localStorage.getItem('userToken');

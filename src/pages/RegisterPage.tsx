@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
 import { SignUp } from '../components/Auth/SignUp';
 
 const RegisterPage:React.FC = () => {
@@ -11,7 +11,7 @@ const RegisterPage:React.FC = () => {
                 <div className='auth-page-reference'>
                 <p > Already have an account?</p>
                 <Link className='gradient-button'
-                    to="/login">Sign in
+                    to="/login">Sign in 
                 </Link> 
                 </div>  
         </div>

@@ -18,7 +18,6 @@ const Goods = () => {
   const { data, isLoading, isError } = useFetchDocumentByIdQuery(`${itemId}`);
   const goods = useAppSelector((state) => state.goods.filteredData);
   const prevItemId = useAppSelector((state) => state.goods.prevItemId)
-  
   let allGoods = extractGoodsFromData(goods);
 
   useEffect(() => {

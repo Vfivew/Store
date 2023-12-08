@@ -11,7 +11,8 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (isAuth) {
       navigate('/'); 
-    }
+    } else 
+      navigate('/login'); 
   }, [isAuth, navigate]);
 
   return (

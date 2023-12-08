@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { setDeliveryMethod, setIsOrderPlaced } from '../../store/slice/formReducer'
+import { setDeliveryMethod, setIsOrderPlaced } from '../../store/slice/formSlice'
 import { resetBasket } from '../../Service/updateBasket';
 import { resetStoreBasket } from '../../store/slice/basketSlise';
 import BasketItem from '../Basket/BasketItem/BasketItem';
