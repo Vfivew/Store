@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
-import { addCategory } from '../../../Service/addCategory';
+import { addCategory } from '../../../service/addCategory';
 
 const AddGoods = () => {
     const [skip, setSkip] = useState(true);
@@ -33,17 +33,17 @@ const AddGoods = () => {
                 const newInputValues = { ...inputValues };
                 keysArray.forEach(dynamicKey => {
                     if (!newInputValues[dynamicKey]) {
-                        newInputValues[dynamicKey] = ''; 
+                        newInputValues[dynamicKey] = '';
                     }
                 });
                 setInputValues(newInputValues);
-            } 
-        } 
+            }
+        }
     };
 
     const handleAddGood = () => {
         const valuesAreFilled = Object.values(inputValues).every(value => value && value.trim() !== '' && value !== undefined);
-        
+
         if (valuesAreFilled) {
             if (inputValues['article']) {
                 const filteredValues = Object.keys(inputValues).reduce((obj: Record<string, string>, key) => {
@@ -75,16 +75,19 @@ const AddGoods = () => {
     const renderInputs = (keysArray: string[]) => {
         return keysArray.map((key, index) => {
             return (
-                <div key={index}>
-                    <label>{key}</label>
-                    <input
-                        type="text"
-                        name={key}
-                        onChange={(e) => {
-                            setInputValues((prev) => ({ ...prev, [key]: e.target.value }));
-                        }}
-                    />
-                </div>
+              <div className="add-category-item" key={index}>
+                <label>{key}</label>
+                <input
+                  type="text"
+                  name={key}
+                  onChange={(e) => {
+                    setInputValues((prev) => ({
+                      ...prev,
+                      [key]: e.target.value,
+                    }));
+                  }}
+                />
+              </div>
             );
         });
     };

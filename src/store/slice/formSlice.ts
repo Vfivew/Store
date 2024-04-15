@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { FormState } from '../../models/goodsSliceModels';
+import { createSlice } from "@reduxjs/toolkit";
+
+import { FormState } from "../../types/types";
 
 const initialState: FormState = {
-  deliveryMethod: '',
+  deliveryMethod: "",
   isOrderPlaced: false,
 };
 
 const formSlice = createSlice({
-  name: 'form',
+  name: "form",
   initialState,
   reducers: {
     setDeliveryMethod: (state, action) => {

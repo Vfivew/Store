@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { Form } from './Form';
-import { setUser } from '../../store/slice/userSlice';
+import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+import { Form } from "./Form";
+import { setUser } from "../../store/slice/userSlice";
 
 const SignUp: FC = () => {
   const dispatch = useDispatch();
@@ -24,22 +25,26 @@ const SignUp: FC = () => {
             })
           );
 
-          navigate('/');
+          navigate("/");
         });
       })
       .catch((error) => {
         console.error(error);
-        if (error.code === 'auth/email-already-in-use') {
-          setError('This postal address is already registered.');
+        if (error.code === "auth/email-already-in-use") {
+          setError("This postal address is already registered.");
         } else {
-          setError('Registration error, try later.');
+          setError("Registration error, try later.");
         }
       });
   };
 
   return (
     <div>
-      <Form title="Register" handleClick={handleRegister} isRegistrationPage={true}/>
+      <Form
+        title="Register"
+        handleClick={handleRegister}
+        isRegistrationPage={true}
+      />
       {error && <p>{error}</p>}
     </div>
   );

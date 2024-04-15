@@ -1,6 +1,7 @@
-import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
-import ResetPasswordForm from './ResetPasswordForm'
+import { FC, useState } from "react";
+import { Link } from "react-router-dom";
+
+import ResetPasswordForm from "./ResetPasswordForm";
 
 interface FormProps {
   title: string;
@@ -9,9 +10,9 @@ interface FormProps {
 }
 
 const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [confirmPass, setConfirmPass] = useState('');
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [resetPassword, setResetPassword] = useState(false);
 
@@ -29,7 +30,9 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
     validatePasswords(newPassword, confirmPass);
   };
 
-  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleConfirmPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const repeatedPassword = e.target.value;
     setConfirmPass(repeatedPassword);
     validatePasswords(pass, repeatedPassword);
@@ -37,7 +40,7 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
 
   const validatePasswords = (password: string, repeatedPassword: string) => {
     if (isRegistrationPage && password !== repeatedPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
     } else {
       setError(null);
     }
@@ -47,7 +50,7 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
     e.preventDefault();
 
     if (isRegistrationPage && pass !== confirmPass) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
     } else {
       setError(null);
       handleClick(email, pass);
@@ -55,7 +58,7 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
   };
 
   return (
-    <div className='form-wrapper'>
+    <div className="form-wrapper">
       {resetPassword ? (
         <ResetPasswordForm onResetPassword={handleResetPasswordCancel} />
       ) : (
@@ -91,25 +94,23 @@ const Form: FC<FormProps> = ({ title, isRegistrationPage, handleClick }) => {
               {error && <p className="">{error}</p>}
             </>
           )}
-          <div className='form-button-block'>
+          <div className="form-button-block">
             <button
               type="submit"
               disabled={isRegistrationPage && pass !== confirmPass}
-              className='gradient-button'
+              className="gradient-button"
             >
               {title}
             </button>
             <button
               onClick={handleResetPasswordClick}
-              className='gradient-button'
+              className="gradient-button"
             >
               Forgot password?
-              </button>
-              <Link to="/">
-              <button className='gradient-button'>
-                Back to Main
-              </button>
-              </Link>
+            </button>
+            <Link to="/">
+              <button className="gradient-button">Back to Main</button>
+            </Link>
           </div>
         </form>
       )}

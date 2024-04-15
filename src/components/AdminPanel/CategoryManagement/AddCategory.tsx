@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
-import { addCategory } from '../../../Service/addCategory';
+import { addCategory } from '../../../service/addCategory';
 
 const AddCategory = () => {
     const [inputValue, setInputValue] = useState<string>('');
@@ -34,7 +34,7 @@ const AddCategory = () => {
     const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
     };
-    
+
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         setImage(e.target.value);
     };
@@ -159,7 +159,7 @@ const AddCategory = () => {
                     ))}
                     <button onClick={handleAddCharacteristic} className="add-button">Add more characteristics</button>
                     <button onClick={handleAdd} className='final-add-button'>Add</button>
-                    {isExist && <p style={{ color: 'red' }}>Category {inputValue} already exists</p>} 
+                    {isExist && <p style={{ color: 'red' }}>Category {inputValue} already exists</p>}
                 </div>
             )}
         </section>

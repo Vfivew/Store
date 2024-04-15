@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { BasketState } from '../../models/goodsSliceModels';
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialBasketState = JSON.parse(localStorage.getItem('basket') || '[]');
+import { BasketState } from "../../types/types";
+
+const initialBasketState = JSON.parse(localStorage.getItem("basket") || "[]");
 
 const initialState: BasketState = {
   basket: initialBasketState,
@@ -9,44 +10,57 @@ const initialState: BasketState = {
 };
 
 const basketSlice = createSlice({
-  name: 'basket',
+  name: "basket",
   initialState,
   reducers: {
     setBasketItem: (state, action) => {
       state.basket = action.payload;
     },
-    resetStoreBasket:(state) => {
+    resetStoreBasket: (state) => {
       state.basket = [];
-      localStorage.removeItem('basket');
+      localStorage.removeItem("basket");
     },
     setToogleModal: (state) => {
       state.isBasketOpen = !state.isBasketOpen;
     },
     addBasketItem: (state, action) => {
       const { quantity, item, itemId } = action.payload;
-      const existingItem = state.basket.find(([, basketItem]) => basketItem.article === item.article);
+      const existingItem = state.basket.find(
+        ([, basketItem]) => basketItem.article === item.article
+      );
       if (existingItem) {
         existingItem[0] += quantity;
       } else {
         state.basket = [...state.basket, [quantity, item, itemId]];
       }
-      localStorage.setItem('basket', JSON.stringify(state.basket));
+      localStorage.setItem("basket", JSON.stringify(state.basket));
     },
     updateQuantity: (state, action) => {
       const { itemForUpdate, newQuantity } = action.payload;
-      const basketIndex = state.basket.findIndex(([, item]) => item.article === itemForUpdate);
+      const basketIndex = state.basket.findIndex(
+        ([, item]) => item.article === itemForUpdate
+      );
       if (basketIndex !== -1) {
         state.basket[basketIndex][0] = newQuantity;
-        localStorage.setItem('basket', JSON.stringify(state.basket));
+        localStorage.setItem("basket", JSON.stringify(state.basket));
       }
     },
     removeBasketItem: (state, action) => {
       const itemIdToRemove = action.payload;
-      state.basket = state.basket.filter(([, item]) => item.article !== itemIdToRemove);
-      localStorage.setItem('basket', JSON.stringify(state.basket));
+      state.basket = state.basket.filter(
+        ([, item]) => item.article !== itemIdToRemove
+      );
+      localStorage.setItem("basket", JSON.stringify(state.basket));
     },
   },
 });
 
-export const { resetStoreBasket, setToogleModal, addBasketItem, updateQuantity, removeBasketItem, setBasketItem } = basketSlice.actions;
+export const {
+  resetStoreBasket,
+  setToogleModal,
+  addBasketItem,
+  updateQuantity,
+  removeBasketItem,
+  setBasketItem,
+} = basketSlice.actions;
 export default basketSlice.reducer;

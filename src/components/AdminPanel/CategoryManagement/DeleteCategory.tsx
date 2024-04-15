@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
-import { deleteCategory } from '../../../Service/deleteCategory';
+import { deleteCategory } from '../../../service/deleteCategory';
 
 const DeleteCategory = () => {
     const [skip, setSkip] = useState<boolean>(true);
      const [itemId, setItemId] = useState<string>('')
     const { data, isLoading, isError } = useFetchDocumentsQuery("Goods");
     const { data: fetchedData, isLoading:fetchLoading, isError:fetchError } = useFetchDocumentByIdQuery(itemId, { skip });
-   
+
     const handleChoiseType = (itemId: string) => {
         setItemId(itemId)
         setSkip(false);
-    
+
     };
 
     const handleDelete = async (key: any) => {

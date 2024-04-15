@@ -6,7 +6,7 @@
   border-radius: 8px;
   .input-field {
     margin-bottom: 0.5em;
-    textarea{
+    textarea {
       margin-top: 0.5em;
     }
     .review-text {
@@ -35,6 +35,7 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.3s;
 
     &:disabled {
       background-color: #ccc;

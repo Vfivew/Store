@@ -1,23 +1,27 @@
-import { FC, useState } from 'react';
-import { getAuth, sendPasswordResetEmail, fetchSignInMethodsForEmail } from 'firebase/auth';
+import { FC, useState } from "react";
+import {
+  getAuth,
+  sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
+} from "firebase/auth";
 
 interface ResetPasswordFormProps {
   onResetPassword: () => void;
 }
 
 const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ onResetPassword }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [resetSent, setResetSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleResetPassword = async () => {
     try {
       const auth = getAuth();
-      
+
       const methods = await fetchSignInMethodsForEmail(auth, email);
 
       if (methods.length === 0) {
-        setError('User with this email was not found.');
+        setError("User with this email was not found.");
         return;
       }
 
@@ -25,7 +29,7 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ onResetPassword }) => {
       setResetSent(true);
       setError(null);
     } catch (error) {
-      setError('Errors when sending a password update request.');
+      setError("Errors when sending a password update request.");
     }
   };
 
@@ -34,17 +38,21 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ onResetPassword }) => {
       {resetSent ? (
         <p>Password update instructions have been sent to your email.</p>
       ) : (
-        <div  className='reset-password-block'>
+        <div className="reset-password-block">
           <p>Enter your email to update your password.</p>
-            <input
+          <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="email"
-            />
+          />
           <div>
-            <button className='gradient-button' onClick={handleResetPassword}>Сhange password</button>
-            <button className='gradient-button' onClick={onResetPassword}>Cancel</button>
+            <button className="gradient-button" onClick={handleResetPassword}>
+              Сhange password
+            </button>
+            <button className="gradient-button" onClick={onResetPassword}>
+              Cancel
+            </button>
           </div>
           {error && <p>{error}</p>}
         </div>

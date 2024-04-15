@@ -1,8 +1,8 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 
-import {GoodsItem, GoodsKind} from '../../models/fireStoreModels'
+import { db } from "../../db/firebase";
+import { GoodsItem, GoodsKind } from "../../types/types";
 
 export const firebaseApi = createApi({
   baseQuery: fakeBaseQuery(),
@@ -31,22 +31,22 @@ export const firebaseApi = createApi({
       async queryFn(email) {
         if (email) {
           try {
-            const docRef = doc(db, 'UserBasket', email);
+            const docRef = doc(db, "UserBasket", email);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
               const basketData: any = docSnap.data();
               return { data: basketData };
             } else {
-              console.log('No such document!');
+              console.log("No such document!");
               return { data: null };
             }
           } catch (error) {
-            console.error('Error getting document:', error);
+            console.error("Error getting document:", error);
             return { error };
           }
         } else {
-          console.log('Email is not valid!');
+          console.log("Email is not valid!");
           return { data: null };
         }
       },
@@ -56,22 +56,22 @@ export const firebaseApi = createApi({
       async queryFn(email) {
         if (email) {
           try {
-            const docRef = doc(db, 'Desire', email);
+            const docRef = doc(db, "Desire", email);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
               const desireData: any = docSnap.data();
               return { data: desireData };
             } else {
-              console.log('No such document!');
+              console.log("No such document!");
               return { data: null };
             }
           } catch (error) {
-            console.error('Error getting document:', error);
+            console.error("Error getting document:", error);
             return { error };
           }
         } else {
-          console.log('Email is not valid!');
+          console.log("Email is not valid!");
           return { data: null };
         }
       },
@@ -132,4 +132,11 @@ export const firebaseApi = createApi({
   }),
 });
 
-export const { useFetchDesireQuery, useFetchDiscountGoodsQuery, useFetchDocumentsQuery,useFetchBasketQuery, useFetchDocumentByIdQuery, useFetchDocumentDiscountGoodsQuery } = firebaseApi;
+export const {
+  useFetchDesireQuery,
+  useFetchDiscountGoodsQuery,
+  useFetchDocumentsQuery,
+  useFetchBasketQuery,
+  useFetchDocumentByIdQuery,
+  useFetchDocumentDiscountGoodsQuery,
+} = firebaseApi;

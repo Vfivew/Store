@@ -1,5 +1,3 @@
-import React from "react";
-
 type GoodsCardProps = {
   name: string;
   img: string;
@@ -7,7 +5,6 @@ type GoodsCardProps = {
 };
 
 const GoodsCard: React.FC<GoodsCardProps> = ({ name, img, price }) => {
-  
   return (
     <>
       <img src={img} alt={name} />

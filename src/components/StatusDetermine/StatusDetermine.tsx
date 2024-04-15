@@ -1,4 +1,3 @@
-import React from "react";
 import Loading from "../Loading/Loading";
 
 interface StatusDetermineProps {
@@ -7,9 +6,13 @@ interface StatusDetermineProps {
   data: any;
 }
 
-const StatusDetermine: React.FC<StatusDetermineProps> = ({ isLoading, isError, data }) => {
+const StatusDetermine: React.FC<StatusDetermineProps> = ({
+  isLoading,
+  isError,
+  data,
+}) => {
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (isError) {

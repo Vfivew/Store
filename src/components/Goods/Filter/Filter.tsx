@@ -1,5 +1,8 @@
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux-hooks";
-import { setFilteredGoods,setActiveButton } from "../../../store/slice/goodsSlice"; 
+import {
+  setFilteredGoods,
+  setActiveButton,
+} from "../../../store/slice/goodsSlice";
 import { setFilterMenuActive } from "../../../store/slice/mediaSlice";
 
 import AdditionalFilter from "./AdditionalFilter";
@@ -7,21 +10,27 @@ import AdditionalFilter from "./AdditionalFilter";
 const Filter = () => {
   const dispatch = useAppDispatch();
   const goods = useAppSelector((state) => state.goods.type);
-  const filterMenuActive = useAppSelector((state) => state.media.filterMenuActive);
-  const activeButton = useAppSelector((state) => state.goods.activeButton)
-  
+  const filterMenuActive = useAppSelector(
+    (state) => state.media.filterMenuActive
+  );
+  const activeButton = useAppSelector((state) => state.goods.activeButton);
+
   const toggleSortMenu = () => {
-    dispatch(setFilterMenuActive(!filterMenuActive))
+    dispatch(setFilterMenuActive(!filterMenuActive));
   };
 
   const handleFilterClick = (key: string) => {
     dispatch(setActiveButton(key));
     dispatch(setFilteredGoods(key));
-    dispatch(setFilterMenuActive(!filterMenuActive))
+    dispatch(setFilterMenuActive(!filterMenuActive));
   };
 
   if (goods === null) {
-    return  <section className={`filter-section ${filterMenuActive ? 'active' : ''}`}></section>
+    return (
+      <section
+        className={`filter-section ${filterMenuActive ? "active" : ""}`}
+      ></section>
+    );
   }
 
   const topLevelKeys = Object.keys(goods);
@@ -31,7 +40,7 @@ const Filter = () => {
       <button className="filter-button" onClick={toggleSortMenu}>
         Filter
       </button>
-      <section className={`filter-section ${filterMenuActive ? 'active' : ''}`}>
+      <section className={`filter-section ${filterMenuActive ? "active" : ""}`}>
         <ul className="filter-list">
           {topLevelKeys.map((key) => (
             <button
@@ -42,15 +51,13 @@ const Filter = () => {
               {key}
             </button>
           ))}
-            <AdditionalFilter/>
-            <button className='button'
-              onClick={toggleSortMenu}
-              >
-              <div className="wave"></div>
-              <span className='span'>Close</span>
-            </button>
+          <AdditionalFilter />
+          <button className="button" onClick={toggleSortMenu}>
+            <div className="wave"></div>
+            <span className="span">Close</span>
+          </button>
         </ul>
-        </section>
+      </section>
     </>
   );
 };

@@ -1,9 +1,11 @@
-.form-wrapper{
+.form-wrapper {
   display: flex;
   justify-content: center;
-  label{
+
+  label {
     margin-top: 0.5em;
   }
+
   .form {
     max-width: 1280px;
     display: flex;
@@ -11,59 +13,73 @@
     font-family: var(--primary-font);
     background-color: var(--background-color);
     max-height: 700px;
+
+    .basket-items-no-items {
+      padding: 1em;
+    }
+
     li {
-      background-color:var(--first-color);
+      background-color: var(--first-color);
       margin: 1em;
     }
+
     .form-basket-items {
       width: 50%;
+
       .form-basket-items-list {
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        background-color:var(--first-color);
+        background-color: var(--first-color);
         width: 95%;
         margin: 1em 0 1em 1em;
         padding: 0.3em 0 0.3em 0;
         list-style: none;
-        border:1px solid var(--second-color);
-        border-radius:1em;
+        border: 1px solid var(--second-color);
+        border-radius: 1em;
       }
     }
   }
-  
+
   .form-block {
     width: 50%;
-    background-color:var(--first-color);
-    border:1px solid var(--second-color);
-    border-radius:1em;
+    background-color: var(--first-color);
+    border: 1px solid var(--second-color);
+    border-radius: 1em;
     margin: 1em 1em 1em 1em;
-    padding: 1em; 
+    padding: 1em;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    h2{
-      font-weight:bold;
+
+    h2 {
+      font-weight: bold;
     }
+
     label {
       display: block;
-      margin-bottom: 0.5em; 
+      margin-bottom: 0.5em;
     }
+
     input,
     select {
       width: 100%;
       padding: 0.5em;
-      margin-bottom: 1em; 
-      border:1px solid var(--second-color);
-      border-radius: 4px; 
+      margin-bottom: 1em;
+      border: 1px solid var(--second-color);
+      border-radius: 4px;
       outline: none;
-      transition: border-color 0.3s; 
+      transition: border-color 0.3s;
     }
+
     input:focus,
     select:focus {
-      border-color: var(--thirty-color); 
-      }
-    .error-message{
-      color:red;
+      border-color: var(--thirty-color);
     }
-    .inputs, .select{
-      background-color:white;
+
+    .error-message {
+      color: red;
+    }
+
+    .inputs,
+    .select {
+      background-color: white;
     }
   }
 }
@@ -74,14 +90,15 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
-    .modal-content {
+
+  .modal-content {
     margin: 1em;
-    background:var(--thirty-color);
+    background: var(--thirty-color);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -92,12 +109,13 @@
   }
 }
 
-@media (max-width: 767px) { 
-  .form-wrapper{
+@media (max-width: 767px) {
+  .form-wrapper {
     .form {
       flex-direction: column;
       justify-content: space-between;
       max-height: 900px;
+
       .form-basket-items {
         width: 100%;
       }
@@ -105,34 +123,36 @@
     .form-block {
       width: 95%;
       margin: 1em;
-        input,
-        select {
-          width: 100%; 
-          padding: 0.5em;
-          margin-bottom: 0.3em; 
-        }
+
+      input,
+      select {
+        width: 100%;
+        padding: 0.5em;
+        margin-bottom: 0.3em;
       }
     }
+  }
 }
 
 @media (min-width: 1980px) {
-  .form-wrapper{
-  .form{
-    max-height: 900px;
-  }
-  .form-block{  
-    input,
-    select {
-      font-size: var(--secondary-size); 
+  .form-wrapper {
+    .form {
+      max-height: 900px;
     }
 
-    label {
-      font-size: var(--secondary-size); 
-    }
+    .form-block {
+      input,
+      select {
+        font-size: var(--secondary-size);
+      }
 
-    button {
-      font-size: var(--secondary-size); 
+      label {
+        font-size: var(--secondary-size);
+      }
+
+      button {
+        font-size: var(--secondary-size);
+      }
     }
-  }
   }
 }

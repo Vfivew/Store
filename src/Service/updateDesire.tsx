@@ -1,6 +1,7 @@
-import { db } from '../firebase';
-import { doc, setDoc, updateDoc,getDoc } from 'firebase/firestore';
-import {sendError} from "./sendError"
+import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
+
+import { db } from "../db/firebase";
+import { sendError } from "./sendError";
 
 interface Item {
   [key: string]: any;
@@ -17,8 +18,12 @@ interface DeleteDesireItemParams {
   email: string;
 }
 
-export const updateDesire = async ({item, itemId, email }: UpdateDesireParams) => {
-  const docRef = doc(db, 'Desire', email);
+export const updateDesire = async ({
+  item,
+  itemId,
+  email,
+}: UpdateDesireParams) => {
+  const docRef = doc(db, "Desire", email);
 
   const article = item.article;
 
@@ -27,29 +32,32 @@ export const updateDesire = async ({item, itemId, email }: UpdateDesireParams) =
 
     if (docSnap.exists()) {
       await updateDoc(docRef, {
-        [article]: [item, itemId]
+        [article]: [item, itemId],
       });
     } else {
       await setDoc(docRef, {
-        [article]: [item, itemId]
+        [article]: [item, itemId],
       });
     }
 
     console.log(`Document with ID ${email} successfully updated.`);
   } catch (error) {
-      if (error instanceof Error) {
-        const errorMessage = 'Some problem: ' + error.message;
-        console.log(error);
-        await sendError(error);
-        return { error: errorMessage };
-      } else {
-        return { error: 'An unknown error occurred.' };
-      }
+    if (error instanceof Error) {
+      const errorMessage = "Some problem: " + error.message;
+      console.log(error);
+      await sendError(error);
+      return { error: errorMessage };
+    } else {
+      return { error: "An unknown error occurred." };
     }
+  }
 };
 
-export const deleteDesireItem = async ({ article, email }: DeleteDesireItemParams) => {
-  const docRef = doc(db, 'Desire', email);
+export const deleteDesireItem = async ({
+  article,
+  email,
+}: DeleteDesireItemParams) => {
+  const docRef = doc(db, "Desire", email);
 
   try {
     const docSnap = await getDoc(docRef);
@@ -57,18 +65,20 @@ export const deleteDesireItem = async ({ article, email }: DeleteDesireItemParam
       const data = docSnap.data();
       delete data[article];
       await setDoc(docRef, data);
-      console.log(`Data with article ${article} has been successfully deleted from document with ID ${email}.`);
+      console.log(
+        `Data with article ${article} has been successfully deleted from document with ID ${email}.`
+      );
     } else {
-      console.log('No such document!');
+      console.log("No such document!");
     }
   } catch (error) {
-      if (error instanceof Error) {
-        const errorMessage = 'Some problem: ' + error.message;
-        console.log(error);
-        await sendError(error);
-        return { error: errorMessage };
-      } else {
-        return { error: 'An unknown error occurred.' };
-      }
+    if (error instanceof Error) {
+      const errorMessage = "Some problem: " + error.message;
+      console.log(error);
+      await sendError(error);
+      return { error: errorMessage };
+    } else {
+      return { error: "An unknown error occurred." };
     }
+  }
 };
