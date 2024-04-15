@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
-import { addCategory } from '../../../service/addCategory';
+import { addCategory } from '../../../helpers/addCategory';
 
 const AddGoods = () => {
     const [skip, setSkip] = useState(true);

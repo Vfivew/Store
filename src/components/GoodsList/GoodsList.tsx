@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../hooks/redux-hooks";
 import { setSortType } from "../../store/slice/sortSlice";
 import { addBasketItem } from "../../store/slice/basketSlise";
 import { setToogleModal } from "../../store/slice/basketSlise";
-import { updateBasket } from "../../service/updateBasket";
+import { updateBasket } from "../../helpers/updateBasket";
 import GoodsCard from "./GoodCards/GoodsCard";
 
 const GoodsList = () => {

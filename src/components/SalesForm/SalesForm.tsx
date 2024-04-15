@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import {
-  setDeliveryMethod,
+  setDeliveryMethod,../../helpers/updateBasket
   setIsOrderPlaced,
 } from "../../store/slice/formSlice";
 import { resetBasket } from "../../service/updateBasket";

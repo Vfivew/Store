@@ -1,4 +1,4 @@
-import { deleteGoodsType } from "../../../service/deleteGoodsType";
+import { deleteGoodsType } from "../../../helpers/deleteGoodsType";
 import { useFetchDocumentsQuery } from "../../../store/slice/fireStoreApi";
 
 const DeleteType = () => {
