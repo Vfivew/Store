@@ -4,9 +4,9 @@ import GoodsCard from "../GoodsList/GoodCards/GoodsCard";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux-hooks";
 import { setToogleModal } from "../../store/slice/basketSlise";
 import { addBasketItem } from "../../store/slice/basketSlise";
-import { updateBasket } from "../../helpers/updateBasket";
+import { updateBasket } from "../../service/updateBasket";
 import { removeDesireItem } from "../../store/slice/desireSlice";
-import { deleteDesireItem } from "../../helpers/updateDesire";
+import { deleteDesireItem } from "../../service/updateDesire";
 
 const Desire = () => {
   const dispatch = useAppDispatch();

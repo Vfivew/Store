@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { addGoodsType } from '../../../helpers/addGoodsType';
+import { addGoodsType } from '../../../service/addGoodsType';
 
 
 const AddType = () => {

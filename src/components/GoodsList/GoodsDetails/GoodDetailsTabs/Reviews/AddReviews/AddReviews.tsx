@@ -2,7 +2,7 @@ import { useEffect,useState, ChangeEvent } from 'react';
 import { useAppSelector,useAppDispatch } from '../../../../../../hooks/redux-hooks';
 import { setNewReview, resetNewFullData } from '../../../../../../store/slice/itemSlice';
 import { useParams } from 'react-router-dom';
-import { updateReview } from '../../../../../../helpers/updateReview'
+import { updateReview } from '../../../../../../service/updateReview'
 
 const AddReviews = () => {
   const dispatch = useAppDispatch();

@@ -6,7 +6,7 @@ import {
   updateQuantity,
   removeBasketItem,
 } from "../../../store/slice/basketSlise";
-import { deleteBasketItem } from "../../../helpers/updateBasket";
+import { deleteBasketItem } from "../../../service/updateBasket";
 
 interface BasketItemProps {
   item: any;

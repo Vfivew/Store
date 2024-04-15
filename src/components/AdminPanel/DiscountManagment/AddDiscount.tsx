@@ -4,7 +4,7 @@ import {
   useFetchDocumentByIdQuery,
   useFetchDocumentDiscountGoodsQuery,
 } from "../../../store/slice/fireStoreApi";
-import { addDiscount } from "../../../helpers/addDiscount";
+import { addDiscount } from "../../../service/addDiscount";
 
 const DeleteGoods = () => {
   const [skip, setSkip] = useState<boolean>(true);
