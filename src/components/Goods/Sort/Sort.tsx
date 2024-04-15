@@ -1,47 +1,47 @@
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux-hooks';
-import { setSortType, setActiveButton } from '../../../store/slice/sortSlice'
-import { setSortMenuActive } from '../../../store/slice/mediaSlice';
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux-hooks";
+import { setSortType, setActiveButton } from "../../../store/slice/sortSlice";
+import { setSortMenuActive } from "../../../store/slice/mediaSlice";
 
 const Sort = () => {
   const dispatch = useAppDispatch();
   const sortMenuActive = useAppSelector((state) => state.media.sortMenuActive);
   const activeButton = useAppSelector((state) => state.sort.activeButton);
   const [buttonText, setButtonText] = useState<string | null>(null);
-  
+
   const toggleSortMenu = () => {
-    dispatch(setSortMenuActive(!sortMenuActive))
+    dispatch(setSortMenuActive(!sortMenuActive));
   };
-    
+
   const handleFilterClick = (buttonText: string) => {
     setButtonText(buttonText);
-    dispatch(setActiveButton(buttonText))
+    dispatch(setActiveButton(buttonText));
     dispatch(setSortType(buttonText));
-    dispatch(setSortMenuActive(!sortMenuActive))
+    dispatch(setSortMenuActive(!sortMenuActive));
   };
 
   return (
-    <section className='sort-section'>
-    <h3>Sort</h3>
+    <section className="sort-section">
+      <h3>Sort by</h3>
       <button className="sort-button" onClick={toggleSortMenu}>
-          {buttonText ? buttonText : 'Choose sorting'}
+        {buttonText ? buttonText : "Choose sorting"}
       </button>
-      <ul className={`sort-menu ${sortMenuActive ? 'active' : ''}`}>
+      <ul className={`sort-menu ${sortMenuActive ? "active" : ""}`}>
         <button
-          className={activeButton === 'PriceUp' ? 'active' : ''}
-          onClick={() => handleFilterClick('PriceUp')}
+          className={activeButton === "PriceUp" ? "active" : ""}
+          onClick={() => handleFilterClick("PriceUp")}
         >
           Price Up
         </button>
         <button
-          className={activeButton === 'Pricedown' ? 'active' : ''}
-          onClick={() => handleFilterClick('Pricedown')}
+          className={activeButton === "Pricedown" ? "active" : ""}
+          onClick={() => handleFilterClick("Pricedown")}
         >
           Price down
         </button>
         <button
-          className={activeButton === 'Rating' ? 'active' : ''}
-          onClick={() => handleFilterClick('Rating')}
+          className={activeButton === "Rating" ? "active" : ""}
+          onClick={() => handleFilterClick("Rating")}
         >
           By rating
         </button>

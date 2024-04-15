@@ -1,4 +1,4 @@
-import {randomItemId} from '../randomItemId';
+import {randomItemId} from '../../utils/randomItemId';
 
 test('items should always have values', () => {
   const result = randomItemId();

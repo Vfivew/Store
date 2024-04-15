@@ -1,8 +1,8 @@
 import { useEffect,useState, ChangeEvent } from 'react';
 import { useAppSelector,useAppDispatch } from '../../../../../../hooks/redux-hooks';
-import { setNewReview, resetNewFullData } from '../../../../../../store/slice/itemSlice'; 
+import { setNewReview, resetNewFullData } from '../../../../../../store/slice/itemSlice';
 import { useParams } from 'react-router-dom';
-import { updateReview } from '../../../../../../Service/updateReview'
+import { updateReview } from '../../../../../../service/updateReview'
 
 const AddReviews = () => {
   const dispatch = useAppDispatch();
@@ -12,11 +12,11 @@ const AddReviews = () => {
   const selectItemData = useAppSelector((state) => state.item.selectedItem);
   const newFullData = useAppSelector((state) => state.item.newFullData);
   const [reviewText, setReviewText] = useState('');
-  const [rating, setRating] = useState(''); 
+  const [rating, setRating] = useState('');
   const [advantages, setAdvantages] = useState('');
   const [disadvantages, setDisadvantages] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  
+
   const handleReviewTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const newText = event.target.value;
     setReviewText(newText);
@@ -24,7 +24,7 @@ const AddReviews = () => {
   };
 
   const handleRatingChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const newRating = event.target.value; 
+    const newRating = event.target.value;
     setRating(newRating);
     setIsButtonDisabled(newRating === '' || reviewText.trim() === '');
   };
@@ -43,7 +43,7 @@ const AddReviews = () => {
     setAdvantages('');
     setDisadvantages('');
     if (fullData !== null && selectItemData !== null) {
-      const currentDate = new Date().toLocaleDateString('en-GB'); 
+      const currentDate = new Date().toLocaleDateString('en-GB');
       const reviewData = {
         advantages:advantages,
         disadvantages:disadvantages,

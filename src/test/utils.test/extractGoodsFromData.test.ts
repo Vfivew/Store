@@ -1,4 +1,4 @@
-import { extractGoodsFromData } from '../extractGoodsFromData';
+import { extractGoodsFromData } from '../../utils/extractGoodsFromData';
 
 describe('extractGoodsFromData', () => {
   test('returns an empty array if data is null', () => {

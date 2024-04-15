@@ -1,4 +1,4 @@
-import formReducer, { setDeliveryMethod, setIsOrderPlaced } from '../formSlice';
+import formReducer, { setDeliveryMethod, setIsOrderPlaced } from '../../store/slice/formSlice';
 
 describe('Form Slice Reducers', () => {
   it('should set delivery method', () => {

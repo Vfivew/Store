@@ -1,4 +1,4 @@
-import sortReducer, { setSortData, setSortType, setActiveButton } from '../sortSlice';
+import sortReducer, { setSortData, setSortType, setActiveButton } from '../../store/slice/sortSlice';
 
 describe('Sort Reducer', () => {
     it('should set sort data', () => {
@@ -86,7 +86,7 @@ describe('Sort Reducer', () => {
         expect(newState.allGoods).toEqual([
             { name: 'Product 2', rating: [4, 5] },
             { name: 'Product 1', rating: [1, 2, 3] },
-            { name: 'Product 3', rating: [] }, 
+            { name: 'Product 3', rating: [] },
             { name: 'Product 4', }
         ]);
     });

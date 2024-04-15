@@ -1,4 +1,4 @@
-import itemReducer, { setItemByArticle, setFullData, setNewReview, resetNewFullData } from '../itemSlice';
+import itemReducer, { setItemByArticle, setFullData, setNewReview, resetNewFullData } from '../../store/slice/itemSlice';
 
 describe('Item Reducer', () => {
   it('should set item by article', () => {
@@ -62,7 +62,7 @@ describe('Item Reducer', () => {
             expect(newState.newFullData.category1.item1.reviews[0].date).toEqual('07.12.2023');
             expect(newState.newFullData.category1.item1.reviews.length).toBe(1);
             expect(newState.newFullData.category1.item1.rating.length).toBe(1);
-        } 
+        }
     });
 
   it('should reset new full data', () => {

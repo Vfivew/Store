@@ -3,32 +3,42 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
-  text-align:center;
-    .add-goods-category-container {
-      max-width: 1280px;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-    .final-add-button{
-      background-color:var(--first-color);
+  align-items: center;
+  text-align: center;
+
+  .add-goods-category-container {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    .final-add-button {
+      width: auto;
+      background-color: var(--first-color);
       font-weight: bold;
+      transition: 0.3s;
     }
+
     .final-add-button:hover,
-    .final-add-button:focus{
-      background-color:rgb(0, 187, 255);
-      border:1px solid black;
+    .final-add-button:focus {
+      background-color: rgb(0, 187, 255);
     }
   }
 
-  .add-category-exist-category{
+  .add-category-exist-category {
     display: flex;
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
-    p{
-      background-color:var(--first-color);
-      margin: 2%;
+
+    .add-category-item {
+      margin: 10px;
+    }
+
+    p {
+      background-color: var(--first-color);
+      margin: 10px;
       width: 45%;
       font-weight: bold;
       display: flex;
@@ -36,10 +46,11 @@
       text-align: center;
       padding: 0.5em;
     }
-    .delete-button{
-      background-color:var(--first-color);
-      margin: 2%;
-      width: 45%;
+
+    .delete-button {
+      background-color: var(--first-color);
+      margin: 10px;
+      width: auto;
       font-weight: bold;
       display: flex;
       justify-content: center;
@@ -47,18 +58,25 @@
       border: 1px solid grey;
       padding: 0.5em;
     }
-    .category-wrapper{
+    .delete-button:hover,
+    .delete-button:focus {
+      background-color: rgb(0, 187, 255);
+    }
+
+    .category-wrapper {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      div{
+
+      div {
         width: 50%;
         display: flex;
         justify-content: center;
-        button{
-          background-color:var(--first-color);
-          margin: 2%;
-          width: 100%;
+
+        button {
+          width: auto;
+          background-color: var(--first-color);
+          margin: 10px;
           font-weight: bold;
           display: flex;
           justify-content: center;
@@ -70,10 +88,21 @@
   }
 
   .add-goods-category-container section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 40%;
     border: 1px solid #ddd;
     padding: 20px;
     margin: 10px;
     flex: 1;
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .add-goods-category-container h2 {
@@ -87,14 +116,15 @@
   }
 
   .add-goods-category-container button {
+    width: auto;
     display: block;
-    width: 100%;
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
     cursor: pointer;
+    transition: 0.3s;
   }
 
   .add-goods-category-container button:hover {
@@ -103,15 +133,10 @@
 
   .add-goods-category-container input[type="text"] {
     display: block;
-    width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 10px;
-    background-color:white;
+    margin: 10px 0;
+    background-color: white;
   }
-
 }
-
-
-

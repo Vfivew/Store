@@ -1,7 +1,7 @@
-import basketReducer, { addBasketItem,setBasketItem,resetStoreBasket,removeBasketItem } from '../basketSlise';
+import basketReducer, { addBasketItem,setBasketItem,resetStoreBasket,removeBasketItem } from '../../store/slice/basketSlise';
 
 // a given object may have a different interface,
-// but the main thing is that the field article is always defined 
+// but the main thing is that the field article is always defined
 interface NewItem {
     article: string;
 }
@@ -11,7 +11,7 @@ describe('Basket Slice Reducers', () => {
     const sampleItemId = "Coils";
     const sampleQuantity = 1;
     const newQuantity = 2
-    
+
     beforeEach(() => {
         newItem = {
             "article": "11",
@@ -39,7 +39,7 @@ describe('Basket Slice Reducers', () => {
 
         expect(state.basket).toEqual([]);
     });
-    
+
     it('should add a new item to the empty basket', () => {
         const initialState = { basket: [], isBasketOpen: false };
 
@@ -52,8 +52,8 @@ describe('Basket Slice Reducers', () => {
     it('should update the quantity of an existing item in the basket', () => {
         const initialState = {
             basket: [
-            [sampleQuantity, 
-            newItem, 
+            [sampleQuantity,
+            newItem,
             sampleItemId]
             ],
             isBasketOpen: false
@@ -64,8 +64,8 @@ describe('Basket Slice Reducers', () => {
 
     expect(state.basket).toEqual([[sampleQuantity+newQuantity, newItem, sampleItemId]]);
   });
-    
-    
+
+
     it('should remove an item from the basket', () => {
         const initialState = {
             basket: [

@@ -1,4 +1,4 @@
-import userReducer, { setUser, removeUser, selectUserEmail } from '../userSlice';
+import userReducer, { setUser, removeUser, selectUserEmail } from '../../store/slice/userSlice';
 
 describe('User Reducer', () => {
   it('should set user', () => {
@@ -39,7 +39,7 @@ describe('User Reducer', () => {
     expect(newState.email).toBeNull();
     expect(newState.token).toBeNull();
     expect(newState.id).toBeNull();
-      
+
     expect(localStorage.getItem('userEmail')).toBeNull();
     expect(localStorage.getItem('userToken')).toBeNull();
     expect(localStorage.getItem('userId')).toBeNull();

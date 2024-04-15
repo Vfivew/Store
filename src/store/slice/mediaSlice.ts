@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   sortMenuActive: false,
   filterMenuActive: false,
   navBurgerActive: false,
-  headerBurgerActive:false,
+  headerBurgerActive: false,
 };
 
 const mediaSlice = createSlice({
-  name: 'media',
+  name: "media",
   initialState,
   reducers: {
     setSortMenuActive: (state, action) => {
@@ -38,6 +38,10 @@ const mediaSlice = createSlice({
   },
 });
 
-
-export const { setSortMenuActive,setFilterMenuActive,setNavBurgerActive,setHeaderBurgerActive } = mediaSlice.actions;
+export const {
+  setSortMenuActive,
+  setFilterMenuActive,
+  setNavBurgerActive,
+  setHeaderBurgerActive,
+} = mediaSlice.actions;
 export default mediaSlice.reducer;

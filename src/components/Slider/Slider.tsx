@@ -1,15 +1,16 @@
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import fishing1 from '../../img/fishing1.jpg';
-import fishing2 from '../../img/fishing2.jpg';
+import Slider from "react-slick";
 
-import "./Slider.scss"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import fishing1 from "../../assets/img/fishing1.jpg";
+import fishing2 from "../../assets/img/fishing2.jpg";
+
+import "./Slider.scss";
 
 const MySlider = () => {
   const settings = {
     dots: true,
-    arrows:false,
+    arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,

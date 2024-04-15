@@ -3,7 +3,7 @@ import mediaReducer, {
   setFilterMenuActive,
   setNavBurgerActive,
   setHeaderBurgerActive,
-} from '../mediaSlice'; 
+} from '../../store/slice/mediaSlice';
 
 describe('Media Reducer', () => {
   it('should set sort menu active', () => {

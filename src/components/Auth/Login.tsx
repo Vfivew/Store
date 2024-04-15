@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { setUser } from '../../store/slice/userSlice';
-import { Form } from './Form';
+import { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+import { setUser } from "../../store/slice/userSlice";
+import { Form } from "./Form";
 
 const Login: FC = () => {
   const dispatch = useDispatch();
@@ -16,33 +17,37 @@ const Login: FC = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         user.getIdToken().then((token) => {
-          localStorage.setItem('userToken', token);
+          localStorage.setItem("userToken", token);
           dispatch(
             setUser({
-              email: user.email || '',
+              email: user.email || "",
               id: user.uid,
               token: token,
             })
           );
-          navigate('/');
+          navigate("/");
         });
       })
       .catch((error) => {
         console.error(error);
         if (
-          error.code === 'auth/wrong-password' ||
-          error.code === 'auth/user-not-found'
+          error.code === "auth/wrong-password" ||
+          error.code === "auth/user-not-found"
         ) {
-          setError('Invalid login or password.');
+          setError("Invalid login or password.");
         } else {
-          setError('Login error try later.');
+          setError("Login error try later.");
         }
       });
   };
 
   return (
     <div>
-      <Form title="Sign in" handleClick={handleLogin} isRegistrationPage={false}/>
+      <Form
+        title="Sign in"
+        handleClick={handleLogin}
+        isRegistrationPage={false}
+      />
       {error && <p>{error}</p>}
     </div>
   );

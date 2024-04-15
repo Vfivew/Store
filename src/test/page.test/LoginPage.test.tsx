@@ -1,5 +1,5 @@
 import { render, waitFor } from '@testing-library/react';
-import LoginPage from '../LoginPage';
+import LoginPage from '../../pages/LoginPage';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
@@ -18,7 +18,7 @@ test('redirects to / when authenticated', () => {
       token: '214njmYT24BXJ6416kmybaevAR351',
     },
   });
-  
+
   render(
     <Provider store={storeWithToken}>
       <MemoryRouter initialEntries={['/login']}>
@@ -46,7 +46,7 @@ test('renders Login component when not authenticated', async () => {
       </Router>
     </Provider>
   );
-  
+
   await waitFor(() => {
     expect(window.location.pathname).toBe('/login');
   });

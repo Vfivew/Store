@@ -1,18 +1,19 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import userReducer, { setUser, removeUser } from './slice/userSlice';
-import { firebaseApi } from '../store/slice/fireStoreApi';
-import documentsReducer from '../store/slice/documentsSlice'
-import goodsReducer from '../store/slice/goodsSlice'
-import sortReducer from '../store/slice/sortSlice'
-import mediaReducer from '../store/slice/mediaSlice'
-import itemReducer from '../store/slice/itemSlice'
-import basketReducer from '../store/slice/basketSlise';
-import formReducer from './slice/formSlice';
-import desireReducer from './slice/desireSlice'
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
-const userToken = localStorage.getItem('userToken');
-const userEmail = localStorage.getItem('userEmail');
-const userId = localStorage.getItem('userId');
+import userReducer, { setUser, removeUser } from "./slice/userSlice";
+import { firebaseApi } from "../store/slice/fireStoreApi";
+import documentsReducer from "../store/slice/documentsSlice";
+import goodsReducer from "../store/slice/goodsSlice";
+import sortReducer from "../store/slice/sortSlice";
+import mediaReducer from "../store/slice/mediaSlice";
+import itemReducer from "../store/slice/itemSlice";
+import basketReducer from "../store/slice/basketSlise";
+import formReducer from "./slice/formSlice";
+import desireReducer from "./slice/desireSlice";
+
+const userToken = localStorage.getItem("userToken");
+const userEmail = localStorage.getItem("userEmail");
+const userId = localStorage.getItem("userId");
 
 export const store = configureStore({
   reducer: {
@@ -25,7 +26,7 @@ export const store = configureStore({
     basket: basketReducer,
     form: formReducer,
     desire: desireReducer,
-    [firebaseApi.reducerPath]: firebaseApi.reducer, 
+    [firebaseApi.reducerPath]: firebaseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(firebaseApi.middleware),
@@ -39,7 +40,9 @@ export const store = configureStore({
 });
 
 if (userToken) {
-  store.dispatch(setUser({ email: userEmail || '', id: userId || '', token: userToken }));
+  store.dispatch(
+    setUser({ email: userEmail || "", id: userId || "", token: userToken })
+  );
 } else {
   store.dispatch(removeUser());
 }

@@ -1,4 +1,4 @@
-import desireReducer, { setDesireItem, addDesireItem, removeDesireItem } from '../desireSlice';
+import desireReducer, { setDesireItem, addDesireItem, removeDesireItem } from '../../store/slice/desireSlice';
 
 interface NewItem {
   article: string;
