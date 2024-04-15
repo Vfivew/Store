@@ -5,9 +5,9 @@ import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../../hooks/redux-hooks";
-import { updateBasket } from "../../../../../service/updateBasket";
+import { updateBasket } from "../../../../../helpers/updateBasket";
 import { addDesireItem } from "../../../../../store/slice/desireSlice";
-import { updateDesire } from "../../../../../service/updateDesire";
+import { updateDesire } from "../../../../../helpers/updateDesire";
 import {
   setToogleModal,
   addBasketItem,

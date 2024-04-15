@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
-import { addCategory } from '../../../service/addCategory';
+import { addCategory } from '../../../helpers/addCategory';
 
 const AddCategory = () => {
     const [inputValue, setInputValue] = useState<string>('');

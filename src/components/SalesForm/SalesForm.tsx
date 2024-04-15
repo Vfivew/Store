@@ -6,7 +6,7 @@ import {
   setDeliveryMethod,
   setIsOrderPlaced,
 } from "../../store/slice/formSlice";
-import { resetBasket } from "../../service/updateBasket";
+import { resetBasket } from "../../helpers/updateBasket";
 import { resetStoreBasket } from "../../store/slice/basketSlise";
 import BasketItem from "../Basket/BasketItem/BasketItem";
 
