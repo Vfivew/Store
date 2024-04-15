@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFetchDocumentsQuery, useFetchDocumentByIdQuery } from '../../../store/slice/fireStoreApi';
-import { deleteCategory } from '../../../helpers/deleteCategory';
+import { deleteCategory } from '../../../api/deleteCategory';
 
 const DeleteGoods = () => {
     const [skip, setSkip] = useState<boolean>(true);
